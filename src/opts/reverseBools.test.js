@@ -1,4 +1,4 @@
-const reverseBools = require('./reverseBools')
+const {reverseBools} = require('..')
 
 test('reverseBools README example works', () => {
   const obj = {

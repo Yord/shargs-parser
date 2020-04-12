@@ -1,4 +1,4 @@
-const verifyOpts = require('./verifyOpts')
+const {verifyOpts} = require('..')
 const {falseOptsRules, wrongOptsRulesType} = require('../errors')
 
 test('verifyOpts README example works', () => {

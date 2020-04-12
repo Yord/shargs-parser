@@ -1,4 +1,4 @@
-const traverseArgv = require('./traverseArgv')
+const {traverseArgv} = require('..')
 
 const tautology = _ => true
 

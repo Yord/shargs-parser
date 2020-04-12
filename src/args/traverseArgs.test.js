@@ -1,4 +1,4 @@
-const traverseArgs = require('./traverseArgs')
+const {traverseArgs} = require('..')
 
 const constant = c => ({key, errs, args}) => ({errs, args: {...args, [key]: c}})
 

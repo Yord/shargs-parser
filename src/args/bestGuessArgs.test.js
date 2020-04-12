@@ -1,4 +1,4 @@
-const bestGuessArgs = require('./bestGuessArgs')
+const {bestGuessArgs} = require('..')
 
 test('bestGuessArgs README example works', () => {
   const obj = {

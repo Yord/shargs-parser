@@ -1,4 +1,4 @@
-const cast = require('./cast')
+const {cast} = require('..')
 const {argumentIsNotABool, argumentIsNotANumber} = require('../errors')
 
 test('cast README example works', () => {

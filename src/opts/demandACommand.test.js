@@ -1,4 +1,4 @@
-const demandACommand = require('./demandACommand')
+const {demandACommand} = require('..')
 const {commandRequired} = require('../errors')
 
 test('demandACommand README example works', () => {

@@ -1,4 +1,4 @@
-const broadenBools = require('./broadenBools')
+const {broadenBools} = require('..')
 const {invalidBoolMapping} = require('../errors')
 
 test('broadenBools README example works', () => {

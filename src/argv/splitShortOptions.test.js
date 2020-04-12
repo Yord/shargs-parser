@@ -1,4 +1,4 @@
-const splitShortOptions = require('./splitShortOptions')
+const {splitShortOptions} = require('..')
 
 test('splitShortOptions README example works', () => {
   const obj = {argv: ['-ab']}

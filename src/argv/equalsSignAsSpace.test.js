@@ -1,4 +1,4 @@
-const equalsSignAsSpace = require('./equalsSignAsSpace')
+const {equalsSignAsSpace} = require('..')
 
 test('equalsSignAsSpace README example works', () => {
   const obj = {argv: ['--name=Logan']}

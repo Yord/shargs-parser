@@ -1,4 +1,4 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('..')
 
 const tautology = _ => true
 

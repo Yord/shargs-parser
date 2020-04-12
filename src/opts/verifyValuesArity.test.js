@@ -1,4 +1,4 @@
-const verifyValuesArity = require('./verifyValuesArity')
+const {verifyValuesArity} = require('..')
 const {invalidArity, invalidTypes, invalidValues} = require('../errors')
 
 test('verifyValuesArity README example works', () => {

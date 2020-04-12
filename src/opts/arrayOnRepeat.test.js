@@ -1,4 +1,4 @@
-const arrayOnRepeat = require('./arrayOnRepeat')
+const {arrayOnRepeat} = require('..')
 
 test('arrayOnRepeat README example works', () => {
   const obj = {

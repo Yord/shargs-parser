@@ -1,4 +1,4 @@
-const shortOptsNoSpace = require('./shortOptsNoSpace')
+const {shortOptsNoSpace} = require('..')
 
 test('shortOptsNoSpace README example works', () => {
   const obj = {argv: ['-nLogan']}

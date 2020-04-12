@@ -1,4 +1,4 @@
-const restrictToOnly = require('./restrictToOnly')
+const {restrictToOnly} = require('..')
 const {valueRestrictionsViolated} = require('../errors')
 
 test('restrictToOnly README example works', () => {
