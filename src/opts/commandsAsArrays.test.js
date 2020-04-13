@@ -61,3 +61,11 @@ test('commandsAsArrays works if input is undefined', () => {
 
   expect(errs).toStrictEqual([])
 })
+
+test('commandsAsArrays passes on errors', () => {
+  const ERRS = ['foo']
+
+  const {errs} = commandsAsArrays({errs: ERRS})
+
+  expect(errs).toStrictEqual(ERRS)
+})
