@@ -31,3 +31,19 @@ test('commandsAsArrays works with defaultValues', () => {
 
   expect(opts).toStrictEqual(exp)
 })
+
+test('commandsAsArrays adds an exmpty array as defaultValues if values and defaultValues are missing', () => {
+  const obj = {
+    opts: [
+      {key: 'heroes', types: null, args: ['-h'], array: true}
+    ]
+  }
+
+  const {opts} = commandsAsArrays(obj)
+
+  const exp = [
+    {key: 'heroes', types: null, args: ['-h'], array: true, defaultValues: []}
+  ]
+
+  expect(opts).toStrictEqual(exp)
+})
