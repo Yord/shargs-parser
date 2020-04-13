@@ -32,7 +32,23 @@ test('commandsAsArrays works with defaultValues', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('commandsAsArrays adds an exmpty array as defaultValues if values and defaultValues are missing', () => {
+test('commandsAsArrays does not change non-command options', () => {
+  const obj = {
+    opts: [
+      {key: 'name', types: ['string'], args: ['-n'], array: true, defaultValues: ['Charles', 'Logan']}
+    ]
+  }
+
+  const {opts} = commandsAsArrays(obj)
+
+  const exp = [
+    {key: 'name', types: ['string'], args: ['-n'], array: true, defaultValues: ['Charles', 'Logan']}
+  ]
+
+  expect(opts).toStrictEqual(exp)
+})
+
+test('commandsAsArrays adds an empty array as defaultValues if values and defaultValues are missing', () => {
   const obj = {
     opts: [
       {key: 'heroes', types: null, args: ['-h'], array: true}

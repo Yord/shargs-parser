@@ -1,6 +1,7 @@
 const traverseOpts = require('./traverseOpts')
+const and          = require('../combinators/and')
 
-module.exports = traverseOpts(hasArrayField)(commandAsArray)
+module.exports = traverseOpts(and(isCommand, hasArrayField))(commandAsArray)
 
 function commandAsArray (opt) {
   const {defaultValues, values} = opt
@@ -21,4 +22,8 @@ function commandAsArray (opt) {
 
 function hasArrayField ({array}) {
   return array === true
+}
+
+function isCommand ({types}) {
+  return types === null
 }
