@@ -1,4 +1,4 @@
-const reverseFlags = require('./reverseFlags')
+const {reverseFlags} = require('..')
 
 test('reverseFlags README example works', () => {
   const obj = {

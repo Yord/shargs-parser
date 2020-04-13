@@ -1,4 +1,4 @@
-const contradictOpts = require('./contradictOpts')
+const {contradictOpts} = require('..')
 const {contradictionDetected, wrongContradictsType} = require('../errors')
 
 test('contradictOpts README example works', () => {

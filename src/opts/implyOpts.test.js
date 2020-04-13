@@ -1,4 +1,4 @@
-const implyOpts = require('./implyOpts')
+const {implyOpts} = require('..')
 const {implicationViolated, wrongImpliesType} = require('../errors')
 
 test('implyOpts README example works', () => {

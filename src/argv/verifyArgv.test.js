@@ -1,4 +1,4 @@
-const verifyArgv = require('./verifyArgv')
+const {verifyArgv} = require('..')
 const {falseArgvRules, wrongArgvRulesType} = require('../errors')
 
 test('verifyArgv README example works', () => {

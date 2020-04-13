@@ -1,4 +1,4 @@
-const requireOptions = require('./requireOptions')
+const {requireOptions} = require('..')
 const {requiredOptionFormat, requiredOptionMissing} = require('../errors')
 
 test('requireOptions README example works', () => {

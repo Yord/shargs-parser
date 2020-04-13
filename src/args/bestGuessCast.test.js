@@ -1,4 +1,4 @@
-const bestGuessCast = require('./bestGuessCast')
+const {bestGuessCast} = require('..')
 
 test('bestGuessCast README example works', () => {
   const obj = {

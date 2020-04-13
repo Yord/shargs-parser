@@ -1,4 +1,4 @@
-const flagsAsBools = require('./flagsAsBools')
+const {flagsAsBools} = require('..')
 
 test('flagsAsBools README example works', () => {
   const obj = {

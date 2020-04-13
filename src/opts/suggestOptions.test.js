@@ -1,4 +1,4 @@
-const suggestOptions = require('./suggestOptions')
+const {suggestOptions} = require('..')
 const {didYouMean} = require('../errors')
 
 test('suggestOptions README example works', () => {

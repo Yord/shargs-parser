@@ -1,4 +1,4 @@
-const mergeArgs = require('./mergeArgs')
+const {mergeArgs} = require('..')
 
 test('mergeArgs README example works', () => {
   const obj = {

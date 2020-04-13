@@ -1,4 +1,4 @@
-const flagsAsNumbers = require('./flagsAsNumbers')
+const {flagsAsNumbers} = require('..')
 
 test('flagsAsNumbers README example works', () => {
   const obj = {

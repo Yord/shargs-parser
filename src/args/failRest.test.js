@@ -1,4 +1,4 @@
-const failRest = require('./failRest')
+const {failRest} = require('..')
 const {unexpectedArgument} = require('../errors')
 
 test('failRest README example works', () => {

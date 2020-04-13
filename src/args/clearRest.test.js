@@ -1,4 +1,4 @@
-const clearRest = require('./clearRest')
+const {clearRest} = require('..')
 
 test('clearRest README example works', () => {
   const obj = {args: {_: ['foo']}}
