@@ -47,3 +47,11 @@ test('commandsAsArrays adds an exmpty array as defaultValues if values and defau
 
   expect(opts).toStrictEqual(exp)
 })
+
+test('commandsAsArrays works if opts is undefined', () => {
+  const obj = {}
+
+  const {errs} = commandsAsArrays(obj)
+
+  expect(errs).toStrictEqual([])
+})
