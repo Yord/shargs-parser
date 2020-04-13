@@ -29,7 +29,8 @@ test('reverseBools works as expected', () => {
       {key: 'bool6', types: ['bool'], args: ['-b'], reverse: true, values: [null]},
       {key: 'bool7', types: ['bool'], args: ['-b'], reverse: true, values: [undefined]},
       {key: 'bool8', types: ['bool'], args: ['-b'], reverse: true, values: [[42]]},
-      {key: 'bool9', types: ['bool'], args: ['-b'], reverse: true, values: [{}]}
+      {key: 'bool9', types: ['bool'], args: ['-b'], reverse: true, values: [{}]},
+      {key: 'bool10', types: ['string', 'bool'], args: ['-b'], reverse: true, values: ['foo', 'true']}
     ]
   }
 
@@ -44,7 +45,8 @@ test('reverseBools works as expected', () => {
     {key: 'bool6', types: ['bool'], args: ['-b'], reverse: true, values: [null]},
     {key: 'bool7', types: ['bool'], args: ['-b'], reverse: true, values: [undefined]},
     {key: 'bool8', types: ['bool'], args: ['-b'], reverse: true, values: [[42]]},
-    {key: 'bool9', types: ['bool'], args: ['-b'], reverse: true, values: [{}]}
+    {key: 'bool9', types: ['bool'], args: ['-b'], reverse: true, values: [{}]},
+    {key: 'bool10', types: ['string', 'bool'], args: ['-b'], reverse: true, values: ['foo', 'false']}
   ]
 
   expect(opts).toStrictEqual(exp)
