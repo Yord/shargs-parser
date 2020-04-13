@@ -55,3 +55,9 @@ test('commandsAsArrays works if opts is undefined', () => {
 
   expect(errs).toStrictEqual([])
 })
+
+test('commandsAsArrays works if input is undefined', () => {
+  const {errs} = commandsAsArrays()
+
+  expect(errs).toStrictEqual([])
+})
