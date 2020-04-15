@@ -3,7 +3,7 @@ const {bestGuessOpts} = require('..')
 test('bestGuessOpts README example works', () => {
   const obj = {
     opts: [
-      {key: 'age', types: ['string'], args: [], values: ['unknown']},
+      {key: 'age', types: ['string'], values: ['unknown']},
       {values: ['--angry']},
       {values: ['--name']},
       {values: ['Logan']},
@@ -14,9 +14,9 @@ test('bestGuessOpts README example works', () => {
   const {opts} = bestGuessOpts(obj)
 
   const exp = [
-    {key: 'age', types: ['string'], args: [], values: ['unknown']},
-    {key: 'angry', types: [], args: [], values: [1]},
-    {key: 'name', types: ['string'], args: [], values: ['Logan']},
+    {key: 'age', types: ['string'], values: ['unknown']},
+    {key: 'angry', types: [], values: [1]},
+    {key: 'name', types: ['string'], values: ['Logan']},
     {values: ['foo']}
   ]
 
@@ -26,7 +26,7 @@ test('bestGuessOpts README example works', () => {
 test('bestGuessOpts does not override existing keys', () => {
   const obj = {
     opts: [
-      {key: 'name', types: ['string'], args: [], values: ['Charles']},
+      {key: 'name', types: ['string'], values: ['Charles']},
       {values: ['--name']},
       {values: ['Logan']}
     ]
@@ -42,7 +42,7 @@ test('bestGuessOpts does not override existing keys', () => {
 test('bestGuessOpts does not interpret short options that are too long', () => {
   const obj = {
     opts: [
-      {key: 'name', types: ['string'], args: [], values: ['Charles']},
+      {key: 'name', types: ['string'], values: ['Charles']},
       {values: ['-name']},
       {values: ['Logan']}
     ]
@@ -58,7 +58,7 @@ test('bestGuessOpts does not interpret short options that are too long', () => {
 test('bestGuessOpts does work despite getting nonsensical input', () => {
   const obj = {
     opts: [
-      {key: 'name', types: ['string'], args: [], values: ['Charles']},
+      {key: 'name', types: ['string'], values: ['Charles']},
       {values: ['--foo']},
       {values: [42]},
       {values: ['-f']},
@@ -71,12 +71,12 @@ test('bestGuessOpts does work despite getting nonsensical input', () => {
   const {opts} = bestGuessOpts(obj)
 
   const exp = [
-    {key: 'name', types: ['string'], args: [], values: ['Charles']},
-    {key: 'foo', types: [], args: [], values: [1]},
+    {key: 'name', types: ['string'], values: ['Charles']},
+    {key: 'foo', types: [], values: [1]},
     {values: [42]},
-    {key: 'f', types: [], args: [], values: [1]},
+    {key: 'f', types: [], values: [1]},
     {values: [1]},
-    {key: 'h', types: [], args: [], values: [1]},
+    {key: 'h', types: [], values: [1]},
     {values: [{foo: 42}]}
   ]
 

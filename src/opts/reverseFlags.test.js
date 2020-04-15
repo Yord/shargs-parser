@@ -3,14 +3,14 @@ const {reverseFlags} = require('..')
 test('reverseFlags README example works', () => {
   const obj = {
     opts: [
-      {key: 'flag', types: [], args: ['-f'], reverse: true, values: [1]}
+      {key: 'flag', types: [], reverse: true, values: [1]}
     ]
   }
 
   const {opts} = reverseFlags(obj)
 
   const exp = [
-    {key: 'flag', types: [], args: ['-f'], reverse: true, values: [-1]}
+    {key: 'flag', types: [], reverse: true, values: [-1]}
   ]
 
   expect(opts).toStrictEqual(exp)
@@ -19,16 +19,16 @@ test('reverseFlags README example works', () => {
 test('reverseFlags does not change booleans', () => {
   const obj = {
     opts: [
-      {key: 'flag', types: [], args: ['-f'], reverse: true, values: [1]},
-      {key: 'bool', types: ['bool'], args: ['-b'], reverse: true, values: [true]}
+      {key: 'flag', types: [], reverse: true, values: [1]},
+      {key: 'bool', types: ['bool'], reverse: true, values: [true]}
     ]
   }
 
   const {opts} = reverseFlags(obj)
 
   const exp = [
-    {key: 'flag', types: [], args: ['-f'], reverse: true, values: [-1]},
-    {key: 'bool', types: ['bool'], args: ['-b'], reverse: true, values: [true]}
+    {key: 'flag', types: [], reverse: true, values: [-1]},
+    {key: 'bool', types: ['bool'], reverse: true, values: [true]}
   ]
 
   expect(opts).toStrictEqual(exp)
@@ -37,16 +37,16 @@ test('reverseFlags does not change booleans', () => {
 test('reverseFlags does not reverse flags without values', () => {
   const obj = {
     opts: [
-      {key: 'flag', types: [], args: ['-f'], reverse: true, values: [1]},
-      {key: 'flag2', types: [], args: ['--f2'], reverse: true, values: null}
+      {key: 'flag', types: [], reverse: true, values: [1]},
+      {key: 'flag2', types: [], reverse: true, values: null}
     ]
   }
 
   const {opts} = reverseFlags(obj)
 
   const exp = [
-    {key: 'flag', types: [], args: ['-f'], reverse: true, values: [-1]},
-    {key: 'flag2', types: [], args: ['--f2'], reverse: true, values: null}
+    {key: 'flag', types: [], reverse: true, values: [-1]},
+    {key: 'flag2', types: [], reverse: true, values: null}
   ]
 
   expect(opts).toStrictEqual(exp)

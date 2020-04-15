@@ -14,15 +14,15 @@ module.exports = ({errs = [], opts = []} = {}) => {
 
         if (opt2 && isRest(opt2)) {
           if (isString(opt2)) {
-            const str = {key, types: ['string'], args: [], values: opt2.values}
+            const str = {key, types: ['string'], values: opt2.values}
             opts2.push(str)
             at += 1
           } else {
-            const flg = {key, types: [], args: [], values: [1]}
+            const flg = {key, types: [], values: [1]}
             opts2.push(flg)
           }
         } else {
-          const flg = {key, types: [], args: [], values: [1]}
+          const flg = {key, types: [], values: [1]}
           opts2.push(flg)
         }
       } else opts2.push(opt)
