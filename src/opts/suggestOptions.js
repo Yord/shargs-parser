@@ -2,14 +2,14 @@ const traverseOpts = require('./traverseOpts')
 const {didYouMean} = require('../errors')
 const and = require('../combinators/and')
 
-module.exports = traverseOpts(and(hasTypes, validValues, stringValue))((opt, _, opts) => {
+module.exports = traverseOpts(and(hasNoTypes, validValues, stringValue))((opt, _, opts) => {
   const argv    = opt.values[0]
   const options = distanceList(argv, opts)
 
   return {errs: [didYouMean({argv, options})]}
 })
 
-function hasTypes ({types}) {
+function hasNoTypes ({types}) {
   return typeof types === 'undefined'
 }
 
@@ -27,9 +27,9 @@ function distanceList (str, opts) {
 
   for (let i = 0; i < opts.length; i++) {
     const opt = opts[i]
-    const {args = []} = opt
+    const {args} = opt
 
-    for (let j = 0; j < args.length; j++) {
+    for (let j = 0; j < (args || []).length; j++) {
       const arg = args[j]
 
       const dist = levenshteinDistance(str, arg)
