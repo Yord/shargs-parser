@@ -27,9 +27,9 @@ function distanceList (str, opts) {
 
   for (let i = 0; i < opts.length; i++) {
     const opt = opts[i]
-    const {args = []} = opt
+    const {args} = opt
 
-    for (let j = 0; j < args.length; j++) {
+    for (let j = 0; j < (args || []).length; j++) {
       const arg = args[j]
 
       const dist = levenshteinDistance(str, arg)
