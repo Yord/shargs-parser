@@ -2,14 +2,14 @@ const traverseOpts = require('./traverseOpts')
 const {didYouMean} = require('../errors')
 const and = require('../combinators/and')
 
-module.exports = traverseOpts(and(hasTypes, validValues, stringValue))((opt, _, opts) => {
+module.exports = traverseOpts(and(hasNoTypes, validValues, stringValue))((opt, _, opts) => {
   const argv    = opt.values[0]
   const options = distanceList(argv, opts)
 
   return {errs: [didYouMean({argv, options})]}
 })
 
-function hasTypes ({types}) {
+function hasNoTypes ({types}) {
   return typeof types === 'undefined'
 }
 
