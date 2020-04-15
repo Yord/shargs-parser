@@ -33,6 +33,7 @@ test('suggestOptions works as expected', () => {
   const title = {key: 'title', types: ['string'], args: ['-t', '--title']}
   const age   = {key: 'age', types: ['number'], args: ['--age', '-a']}
   const beef  = {key: 'age', types: ['bool'], args: ['--beef', '-b']}
+  const pos   = {key: 'pos', types: ['string']}
 
   const opts = [
     beef,
@@ -40,7 +41,8 @@ test('suggestOptions works as expected', () => {
     title,
     {values: [argv2]},
     {values: [argv3]},
-    age
+    age,
+    pos
   ]
 
   const {errs} = suggestOptions({opts})
