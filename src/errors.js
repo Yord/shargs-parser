@@ -88,10 +88,10 @@ const requiredOptionFormat = ({key, values, option}) => ({
   info: {key, values, option}
 })
 
-const requiredOptionMissing = ({key, args, option}) => ({
+const requiredOptionMissing = ({key, option}) => ({
   code: 'Required option is missing',
   msg:  'An option that is marked as required has not been provided.',
-  info: {key, args, option}
+  info: {key, option}
 })
 
 const unexpectedArgument = ({argument}) => ({

@@ -4,10 +4,10 @@ const {requiredOptionFormat, requiredOptionMissing} = require('../errors')
 module.exports = traverseOpts(isRequired)(opt => {
   const errs = []
 
-  const {key, args, values} = opt
+  const {key, values} = opt
 
   if (values === null || typeof values === 'undefined') {
-    errs.push(requiredOptionMissing({key, args, option: opt}))
+    errs.push(requiredOptionMissing({key, option: opt}))
   } else if (!Array.isArray(values)) {
     errs.push(requiredOptionFormat({key, values, option: opt}))
   }
