@@ -79,3 +79,11 @@ test('validatePosArgs does not report invalid variadic if exactly one variadic a
 
   expect(errs).toStrictEqual(exp)
 })
+
+test('validatePosArgs works if opts is undefined', () => {
+  const obj = {}
+
+  const {opts} = validatePosArgs(obj)
+
+  expect(opts).toStrictEqual([])
+})
