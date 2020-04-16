@@ -23,6 +23,7 @@ const suggestOptions    = require('./opts/suggestOptions')
 const traverseArgs      = require('./args/traverseArgs')
 const traverseArgv      = require('./argv/traverseArgv')
 const traverseOpts      = require('./opts/traverseOpts')
+const validatePosArgs   = require('./opts/validatePosArgs')
 const verifyArgs        = require('./args/verifyArgs')
 const verifyArgv        = require('./argv/verifyArgv')
 const verifyOpts        = require('./opts/verifyOpts')
@@ -55,6 +56,7 @@ module.exports = {
   traverseArgs,
   traverseArgv,
   traverseOpts,
+  validatePosArgs,
   verifyArgs,
   verifyArgv,
   verifyOpts,
