@@ -66,3 +66,16 @@ test('validatePosArgs does not report invalid required if no true required ever 
 
   expect(errs).toStrictEqual(exp)
 })
+
+test('validatePosArgs does not report invalid variadic if exactly one variadic argument exists that is at the last position', () => {
+  const opts = [
+    {key: 'pos5', types: ['string'], values: ['Xavier']},
+    {key: 'pos4', types: null, values: ['Logan', 'Charles']}
+  ]
+
+  const {errs} = validatePosArgs({opts})
+
+  const exp = []
+
+  expect(errs).toStrictEqual(exp)
+})
