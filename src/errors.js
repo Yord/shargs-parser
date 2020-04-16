@@ -88,6 +88,12 @@ const invalidValues = ({values, defaultValues, option}) => ({
   info: {values, defaultValues, option}
 })
 
+const invalidVariadicPositionalArgument = ({positionalArguments}) => ({
+  code: 'Invalid variadic positional argument',
+  msg:  'Only the last positional argument may be variadic.',
+  info: {positionalArguments}
+})
+
 const requiredOptionFormat = ({key, values, option}) => ({
   code: 'Wrong format for required option',
   msg:  'A required option has values in the wrong format. It should be an array of values.',
@@ -164,6 +170,7 @@ module.exports = {
   invalidRequiredPositionalArgument,
   invalidTypes,
   invalidValues,
+  invalidVariadicPositionalArgument,
   requiredOptionFormat,
   requiredOptionMissing,
   unexpectedArgument,
