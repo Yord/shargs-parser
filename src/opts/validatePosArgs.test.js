@@ -93,3 +93,11 @@ test('validatePosArgs works if input is undefined', () => {
 
   expect(opts).toStrictEqual([])
 })
+
+test('validatePosArgs passes on errors', () => {
+  const ERRS = ['foo']
+
+  const {errs} = validatePosArgs({errs: ERRS})
+
+  expect(errs).toStrictEqual(ERRS)
+})
