@@ -70,6 +70,12 @@ const invalidBoolMapping = ({key, alt}) => ({
   info: {key, alt}
 })
 
+const invalidRequiredPositionalArgument = ({positionalArguments}) => ({
+  code: 'Invalid required positional argument',
+  msg:  'If a positional argument is required, all previous positional arguments must be required as well. The required field must either be undefined, true or false.',
+  info: {positionalArguments}
+})
+
 const invalidTypes = ({types, option}) => ({
   code: 'Invalid types',
   msg:  'Each argument must have a types key that must be null or an array',
@@ -155,6 +161,7 @@ module.exports = {
   implicationViolated,
   invalidArity,
   invalidBoolMapping,
+  invalidRequiredPositionalArgument,
   invalidTypes,
   invalidValues,
   requiredOptionFormat,
