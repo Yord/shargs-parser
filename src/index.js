@@ -5,7 +5,6 @@ const bestGuessOpts     = require('./opts/bestGuessOpts')
 const broadenBools      = require('./opts/broadenBools')
 const cast              = require('./opts/cast')
 const clearRest         = require('./args/clearRest')
-const commandsAsArrays  = require('./opts/commandsAsArrays')
 const contradictOpts    = require('./opts/contradictOpts')
 const demandACommand    = require('./opts/demandACommand')
 const equalsSignAsSpace = require('./argv/equalsSignAsSpace')
@@ -38,7 +37,6 @@ module.exports = {
   broadenBools,
   cast,
   clearRest,
-  commandsAsArrays,
   contradictOpts,
   demandACommand,
   equalsSignAsSpace,
