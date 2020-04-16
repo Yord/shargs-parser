@@ -3,11 +3,11 @@ const {commandRequired} = require('../errors')
 
 test('demandACommand README example works', () => {
   const opts = [
-    {key: 'title', types: ['string'], args: ['--title'], values: ["The Hitchhiker's Guide to the Galaxy"]},
-    {key: 'numBool', types: ['number', 'bool'], args: ['-n', '--nb'], values: ['23', 'true']},
-    {key: 'answer', types: ['number'], args: ['-a', '--answer'], values: ['42']},
-    {key: 'verbose', types: ['bool'], args: ['--verbose'], values: ['false']},
-    {key: 'version', types: [], args: ['--version'], values: [1]}
+    {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
+    {key: 'numBool', types: ['number', 'bool'], values: ['23', 'true']},
+    {key: 'answer', types: ['number'], values: ['42']},
+    {key: 'verbose', types: ['bool'], values: ['false']},
+    {key: 'version', types: [], values: [1]}
   ]
 
   const {errs} = demandACommand({opts})
@@ -21,12 +21,12 @@ test('demandACommand README example works', () => {
 
 test('demandACommand records no error if a command is defined', () => {
   const opts = [
-    {key: 'title', types: ['string'], args: ['--title'], values: ["The Hitchhiker's Guide to the Galaxy"]},
-    {key: 'numBool', types: ['number', 'bool'], args: ['-n', '--nb'], values: ['23', 'true']},
-    {key: 'answer', types: ['number'], args: ['-a', '--answer'], values: ['42']},
-    {key: 'help', types: null, args: ['-h', '--help'], values: ['foo', '--bar']},
-    {key: 'verbose', types: ['bool'], args: ['--verbose'], values: ['false']},
-    {key: 'version', types: [], args: ['--version'], values: [1]}
+    {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
+    {key: 'numBool', types: ['number', 'bool'], values: ['23', 'true']},
+    {key: 'answer', types: ['number'], values: ['42']},
+    {key: 'help', types: null, values: ['foo', '--bar']},
+    {key: 'verbose', types: ['bool'], values: ['false']},
+    {key: 'version', types: [], values: [1]}
   ]
 
   const {errs} = demandACommand({opts})
@@ -38,8 +38,8 @@ test('demandACommand records no error if a command is defined', () => {
 
 test('demandACommand records no error if two commands are defined', () => {
   const opts = [
-    {key: 'help', types: null, args: ['-h', '--help'], values: ['foo', '--bar']},
-    {key: 'verbose', types: null, args: ['--verbose'], values: ['false']}
+    {key: 'help', types: null, values: ['foo', '--bar']},
+    {key: 'verbose', types: null, values: ['false']}
   ]
 
   const {errs} = demandACommand({opts})

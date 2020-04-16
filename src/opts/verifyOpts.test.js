@@ -10,8 +10,8 @@ test('verifyOpts README example works', () => {
   )
 
   const opts = [
-    {key: 'firstName', types: ['string'], args: ['-f'], values: ['Logan']},
-    {key: 'lastName', types: ['string'], args: ['-l']}
+    {key: 'firstName', types: ['string'], values: ['Logan']},
+    {key: 'lastName', types: ['string']}
   ]
 
   const {errs} = verifyOpts(rules)({opts})
@@ -27,8 +27,8 @@ test('verifyOpts fails on wrong type', () => {
   const rules = 42
 
   const opts = [
-    {key: 'firstName', types: ['string'], args: ['-f'], values: ['Logan']},
-    {key: 'lastName', types: ['string'], args: ['-l']}
+    {key: 'firstName', types: ['string'], values: ['Logan']},
+    {key: 'lastName', types: ['string']}
   ]
 
   const {errs} = verifyOpts(rules)({opts})

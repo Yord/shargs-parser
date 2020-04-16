@@ -5,7 +5,6 @@ const bestGuessOpts     = require('./opts/bestGuessOpts')
 const broadenBools      = require('./opts/broadenBools')
 const cast              = require('./opts/cast')
 const clearRest         = require('./args/clearRest')
-const commandsAsArrays  = require('./opts/commandsAsArrays')
 const contradictOpts    = require('./opts/contradictOpts')
 const demandACommand    = require('./opts/demandACommand')
 const equalsSignAsSpace = require('./argv/equalsSignAsSpace')
@@ -24,6 +23,7 @@ const suggestOptions    = require('./opts/suggestOptions')
 const traverseArgs      = require('./args/traverseArgs')
 const traverseArgv      = require('./argv/traverseArgv')
 const traverseOpts      = require('./opts/traverseOpts')
+const validatePosArgs   = require('./opts/validatePosArgs')
 const verifyArgs        = require('./args/verifyArgs')
 const verifyArgv        = require('./argv/verifyArgv')
 const verifyOpts        = require('./opts/verifyOpts')
@@ -38,7 +38,6 @@ module.exports = {
   broadenBools,
   cast,
   clearRest,
-  commandsAsArrays,
   contradictOpts,
   demandACommand,
   equalsSignAsSpace,
@@ -57,6 +56,7 @@ module.exports = {
   traverseArgs,
   traverseArgv,
   traverseOpts,
+  validatePosArgs,
   verifyArgs,
   verifyArgv,
   verifyOpts,

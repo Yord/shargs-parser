@@ -7,8 +7,8 @@ test('verifyRules README example works', () => {
     opts.some(({key, values}) => key === 'lastName' && values)
   )
 
-  const firstName = {key: 'firstName', types: ['string'], args: ['-f'], rules, values: ['Charles']}
-  const lastName  = {key: 'lastName', types: ['string'], args: ['-l']}
+  const firstName = {key: 'firstName', types: ['string'], rules, values: ['Charles']}
+  const lastName  = {key: 'lastName', types: ['string']}
 
   const obj = {
     opts: [firstName, lastName]
@@ -29,8 +29,8 @@ test('verifyRules does not change anything if it passes', () => {
     opts.some(({key, values}) => key === 'lastName' && values !== null)
   )
 
-  const firstName = {key: 'firstName', types: ['string'], args: ['-f'], rules, values: ['Logan']}
-  const lastName  = {key: 'lastName', types: ['string'], args: ['-l']}
+  const firstName = {key: 'firstName', types: ['string'], rules, values: ['Logan']}
+  const lastName  = {key: 'lastName', types: ['string']}
 
   const obj = {
     opts: [firstName, lastName]
@@ -46,8 +46,8 @@ test('verifyRules does not change anything if it passes', () => {
 test('verifyRules fails on wrong type', () => {
   const rules = 42
 
-  const firstName = {key: 'firstName', types: ['string'], args: ['-f'], rules, values: ['Charles']}
-  const lastName  = {key: 'lastName', types: ['string'], args: ['-l']}
+  const firstName = {key: 'firstName', types: ['string'], rules, values: ['Charles']}
+  const lastName  = {key: 'lastName', types: ['string']}
 
   const obj = {
     opts: [firstName, lastName]

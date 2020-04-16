@@ -2,8 +2,8 @@ const {implyOpts} = require('..')
 const {implicationViolated, wrongImpliesType} = require('../errors')
 
 test('implyOpts README example works', () => {
-  const age      = {key: 'age', types: ['number'], args: ['-a'], implies: ['birthday'], values: ['27']}
-  const birthday = {key: 'birthday', types: ['string'], args: ['-b'], implies: ['age']}
+  const age      = {key: 'age', types: ['number'], implies: ['birthday'], values: ['27']}
+  const birthday = {key: 'birthday', types: ['string'], implies: ['age']}
 
   const obj = {
     opts: [age, birthday]
@@ -19,8 +19,8 @@ test('implyOpts README example works', () => {
 })
 
 test('implyOpts works on default values', () => {
-  const age      = {key: 'age', types: ['number'], args: ['-a'], implies: ['birthday'], defaultValues: ['27']}
-  const birthday = {key: 'birthday', types: ['string'], args: ['-b'], implies: ['age']}
+  const age      = {key: 'age', types: ['number'], implies: ['birthday'], defaultValues: ['27']}
+  const birthday = {key: 'birthday', types: ['string'], implies: ['age']}
 
   const obj = {
     opts: [age, birthday]
@@ -36,8 +36,8 @@ test('implyOpts works on default values', () => {
 })
 
 test('implyOpts does not change anything if it passes', () => {
-  const age      = {key: 'age', types: ['number'], args: ['-a'], contradicts: ['birthday'], values: ['27']}
-  const birthday = {key: 'birthday', types: ['string'], args: ['-b'], contradicts: ['age'], values: ['27.7.1927']}
+  const age      = {key: 'age', types: ['number'], contradicts: ['birthday'], values: ['27']}
+  const birthday = {key: 'birthday', types: ['string'], contradicts: ['age'], values: ['27.7.1927']}
 
   const obj = {
     opts: [age, birthday]
@@ -51,8 +51,8 @@ test('implyOpts does not change anything if it passes', () => {
 })
 
 test('implyOpts fails on wrong type', () => {
-  const age      = {key: 'age', types: ['number'], args: ['-a'], implies: 'birthday', values: ['27']}
-  const birthday = {key: 'birthday', types: ['string'], args: ['-b'], implies: ['age'], values: ['27.7.1927']}
+  const age      = {key: 'age', types: ['number'], implies: 'birthday', values: ['27']}
+  const birthday = {key: 'birthday', types: ['string'], implies: ['age'], values: ['27.7.1927']}
 
   const obj = {
     opts: [age, birthday]

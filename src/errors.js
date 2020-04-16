@@ -70,6 +70,12 @@ const invalidBoolMapping = ({key, alt}) => ({
   info: {key, alt}
 })
 
+const invalidRequiredPositionalArgument = ({positionalArguments}) => ({
+  code: 'Invalid required positional argument',
+  msg:  'If a positional argument is required, all previous positional arguments must be required as well. The required field must either be undefined, true or false.',
+  info: {positionalArguments}
+})
+
 const invalidTypes = ({types, option}) => ({
   code: 'Invalid types',
   msg:  'Each argument must have a types key that must be null or an array',
@@ -82,16 +88,22 @@ const invalidValues = ({values, defaultValues, option}) => ({
   info: {values, defaultValues, option}
 })
 
+const invalidVariadicPositionalArgument = ({positionalArguments}) => ({
+  code: 'Invalid variadic positional argument',
+  msg:  'Only the last positional argument may be variadic.',
+  info: {positionalArguments}
+})
+
 const requiredOptionFormat = ({key, values, option}) => ({
   code: 'Wrong format for required option',
   msg:  'A required option has values in the wrong format. It should be an array of values.',
   info: {key, values, option}
 })
 
-const requiredOptionMissing = ({key, args, option}) => ({
+const requiredOptionMissing = ({key, option}) => ({
   code: 'Required option is missing',
   msg:  'An option that is marked as required has not been provided.',
-  info: {key, args, option}
+  info: {key, option}
 })
 
 const unexpectedArgument = ({argument}) => ({
@@ -155,8 +167,10 @@ module.exports = {
   implicationViolated,
   invalidArity,
   invalidBoolMapping,
+  invalidRequiredPositionalArgument,
   invalidTypes,
   invalidValues,
+  invalidVariadicPositionalArgument,
   requiredOptionFormat,
   requiredOptionMissing,
   unexpectedArgument,
