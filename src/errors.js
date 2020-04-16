@@ -58,6 +58,12 @@ const implicationViolated = ({key, implies, option}) => ({
   info: {key, implies, option}
 })
 
+const incompatibleTypes = ({opts}) => ({
+  code: 'Incompatible types',
+  msg:  'Repeated options must either both be variadic or both not.',
+  info: {opts}
+})
+
 const invalidArity = ({option}) => ({
   code: 'Invalid arity',
   msg:  "An option's types arity does not match its values arity.",
@@ -165,6 +171,7 @@ module.exports = {
   falseOptsRules,
   falseRules,
   implicationViolated,
+  incompatibleTypes,
   invalidArity,
   invalidBoolMapping,
   invalidRequiredPositionalArgument,
