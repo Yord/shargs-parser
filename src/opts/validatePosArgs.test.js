@@ -36,3 +36,18 @@ test('validatePosArgs reports invalid required if required is not undefined, tru
 
   expect(errs).toStrictEqual(exp)
 })
+
+test('validatePosArgs reports invalid variadic if a variadic argument exists, but is not at the last position', () => {
+  const opts = [
+    {key: 'pos4', types: null, values: ['Logan', 'Charles']},
+    {key: 'pos5', types: ['string'], values: ['Xavier']}
+  ]
+
+  const {errs} = validatePosArgs({opts})
+
+  const exp = [
+    invalidVariadicPositionalArgument({positionalArguments: opts})
+  ]
+
+  expect(errs).toStrictEqual(exp)
+})
