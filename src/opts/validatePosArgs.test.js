@@ -51,3 +51,18 @@ test('validatePosArgs reports invalid variadic if a variadic argument exists, bu
 
   expect(errs).toStrictEqual(exp)
 })
+
+test('validatePosArgs does not report invalid required if no true required ever occurs after an undefined or false required', () => {
+  const opts = [
+    {key: 'pos1', types: ['string'], required: true, values: ['Logan']},
+    {key: 'pos2', types: ['string'], required: true, values: ['Charles']},
+    {key: 'pos3', types: ['string'], required: false, values: ['Xavier']},
+    {key: 'pos5', types: ['string'], values: ['Xavier']}
+  ]
+
+  const {errs} = validatePosArgs({opts})
+
+  const exp = []
+
+  expect(errs).toStrictEqual(exp)
+})
