@@ -148,6 +148,22 @@ test('reverseBools does not change bool options with invalid defaultValues', () 
   expect(opts).toStrictEqual(exp)
 })
 
+test('reverseBools does not reverse booleans without values or defaultValues', () => {
+  const obj = {
+    opts: [
+      {key: 'bool2', types: ['bool'], reverse: true, values: null},
+      {key: 'bool4', types: ['bool'], reverse: true, defaultValues: null},
+      {key: 'bool5', types: ['bool'], reverse: true}
+    ]
+  }
+
+  const {opts} = reverseBools(obj)
+
+  const exp = obj.opts
+
+  expect(opts).toStrictEqual(exp)
+})
+
 test('reverseBools works if opts is undefined', () => {
   const obj = {}
 
