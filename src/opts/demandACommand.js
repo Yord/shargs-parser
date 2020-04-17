@@ -1,4 +1,6 @@
 const {commandRequired} = require('../errors')
+const {CommandOption} = require('../ducktypes')
+const is = require('../combinators/is')
 
 module.exports = ({errs = [], opts = []} = {}) => {
   const errs2 = []
@@ -11,9 +13,5 @@ module.exports = ({errs = [], opts = []} = {}) => {
 }
 
 function noCommandIn (opts) {
-  return !opts.some(isCommand)
-}
-
-function isCommand ({types, values}) {
-  return types === null && typeof values !== 'undefined'
+  return !opts.some(is(CommandOption))
 }
