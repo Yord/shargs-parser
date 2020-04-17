@@ -148,6 +148,25 @@ test('requireOptions works if defaultValues are present', () => {
   expect(errs).toStrictEqual(exp)
 })
 
+test('requireOptions works if a mix of values and defaultValues is present', () => {
+  const obj = {
+    opts: [
+      {key: 'title', types: ['string'], required: true, values: ['foo']},
+      {key: 'numBool', types: ['number', 'bool'], required: true, defaultValues: ['23', 'true']},
+      {key: 'answer', types: ['number'], required: true, values: ['42']},
+      {key: 'help', args: ['help'], required: true, defaultValues: ['foo', 'bar']},
+      {key: 'verbose', types: ['bool'], required: true, values: ['false']},
+      {key: 'version', types: [], required: true, defaultValues: [1]}
+    ]
+  }
+
+  const {errs} = requireOptions(obj)
+
+  const exp = []
+
+  expect(errs).toStrictEqual(exp)
+})
+
 test('requireOptions works if opts is undefined', () => {
   const obj = {}
 
