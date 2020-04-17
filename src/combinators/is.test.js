@@ -24,5 +24,16 @@ test('is works on empty objects', () => {
   const exp = false
 
   expect(res).toStrictEqual(exp)
+})
+
+test('is returns false for input that is not a function', () => {
+  const a = {a: 42}
+
+  const obj = {}
+
+  const res = is(a)(obj)
+
+  const exp = false
+
   expect(res).toStrictEqual(exp)
 })
