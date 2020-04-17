@@ -1,22 +1,23 @@
 const traverseOpts = require('./traverseOpts')
 const {invalidBoolMapping} = require('../errors')
+const {Bool, TypedVariable, ValidValuesTypes, ValidDefaultValuesTypes} = require('../ducktypes')
+const is   = require('../combinators/is')
 const pipe = require('../combinators/pipe')
-const and  = require('../combinators/and')
 
 module.exports = (alt = {}) => {
   const altToBool = reverse(alt)
 
   return pipe(
-    broadenValues('values', altToBool, alt),
-    broadenValues('defaultValues', altToBool, alt)
+    broadenValues('values', ValidValuesTypes, altToBool, alt),
+    broadenValues('defaultValues', ValidDefaultValuesTypes, altToBool, alt)
   )
 }
 
-function broadenValues (key, altToBool, alt) {
-  return traverseOpts(and(hasBool, validValues(key)))(opt => {
-    let errs   = []
+function broadenValues (val, Domain, altToBool, alt) {
+  return traverseOpts(is(TypedVariable, Domain, Bool))(opt => {
+    let errs = []
 
-    const {types, [key]: values} = opt
+    const {types, [val]: values} = opt
 
     const values2 = []
 
@@ -37,16 +38,8 @@ function broadenValues (key, altToBool, alt) {
       }
     }
 
-    return {errs, opts: [{...opt, [key]: values2}]}
+    return {errs, opts: [{...opt, [val]: values2}]}
   })
-}
-
-function hasBool ({types}) {
-  return Array.isArray(types) && types.length > 0 && types.indexOf('bool') > -1
-}
-
-function validValues (key) {
-  return ({types, [key]: values}) => Array.isArray(values) && values.length === types.length
 }
 
 function reverse (alt) {
