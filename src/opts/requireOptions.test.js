@@ -110,6 +110,25 @@ test('requireOptions works only with valid values', () => {
   expect(errs).toStrictEqual(exp)
 })
 
+test('requireOptions works if values are present', () => {
+  const obj = {
+    opts: [
+      {key: 'title', types: ['string'], required: true, values: ['foo']},
+      {key: 'numBool', types: ['number', 'bool'], required: true, values: ['23', 'true']},
+      {key: 'answer', types: ['number'], required: true, values: ['42']},
+      {key: 'help', args: ['help'], required: true, values: ['foo', 'bar']},
+      {key: 'verbose', types: ['bool'], required: true, values: ['false']},
+      {key: 'version', types: [], required: true, values: [1]}
+    ]
+  }
+
+  const {errs} = requireOptions(obj)
+
+  const exp = []
+
+  expect(errs).toStrictEqual(exp)
+})
+
 test('requireOptions works if opts is undefined', () => {
   const obj = {}
 
