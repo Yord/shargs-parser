@@ -16,7 +16,6 @@ test('verifyValuesArity README example works', () => {
 
 test('verifyValuesArity does not throw for correct arities in values', () => {
   const opts = [
-    {key: 'rest', values: ['foo']},
     {values: ['foo']},
 
     {key: 'string1', types: ['string'], values: ['string']},
@@ -43,16 +42,16 @@ test('verifyValuesArity does not throw for correct arities in values', () => {
     {key: 'bool4', types: ['bool'], values: undefined},
     {key: 'bool5', types: ['bool']},
     
-    {key: 'flag1', types: [], values: [1]},
-    {key: 'flag2', types: [], values: ['42']},
-    {key: 'flag3', types: [], values: null},
-    {key: 'flag4', types: [], values: undefined},
-    {key: 'flag5', types: []},
+    {key: 'flag1', args: ['-f'], types: [], values: [1]},
+    {key: 'flag2', args: ['-f'], types: [], values: ['42']},
+    {key: 'flag3', args: ['-f'], types: [], values: null},
+    {key: 'flag4', args: ['-f'], types: [], values: undefined},
+    {key: 'flag5', args: ['-f'], types: []},
 
-    {key: 'help1', types: null, values: []},
-    {key: 'help2', types: null, values: ['foo']},
-    {key: 'help3', types: null, values: ['foo', '--bar']},
-    {key: 'help4', types: null, values: ['foo', 42, 'baz']}
+    {key: 'help1', values: []},
+    {key: 'help2', values: ['foo']},
+    {key: 'help3', values: ['foo', '--bar']},
+    {key: 'help4', values: ['foo', 42, 'baz']}
   ]
 
   const {errs} = verifyValuesArity({opts})
@@ -64,8 +63,6 @@ test('verifyValuesArity does not throw for correct arities in values', () => {
 
 test('verifyValuesArity does not throw for correct arities in defaultValues', () => {
   const opts = [
-    {key: 'rest', defaultValues: ['foo']},
-
     {key: 'string1', types: ['string'], defaultValues: ['string']},
     {key: 'string2', types: ['string'], defaultValues: [42]},
     {key: 'string3', types: ['string'], defaultValues: null},
@@ -86,15 +83,15 @@ test('verifyValuesArity does not throw for correct arities in defaultValues', ()
     {key: 'bool3', types: ['bool'], defaultValues: null},
     {key: 'bool4', types: ['bool'], defaultValues: undefined},
     
-    {key: 'flag1', types: [], defaultValues: [1]},
-    {key: 'flag2', types: [], defaultValues: ['42']},
-    {key: 'flag3', types: [], defaultValues: null},
-    {key: 'flag4', types: [], defaultValues: undefined},
+    {key: 'flag1', args: ['-f'], types: [], defaultValues: [1]},
+    {key: 'flag2', args: ['-f'], types: [], defaultValues: ['42']},
+    {key: 'flag3', args: ['-f'], types: [], defaultValues: null},
+    {key: 'flag4', args: ['-f'], types: [], defaultValues: undefined},
 
-    {key: 'help1', types: null, defaultValues: []},
-    {key: 'help2', types: null, defaultValues: ['foo']},
-    {key: 'help3', types: null, defaultValues: ['foo', '--bar']},
-    {key: 'help4', types: null, defaultValues: ['foo', 42, 'baz']}
+    {key: 'help1', defaultValues: []},
+    {key: 'help2', defaultValues: ['foo']},
+    {key: 'help3', defaultValues: ['foo', '--bar']},
+    {key: 'help4', defaultValues: ['foo', 42, 'baz']}
   ]
 
   const {errs} = verifyValuesArity({opts})
@@ -104,32 +101,40 @@ test('verifyValuesArity does not throw for correct arities in defaultValues', ()
   expect(errs).toStrictEqual(exp)
 })
 
-test('verifyValuesArity throws invalidArity error for incorrect arities for string, number, bool, and flag in values', () => {
+test('verifyValuesArity throws invalidArity error for incorrect arities in values', () => {
+  const rest1 = {values: ['foo', 'bar']}
+  const rest2 = {values: []}
+
   const string1 = {key: 'string1', types: ['string'], values: []}
   const string2 = {key: 'string2', types: ['string'], values: ['foo', 'bar']}
-  const string3 = {key: 'string3', values: []}
-  const string4 = {key: 'string4', values: ['foo', 'bar']}
+  const string3 = {key: 'string3', types: ['string'], values: []}
+  const string4 = {key: 'string4', types: ['string'], values: ['foo', 'bar']}
 
   const number1 = {key: 'number1', types: ['number'], values: []}
   const number2 = {key: 'number2', types: ['number'], values: ['foo', 'bar']}
-  const number3 = {key: 'number3', values: []}
-  const number4 = {key: 'number4', values: ['foo', 'bar']}
+  const number3 = {key: 'number3', types: ['number'], values: []}
+  const number4 = {key: 'number4', types: ['number'], values: ['foo', 'bar']}
 
   const bool1 = {key: 'bool1', types: ['bool'], values: []}
   const bool2 = {key: 'bool2', types: ['bool'], values: ['foo', 'bar']}
-  const bool3 = {key: 'bool3', values: []}
-  const bool4 = {key: 'bool4', values: ['foo', 'bar']}
+  const bool3 = {key: 'bool3', types: ['bool'], values: []}
+  const bool4 = {key: 'bool4', types: ['bool'], values: ['foo', 'bar']}
 
-  const flag1 = {key: 'flag1', types: [], values: []}
-  const flag2 = {key: 'flag2', types: [], values: ['foo', 'bar']}
-  const flag3 = {key: 'flag3', values: []}
-  const flag4 = {key: 'flag4', values: ['foo', 'bar']}
+  const flag1 = {key: 'flag1', args: ['-f'], types: [], values: []}
+  const flag2 = {key: 'flag2', args: ['-f'], types: [], values: ['foo', 'bar']}
+  const flag3 = {key: 'flag3', args: ['-f'], types: [], values: []}
+  const flag4 = {key: 'flag4', args: ['-f'], types: [], values: ['foo', 'bar']}
+
+  const array1 = {key: 'array1', types: ['bool', 'string'], values: []}
+  const array2 = {key: 'array2', types: ['bool', 'string'], values: ['foo']}
 
   const opts = [
+    rest1, rest2,
     string1, string2, string3, string4,
     number1, number2, number3, number4,
     bool1, bool2, bool3, bool4,
-    flag1, flag2, flag3, flag4
+    flag1, flag2, flag3, flag4,
+    array1, array2
   ]
 
   const {errs} = verifyValuesArity({opts})
@@ -139,32 +144,36 @@ test('verifyValuesArity throws invalidArity error for incorrect arities for stri
   expect(errs).toStrictEqual(exp)
 })
 
-test('verifyValuesArity throws invalidArity error for incorrect arities for string, number, bool, and flag in defaultValues', () => {
+test('verifyValuesArity throws invalidArity error for incorrect arities in defaultValues', () => {
   const string1 = {key: 'string1', types: ['string'], defaultValues: []}
   const string2 = {key: 'string2', types: ['string'], defaultValues: ['foo', 'bar']}
-  const string3 = {key: 'string3', defaultValues: []}
-  const string4 = {key: 'string4', defaultValues: ['foo', 'bar']}
+  const string3 = {key: 'string3', types: ['string'], defaultValues: []}
+  const string4 = {key: 'string4', types: ['string'], defaultValues: ['foo', 'bar']}
 
   const number1 = {key: 'number1', types: ['number'], defaultValues: []}
   const number2 = {key: 'number2', types: ['number'], defaultValues: ['foo', 'bar']}
-  const number3 = {key: 'number3', defaultValues: []}
-  const number4 = {key: 'number4', defaultValues: ['foo', 'bar']}
+  const number3 = {key: 'number3', types: ['number'], defaultValues: []}
+  const number4 = {key: 'number4', types: ['number'], defaultValues: ['foo', 'bar']}
 
   const bool1 = {key: 'bool1', types: ['bool'], defaultValues: []}
   const bool2 = {key: 'bool2', types: ['bool'], defaultValues: ['foo', 'bar']}
   const bool3 = {key: 'bool3', types: ['bool'], defaultValues: []}
   const bool4 = {key: 'bool4', types: ['bool'], defaultValues: ['foo', 'bar']}
 
-  const flag1 = {key: 'flag1', types: [], defaultValues: []}
-  const flag2 = {key: 'flag2', types: [], defaultValues: ['foo', 'bar']}
-  const flag3 = {key: 'flag3', defaultValues: []}
-  const flag4 = {key: 'flag4', defaultValues: ['foo', 'bar']}
+  const flag1 = {key: 'flag1', args: ['-f'], types: [], defaultValues: []}
+  const flag2 = {key: 'flag2', args: ['-f'], types: [], defaultValues: ['foo', 'bar']}
+  const flag3 = {key: 'flag3', args: ['-f'], types: [], defaultValues: []}
+  const flag4 = {key: 'flag4', args: ['-f'], types: [], defaultValues: ['foo', 'bar']}
+
+  const array1 = {key: 'array1', types: ['bool', 'string'], defaultValues: []}
+  const array2 = {key: 'array2', types: ['bool', 'string'], defaultValues: ['foo']}
 
   const opts = [
     string1, string2, string3, string4,
     number1, number2, number3, number4,
     bool1, bool2, bool3, bool4,
-    flag1, flag2, flag3, flag4
+    flag1, flag2, flag3, flag4,
+    array1, array2
   ]
 
   const {errs} = verifyValuesArity({opts})
@@ -174,7 +183,11 @@ test('verifyValuesArity throws invalidArity error for incorrect arities for stri
   expect(errs).toStrictEqual(exp)
 })
 
-test('verifyValuesArity throws invalidValues error for incorrect values for string, number, bool, and flag in values', () => {
+test('verifyValuesArity throws invalidValues error for incorrect values in values', () => {
+  const rest1 = {values: [1]}
+  const rest2 = {values: '1'}
+  const rest3 = {values: {foo: 42}}
+
   const string1 = {key: 'string1', types: ['string'], values: 42}
   const string2 = {key: 'string2', types: ['string'], values: {foo: 42}}
 
@@ -187,7 +200,7 @@ test('verifyValuesArity throws invalidValues error for incorrect values for stri
   const flag1 = {key: 'flag1', types: [], values: 42}
   const flag2 = {key: 'flag2', types: [], values: {foo: 42}}
 
-  const opts = [string1, string2, number1, number2, bool1, bool2, flag1, flag2]
+  const opts = [rest1, rest2, rest3, string1, string2, number1, number2, bool1, bool2, flag1, flag2]
 
   const {errs} = verifyValuesArity({opts})
 
@@ -196,7 +209,11 @@ test('verifyValuesArity throws invalidValues error for incorrect values for stri
   expect(errs).toStrictEqual(exp)
 })
 
-test('verifyValuesArity throws invalidValues error for incorrect values for string, number, bool, and flag in defaultValues', () => {
+test('verifyValuesArity throws invalidValues error for incorrect values in defaultValues', () => {
+  const rest1 = {defaultValues: []}
+  const rest2 = {defaultValues: ['1']}
+  const rest3 = {defaultValues: ['1', '2']}
+
   const string1 = {key: 'string1', types: ['string'], defaultValues: 42}
   const string2 = {key: 'string2', types: ['string'], defaultValues: {foo: 42}}
 
@@ -209,7 +226,7 @@ test('verifyValuesArity throws invalidValues error for incorrect values for stri
   const flag1 = {key: 'flag1', types: [], defaultValues: 42}
   const flag2 = {key: 'flag2', types: [], defaultValues: {foo: 42}}
 
-  const opts = [string1, string2, number1, number2, bool1, bool2, flag1, flag2]
+  const opts = [rest1, rest2, rest3, string1, string2, number1, number2, bool1, bool2, flag1, flag2]
 
   const {errs} = verifyValuesArity({opts})
 
@@ -218,7 +235,7 @@ test('verifyValuesArity throws invalidValues error for incorrect values for stri
   expect(errs).toStrictEqual(exp)
 })
 
-test('verifyValuesArity throws invalidTypes error for incorrect values for string, number, bool, and flag in values', () => {
+test('verifyValuesArity throws invalidTypes error for incorrect values in values', () => {
   const string0 = {key: 'string', types: 42, values: ['foo']}
   const number0 = {key: 'number', types: 42, values: ['42']}
   const bool0 = {key: 'bool', types: 42, values: ['true']}
@@ -233,7 +250,7 @@ test('verifyValuesArity throws invalidTypes error for incorrect values for strin
   expect(errs).toStrictEqual(exp)
 })
 
-test('verifyValuesArity throws invalidTypes error for incorrect values for string, number, bool, and flag in defaultValues', () => {
+test('verifyValuesArity throws invalidTypes error for incorrect values in defaultValues', () => {
   const string0 = {key: 'string', types: 42, defaultValues: ['foo']}
   const number0 = {key: 'number', types: 42, defaultValues: ['42']}
   const bool0 = {key: 'bool', types: 42, defaultValues: ['true']}
