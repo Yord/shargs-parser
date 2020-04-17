@@ -15,3 +15,19 @@ test('compose composes functions', () => {
     })
   )
 })
+
+test('compose is associative', () => {
+  const f = func(anything())
+  const g = func(anything())
+  const h = func(anything())
+  const a = anything()
+  assert(
+    property(f, g, h, a, (f, g, h, a) => {
+      expect(
+        compose(f, compose(g, h))(a)
+      ).toStrictEqual(
+        compose(compose(f, g), h)(a)
+      )
+    })
+  )
+})
