@@ -31,3 +31,19 @@ test('compose is associative', () => {
     })
   )
 })
+
+test('composing f with id is f', () => {
+  const id = a => a
+
+  const f  = func(anything())
+  const a  = anything()
+  assert(
+    property(f, a, (f, a) => {
+      expect(
+        compose(f, id)(a)
+      ).toStrictEqual(
+        f(a)
+      )
+    })
+  )
+})
