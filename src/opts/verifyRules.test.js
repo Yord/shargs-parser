@@ -62,6 +62,29 @@ test('verifyRules fails on wrong type', () => {
   expect(errs).toStrictEqual(exp)
 })
 
+test('verifyRules ignores objects that have rules but no key', () => {
+  const rules = firstName => opts => (
+    firstName.values[0] === 'Logan' ||
+    opts.some(({key, values}) => key === 'lastName' && values !== null)
+  )
+
+  const firstName = {rules, values: ['Charles']}
+  const lastName  = {key: 'lastName', types: ['string']}
+
+  const obj = {
+    opts: [firstName, lastName]
+  }
+
+  const {errs, opts} = verifyRules(obj)
+
+  const expErrs = []
+  
+  const expOpts = obj.opts
+
+  expect(opts).toStrictEqual(expOpts)
+  expect(errs).toStrictEqual(expErrs)
+})
+
 test('verifyRules works if opts is undefined', () => {
   const obj = {}
 

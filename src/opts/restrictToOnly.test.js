@@ -26,12 +26,12 @@ test('restrictToOnly README example works', () => {
 test('restrictToOnly works as expected on all types', () => {
   const obj = {
     opts: [
-      {key: 'title', types: ['string'], only: ["The Hitchhiker's Guide to the Galaxy"], values: ["The Hitchhiker's Guide to the Galaxy"]},
-      {key: 'numBool', types: ['number', 'bool'], only: [23, true], values: [23, true]},
-      {key: 'answer', types: ['number'], only: [42], values: [42]},
-      {key: 'help', types: null, only: ['foo --bar'], values: ['foo --bar']},
-      {key: 'verbose', types: ['bool'], only: [false], values: [false]},
-      {key: 'version', types: [], only: [1], values: [1]}
+      {key: 'title', only: ["The Hitchhiker's Guide to the Galaxy"], values: ["The Hitchhiker's Guide to the Galaxy"]},
+      {key: 'numBool', only: [23, true], values: [23, true]},
+      {key: 'answer', only: [42], values: [42]},
+      {key: 'help', only: ['foo --bar'], values: ['foo --bar']},
+      {key: 'verbose', only: [false], values: [false]},
+      {key: 'version', only: [1], values: [1]}
     ]
   }
 
@@ -42,21 +42,21 @@ test('restrictToOnly works as expected on all types', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('restrictToOnly does nothing if the only attribute is undefined or null', () => {
+test('restrictToOnly does nothing if the only attribute is not an array', () => {
   const obj = {
     opts: [
-      {key: 'title', types: ['string'], only: null, values: ["The Hitchhiker's Guide to the Galaxy"]},
-      {key: 'numBool', types: ['number', 'bool'], only: null, values: [23, true]},
-      {key: 'answer', types: ['number'], only: null, values: [42]},
-      {key: 'help', types: [], only: null, values: ['foo --bar']},
-      {key: 'verbose', types: ['bool'], only: null, values: [false]},
-      {key: 'version', types: [], only: null, values: [1]},
-      {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
-      {key: 'numBool', types: ['number', 'bool'], values: [23, true]},
-      {key: 'answer', types: ['number'], values: [42]},
-      {key: 'help', types: null, values: ['foo --bar']},
-      {key: 'verbose', types: ['bool'], values: [false]},
-      {key: 'version', types: [], values: [1]}
+      {key: 'title', only: null, values: ["The Hitchhiker's Guide to the Galaxy"]},
+      {key: 'numBool', only: null, values: [23, true]},
+      {key: 'answer', only: null, values: [42]},
+      {key: 'help', only: null, values: ['foo --bar']},
+      {key: 'verbose', only: null, values: [false]},
+      {key: 'version', only: null, values: [1]},
+      {key: 'title', values: ["The Hitchhiker's Guide to the Galaxy"]},
+      {key: 'numBool', values: [23, true]},
+      {key: 'answer', values: [42]},
+      {key: 'help', values: ['foo --bar']},
+      {key: 'verbose', values: [false]},
+      {key: 'version', values: [1]}
     ]
   }
 
@@ -68,7 +68,7 @@ test('restrictToOnly does nothing if the only attribute is undefined or null', (
 })
 
 test('restrictToOnly works if values are undefined', () => {
-  const answer = {key: 'answer', types: ['number'], only: [42]}
+  const answer = {key: 'answer', only: [42]}
 
   const obj = {
     opts: [answer]
@@ -81,8 +81,8 @@ test('restrictToOnly works if values are undefined', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('restrictToOnly works if values are null', () => {
-  const answer = {key: 'answer', types: ['number'], only: [42], values: null}
+test('restrictToOnly works if values are not an array', () => {
+  const answer = {key: 'answer', only: [42], values: null}
   
   const obj = {
     opts: [answer]
@@ -93,6 +93,23 @@ test('restrictToOnly works if values are null', () => {
   const exp = [answer]
 
   expect(opts).toStrictEqual(exp)
+})
+
+test('restrictToOnly ignores defaultValues', () => {
+  const answer = {key: 'answer', only: [42], defaultValues: [23]}
+  
+  const obj = {
+    opts: [answer]
+  }
+
+  const {errs, opts} = restrictToOnly(obj)
+
+  const expOpts = [answer]
+
+  const expErrs = []
+
+  expect(opts).toStrictEqual(expOpts)
+  expect(errs).toStrictEqual(expErrs)
 })
 
 test('restrictToOnly fails if a value is not allowed', () => {

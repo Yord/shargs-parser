@@ -28,13 +28,14 @@ test('broadenBools README example works', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('broadenBools README example works for defaultValues', () => {
+test('broadenBools works for defaultValues', () => {
   const obj = {
     opts: [
       {key: 'answer', types: ['number'], defaultValues: ['42']},
       {key: 'numBool', types: ['number', 'bool'], defaultValues: ['23', 'yes']},
       {key: 'verbose', types: ['bool'], defaultValues: ['no']},
-      {key: 'verbose', types: ['bool'], defaultValues: ['f']}
+      {key: 'verbose', types: ['bool'], defaultValues: ['f']},
+      {values: ['foo']}
     ]
   }
 
@@ -49,13 +50,14 @@ test('broadenBools README example works for defaultValues', () => {
     {key: 'answer', types: ['number'], defaultValues: ['42']},
     {key: 'numBool', types: ['number', 'bool'], defaultValues: ['23', 'true']},
     {key: 'verbose', types: ['bool'], defaultValues: ['false']},
-    {key: 'verbose', types: ['bool'], defaultValues: ['false']}
+    {key: 'verbose', types: ['bool'], defaultValues: ['false']},
+    {values: ['foo']}
   ]
 
   expect(opts).toStrictEqual(exp)
 })
 
-test('broadenBools README example works for both, values and defaultValues together', () => {
+test('broadenBools works for both, values and defaultValues together', () => {
   const obj = {
     opts: [
       {key: 'answer', types: ['number'], defaultValues: ['42']},

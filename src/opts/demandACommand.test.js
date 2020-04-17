@@ -24,7 +24,7 @@ test('demandACommand records no error if a command is defined', () => {
     {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
     {key: 'numBool', types: ['number', 'bool'], values: ['23', 'true']},
     {key: 'answer', types: ['number'], values: ['42']},
-    {key: 'help', types: null, values: ['foo', '--bar']},
+    {key: 'help', args: ['help'], opts: [], values: ['foo', '--bar']},
     {key: 'verbose', types: ['bool'], values: ['false']},
     {key: 'version', types: [], values: [1]}
   ]
@@ -38,8 +38,8 @@ test('demandACommand records no error if a command is defined', () => {
 
 test('demandACommand records no error if two commands are defined', () => {
   const opts = [
-    {key: 'help', types: null, values: ['foo', '--bar']},
-    {key: 'verbose', types: null, values: ['false']}
+    {key: 'help', args: ['help'], opts: [], values: ['foo', '--bar']},
+    {key: 'verbose', args: ['verbose'], opts: [], values: ['false']}
   ]
 
   const {errs} = demandACommand({opts})

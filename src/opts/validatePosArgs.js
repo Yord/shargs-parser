@@ -1,8 +1,10 @@
 const {invalidRequiredPositionalArgument, invalidVariadicPositionalArgument} = require('../errors')
+const {PosArg, VariadicPosArg} = require('../ducktypes')
+const is   = require('../combinators/is')
 const pipe = require('../combinators/pipe')
 
 module.exports = ({errs = [], opts = []} = {}) => {
-  const posArgs = opts.filter(isPosArg)
+  const posArgs = opts.filter(is(PosArg))
 
   return pipe(
     validateRequired(posArgs),
@@ -42,7 +44,7 @@ function validateVariadic (posArgs) {
     const errs2 = []
 
     const invalidVariadic = posArgs.slice(0, posArgs.length - 1).reduce(
-      (bool, opt) => bool || isVariadicPosArg(opt),
+      (bool, opt) => bool || is(VariadicPosArg)(opt),
       false
     )
   
@@ -52,24 +54,4 @@ function validateVariadic (posArgs) {
 
     return {errs: errs.concat(errs2), opts}
   }
-}
-
-function isPosArg (opt) {
-  return hasKey(opt) && !hasArgs(opt)
-}
-
-function isVariadicPosArg (opt) {
-  return isPosArg(opt) && !hasTypes(opt)
-}
-
-function hasArgs ({args}) {
-  return Array.isArray(args)
-}
-
-function hasTypes ({types}) {
-  return Array.isArray(types)
-}
-
-function hasKey ({key}) {
-  return typeof key === 'string'
 }

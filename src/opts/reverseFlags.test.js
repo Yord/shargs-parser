@@ -3,14 +3,34 @@ const {reverseFlags} = require('..')
 test('reverseFlags README example works', () => {
   const obj = {
     opts: [
-      {key: 'flag', types: [], reverse: true, values: [1]}
+      {key: 'flag', args: ['-f'], types: [], reverse: true, values: [1]}
     ]
   }
 
   const {opts} = reverseFlags(obj)
 
   const exp = [
-    {key: 'flag', types: [], reverse: true, values: [-1]}
+    {key: 'flag', args: ['-f'], types: [], reverse: true, values: [-1]}
+  ]
+
+  expect(opts).toStrictEqual(exp)
+})
+
+test('reverseFlags reverses values and defaultValues', () => {
+  const obj = {
+    opts: [
+      {key: 'flag', args: ['-f'], types: [], reverse: true, values: [1]},
+      {key: 'flag', args: ['-f'], types: [], reverse: true, defaultValues: [1]},
+      {key: 'flag', args: ['-f'], types: [], reverse: true, values: [1], defaultValues: [1]}
+    ]
+  }
+
+  const {opts} = reverseFlags(obj)
+
+  const exp = [
+    {key: 'flag', args: ['-f'], types: [], reverse: true, values: [-1]},
+    {key: 'flag', args: ['-f'], types: [], reverse: true, defaultValues: [-1]},
+    {key: 'flag', args: ['-f'], types: [], reverse: true, values: [-1], defaultValues: [-1]}
   ]
 
   expect(opts).toStrictEqual(exp)
@@ -19,7 +39,6 @@ test('reverseFlags README example works', () => {
 test('reverseFlags does not change booleans', () => {
   const obj = {
     opts: [
-      {key: 'flag', types: [], reverse: true, values: [1]},
       {key: 'bool', types: ['bool'], reverse: true, values: [true]}
     ]
   }
@@ -27,7 +46,6 @@ test('reverseFlags does not change booleans', () => {
   const {opts} = reverseFlags(obj)
 
   const exp = [
-    {key: 'flag', types: [], reverse: true, values: [-1]},
     {key: 'bool', types: ['bool'], reverse: true, values: [true]}
   ]
 
@@ -37,16 +55,18 @@ test('reverseFlags does not change booleans', () => {
 test('reverseFlags does not reverse flags without values', () => {
   const obj = {
     opts: [
-      {key: 'flag', types: [], reverse: true, values: [1]},
-      {key: 'flag2', types: [], reverse: true, values: null}
+      {key: 'flag', args: ['-f'], types: [], reverse: true, values: [1]},
+      {key: 'flag', args: ['-f'], types: [], reverse: true, defaultValues: [1]},
+      {key: 'flag2', args: ['-f'], types: [], reverse: true}
     ]
   }
 
   const {opts} = reverseFlags(obj)
 
   const exp = [
-    {key: 'flag', types: [], reverse: true, values: [-1]},
-    {key: 'flag2', types: [], reverse: true, values: null}
+    {key: 'flag', args: ['-f'], types: [], reverse: true, values: [-1]},
+    {key: 'flag', args: ['-f'], types: [], reverse: true, defaultValues: [-1]},
+    {key: 'flag2', args: ['-f'], types: [], reverse: true}
   ]
 
   expect(opts).toStrictEqual(exp)

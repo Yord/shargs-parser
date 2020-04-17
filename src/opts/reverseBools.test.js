@@ -18,7 +18,7 @@ test('reverseBools README example works', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('reverseBools works as expected', () => {
+test('reverseBools works as expected with values', () => {
   const obj = {
     opts: [
       {key: 'bool1', types: ['bool'], reverse: true, values: [true]},
@@ -47,6 +47,40 @@ test('reverseBools works as expected', () => {
     {key: 'bool8', types: ['bool'], reverse: true, values: [[42]]},
     {key: 'bool9', types: ['bool'], reverse: true, values: [{}]},
     {key: 'bool10', types: ['string', 'bool'], reverse: true, values: ['foo', 'false']}
+  ]
+
+  expect(opts).toStrictEqual(exp)
+})
+
+test('reverseBools works as expected with defaultValues', () => {
+  const obj = {
+    opts: [
+      {key: 'bool1', types: ['bool'], reverse: true, defaultValues: [true]},
+      {key: 'bool2', types: ['bool'], reverse: true, defaultValues: [false]},
+      {key: 'bool3', types: ['bool'], reverse: true, defaultValues: ['true']},
+      {key: 'bool4', types: ['bool'], reverse: true, defaultValues: ['false']},
+      {key: 'bool5', types: ['bool'], reverse: true, defaultValues: [42]},
+      {key: 'bool6', types: ['bool'], reverse: true, defaultValues: [null]},
+      {key: 'bool7', types: ['bool'], reverse: true, defaultValues: [undefined]},
+      {key: 'bool8', types: ['bool'], reverse: true, defaultValues: [[42]]},
+      {key: 'bool9', types: ['bool'], reverse: true, defaultValues: [{}]},
+      {key: 'bool10', types: ['string', 'bool'], reverse: true, defaultValues: ['foo', 'true']}
+    ]
+  }
+
+  const {opts} = reverseBools(obj)
+
+  const exp = [
+    {key: 'bool1', types: ['bool'], reverse: true, defaultValues: [false]},
+    {key: 'bool2', types: ['bool'], reverse: true, defaultValues: [true]},
+    {key: 'bool3', types: ['bool'], reverse: true, defaultValues: ['false']},
+    {key: 'bool4', types: ['bool'], reverse: true, defaultValues: ['true']},
+    {key: 'bool5', types: ['bool'], reverse: true, defaultValues: [42]},
+    {key: 'bool6', types: ['bool'], reverse: true, defaultValues: [null]},
+    {key: 'bool7', types: ['bool'], reverse: true, defaultValues: [undefined]},
+    {key: 'bool8', types: ['bool'], reverse: true, defaultValues: [[42]]},
+    {key: 'bool9', types: ['bool'], reverse: true, defaultValues: [{}]},
+    {key: 'bool10', types: ['string', 'bool'], reverse: true, defaultValues: ['foo', 'false']}
   ]
 
   expect(opts).toStrictEqual(exp)
@@ -92,20 +126,40 @@ test('reverseBools does not change bool options with invalid values', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('reverseBools does not reverse booleans without values', () => {
+test('reverseBools does not change bool options with invalid defaultValues', () => {
   const obj = {
     opts: [
-      {key: 'bool', types: ['bool'], reverse: true, values: [true]},
-      {key: 'bool2', types: ['bool'], reverse: true, values: null}
+      {key: 'bool1', types: ['bool'], reverse: true, defaultValues: [42]},
+      {key: 'bool2', types: ['bool'], reverse: true, defaultValues: ['42']},
+      {key: 'bool2', types: ['bool'], reverse: true, defaultValues: [undefined]},
+      {key: 'bool2', types: ['bool'], reverse: true, defaultValues: [null]}
     ]
   }
 
   const {opts} = reverseBools(obj)
 
   const exp = [
-    {key: 'bool', types: ['bool'], reverse: true, values: [false]},
-    {key: 'bool2', types: ['bool'], reverse: true, values: null}
+    {key: 'bool1', types: ['bool'], reverse: true, defaultValues: [42]},
+    {key: 'bool2', types: ['bool'], reverse: true, defaultValues: ['42']},
+    {key: 'bool2', types: ['bool'], reverse: true, defaultValues: [undefined]},
+    {key: 'bool2', types: ['bool'], reverse: true, defaultValues: [null]}
   ]
+
+  expect(opts).toStrictEqual(exp)
+})
+
+test('reverseBools does not reverse booleans without values or defaultValues', () => {
+  const obj = {
+    opts: [
+      {key: 'bool2', types: ['bool'], reverse: true, values: null},
+      {key: 'bool4', types: ['bool'], reverse: true, defaultValues: null},
+      {key: 'bool5', types: ['bool'], reverse: true}
+    ]
+  }
+
+  const {opts} = reverseBools(obj)
+
+  const exp = obj.opts
 
   expect(opts).toStrictEqual(exp)
 })

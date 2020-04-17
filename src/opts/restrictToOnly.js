@@ -1,8 +1,9 @@
 const traverseOpts = require('./traverseOpts')
 const {valueRestrictionsViolated} = require('../errors')
-const and = require('../combinators/and')
+const {Only, Values, Variable} = require('../ducktypes')
+const is = require('../combinators/is')
 
-module.exports = traverseOpts(and(hasOnly, hasValues))(opt => {
+module.exports = traverseOpts(is(Variable, Values, Only))(opt => {
   const errs = []
   const opts = []
 
@@ -25,11 +26,3 @@ module.exports = traverseOpts(and(hasOnly, hasValues))(opt => {
 
   return {errs, opts}
 })
-
-function hasOnly ({only}) {
-  return only !== null && typeof only !== 'undefined'
-}
-
-function hasValues ({values}) {
-  return values !== null && typeof values !== 'undefined'
-}

@@ -1,3 +1,9 @@
+const {incompatibleTypes} = require('../errors')
+const {CommandOption, FlagOption, Variable, Variadic} = require('../ducktypes')
+const and = require('../combinators/and')
+const is = require('../combinators/is')
+const not = require('../combinators/not')
+
 module.exports = ({errs = [], opts = []} = {}) => {
   const errs2 = []
   const opts2 = []
@@ -6,20 +12,37 @@ module.exports = ({errs = [], opts = []} = {}) => {
 
   for (let i = 0; i < opts.length; i++) {
     const opt = opts[i]
-    
-    if (hasValues(opt) && isArray(opt)) {
+
+    if (and(is(Variable), not(is(CommandOption)), not(is(FlagOption)))(opt)) {
       const {key, types, values} = opt
 
       if (typeof keysIndex[key] === 'undefined') {
-        keysIndex[key] = i
         opts2.push(opt)
+        keysIndex[key] = opts2.length - 1
       } else {
         const prev = opts2[keysIndex[key]]
 
-        opts2[keysIndex[key]] = {
-          ...prev,
-          types: [...prev.types, ...types],
-          values: [...prev.values, ...values]
+        if (is(Variadic)(opt)) {
+          if (is(Variadic)(prev)) {
+            opts2[keysIndex[key]] = {
+              ...prev,
+              values: [...prev.values, ...values]
+            }
+          } else {
+            opts2.push(opt)
+            errs.push(incompatibleTypes({opts: [prev, opt]}))
+          }
+        } else {
+          if (is(Variadic)(prev)) {
+            opts2.push(opt)
+            errs.push(incompatibleTypes({opts: [prev, opt]}))
+          } else {
+            opts2[keysIndex[key]] = {
+              ...prev,
+              types: [...prev.types, ...types],
+              values: [...prev.values, ...values]
+            }
+          }
         }
       }
     } else {
@@ -28,12 +51,4 @@ module.exports = ({errs = [], opts = []} = {}) => {
   }
 
   return {errs: errs.concat(errs2), opts: opts2}
-}
-
-function hasValues ({values}) {
-  return Array.isArray(values) && values.length > 0
-}
-
-function isArray ({types}) {
-  return Array.isArray(types) && types.length > 0
 }

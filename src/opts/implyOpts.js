@@ -1,14 +1,15 @@
 const traverseOpts = require('./traverseOpts')
 const {implicationViolated, wrongImpliesType} = require('../errors')
-const and = require('../combinators/and')
+const {Implies, ValuesOrDefaultValues, Variable} = require('../ducktypes')
+const is = require('../combinators/is')
 
-module.exports = traverseOpts(and(doesImply, willHaveValues))((opt, _, opts) => {
+module.exports = traverseOpts(is(Variable, Implies, ValuesOrDefaultValues))((opt, _, opts) => {
   const errs = []
 
   const {key, implies: keys} = opt
 
   if (Array.isArray(keys)) {
-    if (!opts.every(opt2 => keys.indexOf(opt2.key) === -1 || willHaveValues(opt2))) {
+    if (!opts.every(opt2 => keys.indexOf(opt2.key) === -1 || is(Variable, ValuesOrDefaultValues)(opt2))) {
       errs.push(implicationViolated({key, implies: keys, option: opt}))
     }
   } else {
@@ -17,11 +18,3 @@ module.exports = traverseOpts(and(doesImply, willHaveValues))((opt, _, opts) => 
 
   return {errs}
 })
-
-function doesImply ({implies}) {
-  return typeof implies !== 'undefined'
-}
-
-function willHaveValues ({values, defaultValues}) {
-  return typeof values !== 'undefined' || typeof defaultValues !== 'undefined'
-}

@@ -4,7 +4,10 @@ test('bestGuessOpts README example works', () => {
   const obj = {
     opts: [
       {key: 'age', types: ['string'], values: ['unknown']},
+      {values: ['--furious']},
+      {key: 'gender', types: ['string'], values: ['male']},
       {values: ['--angry']},
+      {values: ['--']},
       {values: ['--name']},
       {values: ['Logan']},
       {values: ['foo']}
@@ -15,7 +18,10 @@ test('bestGuessOpts README example works', () => {
 
   const exp = [
     {key: 'age', types: ['string'], values: ['unknown']},
+    {key: 'furious', types: [], values: [1]},
+    {key: 'gender', types: ['string'], values: ['male']},
     {key: 'angry', types: [], values: [1]},
+    {values: ['--']},
     {key: 'name', types: ['string'], values: ['Logan']},
     {values: ['foo']}
   ]

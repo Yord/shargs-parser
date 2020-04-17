@@ -58,6 +58,12 @@ const implicationViolated = ({key, implies, option}) => ({
   info: {key, implies, option}
 })
 
+const incompatibleTypes = ({opts}) => ({
+  code: 'Incompatible types',
+  msg:  'Repeated options must either both be variadic or both not.',
+  info: {opts}
+})
+
 const invalidArity = ({option}) => ({
   code: 'Invalid arity',
   msg:  "An option's types arity does not match its values arity.",
@@ -94,10 +100,10 @@ const invalidVariadicPositionalArgument = ({positionalArguments}) => ({
   info: {positionalArguments}
 })
 
-const requiredOptionFormat = ({key, values, option}) => ({
+const requiredOptionFormat = ({key, values, defaultValues, option}) => ({
   code: 'Wrong format for required option',
-  msg:  'A required option has values in the wrong format. It should be an array of values.',
-  info: {key, values, option}
+  msg:  'A required option has values or defaultValues in the wrong format. It should be an array of values.',
+  info: {key, values, defaultValues, option}
 })
 
 const requiredOptionMissing = ({key, option}) => ({
@@ -165,6 +171,7 @@ module.exports = {
   falseOptsRules,
   falseRules,
   implicationViolated,
+  incompatibleTypes,
   invalidArity,
   invalidBoolMapping,
   invalidRequiredPositionalArgument,

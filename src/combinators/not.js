@@ -1,0 +1,1 @@
+module.exports = p => a => !p(a)

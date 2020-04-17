@@ -1,20 +1,17 @@
 const traverseOpts = require('./traverseOpts')
-const and = require('../combinators/and')
+const {FlagOption, Reverse, ValidDefaultValuesTypes, ValidValuesTypes} = require('../ducktypes')
+const is   = require('../combinators/is')
+const pipe = require('../combinators/pipe')
 
-module.exports = traverseOpts(and(hasReverse, isFlag, hasValidValues))(opt => ({
-  opts: [
-    {...opt, values: [-opt.values[0]]}
-  ]
-}))
+module.exports = pipe(
+  reverseFlags('values', ValidValuesTypes),
+  reverseFlags('defaultValues', ValidDefaultValuesTypes)
+)
 
-function hasReverse ({reverse}) {
-  return reverse === true
-}
-
-function isFlag ({types}) {
-  return Array.isArray(types) && types.length === 0
-}
-
-function hasValidValues ({values}) {
-  return Array.isArray(values) && values.length === 1
+function reverseFlags (val, Domain) {
+  return traverseOpts(is(FlagOption, Domain, Reverse))(opt => ({
+    opts: [
+      {...opt, [val]: [-opt[val][0]]}
+    ]
+  }))
 }

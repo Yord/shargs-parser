@@ -6,7 +6,7 @@ test('validatePosArgs README example works', () => {
     {key: 'pos1', types: ['string'], required: true, values: ['Logan']},
     {key: 'pos2', types: ['string'], required: false, values: ['Charles']},
     {key: 'pos3', types: ['string'], required: true, values: ['Xavier']},
-    {key: 'pos4', types: null, values: ['Logan', 'Charles']},
+    {key: 'pos4', values: ['Logan', 'Charles']},
     {key: 'pos5', types: ['string'], values: ['Xavier']}
   ]
 
@@ -39,7 +39,7 @@ test('validatePosArgs reports invalid required if required is not undefined, tru
 
 test('validatePosArgs reports invalid variadic if a variadic argument exists, but is not at the last position', () => {
   const opts = [
-    {key: 'pos4', types: null, values: ['Logan', 'Charles']},
+    {key: 'pos4', values: ['Logan', 'Charles']},
     {key: 'pos5', types: ['string'], values: ['Xavier']}
   ]
 
@@ -70,7 +70,7 @@ test('validatePosArgs does not report invalid required if no true required ever 
 test('validatePosArgs does not report invalid variadic if exactly one variadic argument exists that is at the last position', () => {
   const opts = [
     {key: 'pos5', types: ['string'], values: ['Xavier']},
-    {key: 'pos4', types: null, values: ['Logan', 'Charles']}
+    {key: 'pos4', values: ['Logan', 'Charles']}
   ]
 
   const {errs} = validatePosArgs({opts})
