@@ -36,11 +36,14 @@ test('implyOpts works on default values', () => {
 })
 
 test('implyOpts does not change anything if it passes', () => {
-  const age      = {key: 'age', types: ['number'], contradicts: ['birthday'], values: ['27']}
-  const birthday = {key: 'birthday', types: ['string'], contradicts: ['age'], values: ['27.7.1927']}
-
   const obj = {
-    opts: [age, birthday]
+    opts: [
+      {key: 'age', types: ['number'], contradicts: ['birthday'], values: ['27']},
+      {key: 'birthday', types: ['string'], contradicts: ['age'], values: ['27.7.1927']},
+      {values: ['foo']},
+      {key: 'variadic', contradicts: ['birthday'], values: ['foo', 'bar']},
+      {key: 'command', args: ['command'], opts: [], contradicts: ['birthday'], values: ['foo', 'bar']},
+    ]
   }
 
   const {opts} = implyOpts(obj)
