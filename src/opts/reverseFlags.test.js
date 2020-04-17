@@ -16,6 +16,21 @@ test('reverseFlags README example works', () => {
   expect(opts).toStrictEqual(exp)
 })
 
+test('reverseFlags reverses values and defaultValues', () => {
+  const obj = {
+    opts: [
+      {key: 'flag', args: ['-f'], types: [], reverse: true, values: [1]},
+      {key: 'flag', args: ['-f'], types: [], reverse: true, defaultValues: [1]},
+      {key: 'flag', args: ['-f'], types: [], reverse: true, values: [1], defaultValues: [1]}
+    ]
+  }
+
+  const {opts} = reverseFlags(obj)
+
+  const exp = [
+    {key: 'flag', args: ['-f'], types: [], reverse: true, values: [-1]},
+    {key: 'flag', args: ['-f'], types: [], reverse: true, defaultValues: [-1]},
+    {key: 'flag', args: ['-f'], types: [], reverse: true, values: [-1], defaultValues: [-1]}
   ]
 
   expect(opts).toStrictEqual(exp)
