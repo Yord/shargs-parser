@@ -44,6 +44,23 @@ test('arrayOnRepeat works with arrays, variadic, and singleton, but not commands
   expect(opts).toStrictEqual(exp)
 })
 
+test('arrayOnRepeat ignores flags and commands', () => {
+  const obj = {
+    opts: [
+      {key: 'flag', types: [], args: [], values: [1]},
+      {key: 'flag', types: [], args: [], values: [1]},
+      {key: 'commands', args: [], opts: [], values: ['1', '2']},
+      {key: 'commands', args: [], opts: [], values: ['3', '4']}
+    ]
+  }
+
+  const {opts} = arrayOnRepeat(obj)
+
+  const exp = obj.opts
+
+  expect(opts).toStrictEqual(exp)
+})
+
 test('arrayOnRepeat does not change non-repeated options', () => {
   const obj = {
     opts: [
