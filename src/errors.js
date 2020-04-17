@@ -100,10 +100,10 @@ const invalidVariadicPositionalArgument = ({positionalArguments}) => ({
   info: {positionalArguments}
 })
 
-const requiredOptionFormat = ({key, values, option}) => ({
+const requiredOptionFormat = ({key, values, defaultValues, option}) => ({
   code: 'Wrong format for required option',
-  msg:  'A required option has values in the wrong format. It should be an array of values.',
-  info: {key, values, option}
+  msg:  'A required option has values or defaultValues in the wrong format. It should be an array of values.',
+  info: {key, values, defaultValues, option}
 })
 
 const requiredOptionMissing = ({key, option}) => ({
