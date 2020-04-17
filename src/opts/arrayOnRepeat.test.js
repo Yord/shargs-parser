@@ -61,6 +61,29 @@ test('arrayOnRepeat ignores flags and commands', () => {
   expect(opts).toStrictEqual(exp)
 })
 
+test('arrayOnRepeat does not merge options of different types', () => {
+  const obj = {
+    opts: [
+      {key: 'foo', types: ['string'], args: [], values: ['1']},
+      {key: 'foo', values: ['2', '3']},
+      {key: 'bar', values: ['3', '4']},
+      {key: 'bar', types: ['string'], args: [], values: ['1']}
+    ]
+  }
+
+  const {errs, opts} = arrayOnRepeat(obj)
+
+  const expOpts = obj.opts
+
+  const expErrs = [
+    incompatibleTypes({opts: opts.slice(0, 2)}),
+    incompatibleTypes({opts: opts.slice(2)})
+  ]
+
+  expect(opts).toStrictEqual(expOpts)
+  expect(errs).toStrictEqual(expErrs)
+})
+
 test('arrayOnRepeat does not change non-repeated options', () => {
   const obj = {
     opts: [
