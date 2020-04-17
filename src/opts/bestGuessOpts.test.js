@@ -18,9 +18,9 @@ test('bestGuessOpts README example works', () => {
 
   const exp = [
     {key: 'age', types: ['string'], values: ['unknown']},
-    {key: 'furious', types: [], values: [1]},
+    {key: 'furious', types: [], args: [], values: [1]},
     {key: 'gender', types: ['string'], values: ['male']},
-    {key: 'angry', types: [], values: [1]},
+    {key: 'angry', types: [], args: [], values: [1]},
     {values: ['--']},
     {key: 'name', types: ['string'], values: ['Logan']},
     {values: ['foo']}
@@ -78,11 +78,11 @@ test('bestGuessOpts does work despite getting nonsensical input', () => {
 
   const exp = [
     {key: 'name', types: ['string'], values: ['Charles']},
-    {key: 'foo', types: [], values: [1]},
+    {key: 'foo', types: [], args: [], values: [1]},
     {values: [42]},
-    {key: 'f', types: [], values: [1]},
+    {key: 'f', types: [], args: [], values: [1]},
     {values: [1]},
-    {key: 'h', types: [], values: [1]},
+    {key: 'h', types: [], args: [], values: [1]},
     {values: [{foo: 42}]}
   ]
 
