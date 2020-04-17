@@ -12,3 +12,17 @@ test('is checks for interfaces', () => {
 
   expect(res).toStrictEqual(exp)
 })
+
+test('is works on empty objects', () => {
+  const a = {a: a => a === 42}
+  const b = {b: b => b === true}
+
+  const obj = {}
+
+  const res = is(a, b)(obj)
+
+  const exp = false
+
+  expect(res).toStrictEqual(exp)
+  expect(res).toStrictEqual(exp)
+})
