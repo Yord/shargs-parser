@@ -24,11 +24,11 @@ module.exports = ({errs = [], opts = []} = {}) => {
             opts2.push(str)
             at += 1
           } else {
-            const flg = {key, types: [], values: [1]}
+            const flg = {key, types: [], args: [], values: [1]}
             opts2.push(flg)
           }
         } else {
-          const flg = {key, types: [], values: [1]}
+          const flg = {key, types: [], args: [], values: [1]}
           opts2.push(flg)
         }
       } else opts2.push(opt)
