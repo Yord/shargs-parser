@@ -95,6 +95,23 @@ test('restrictToOnly works if values are not an array', () => {
   expect(opts).toStrictEqual(exp)
 })
 
+test('restrictToOnly ignores defaultValues', () => {
+  const answer = {key: 'answer', only: [42], defaultValues: [23]}
+  
+  const obj = {
+    opts: [answer]
+  }
+
+  const {errs, opts} = restrictToOnly(obj)
+
+  const expOpts = [answer]
+
+  const expErrs = []
+
+  expect(opts).toStrictEqual(expOpts)
+  expect(errs).toStrictEqual(expErrs)
+})
+
 test('restrictToOnly fails if a value is not allowed', () => {
   const obj = {
     opts: [
