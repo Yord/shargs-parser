@@ -17,11 +17,11 @@ test('cast README example works', () => {
 
   const exp = [
     {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
-      {key: 'numBool', types: ['number', 'bool'], values: [23, true]},
-      {key: 'answer', types: ['number'], values: [42]},
-      {key: 'help', types: null, values: ['foo --bar']},
-      {key: 'verbose', types: ['bool'], values: [false]},
-      {key: 'version', types: [], values: [1]}
+    {key: 'numBool', types: ['number', 'bool'], values: [23, true]},
+    {key: 'answer', types: ['number'], values: [42]},
+    {key: 'help', types: null, values: ['foo --bar']},
+    {key: 'verbose', types: ['bool'], values: [false]},
+    {key: 'version', types: [], values: [1]}
   ]
 
   expect(opts).toStrictEqual(exp)
@@ -123,7 +123,7 @@ test('cast casts numbers twice in defaultValues', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('cast does not change commands in values', () => {
+test('cast does not change variadic in values', () => {
   const obj = {
     opts: [
       {key: 'help', types: null, values: ['foo --bar']}
@@ -132,14 +132,26 @@ test('cast does not change commands in values', () => {
 
   const {opts} = cast(obj)
 
-  const exp = [
-    {key: 'help', types: null, values: ['foo --bar']}
-  ]
+  const exp = obj.opts
 
   expect(opts).toStrictEqual(exp)
 })
 
-test('cast does not change commands in defaultValues', () => {
+test('cast does not change commands in values', () => {
+  const obj = {
+    opts: [
+      {key: 'help', types: null, values: ['foo --bar'], opts: []}
+    ]
+  }
+
+  const {opts} = cast(obj)
+
+  const exp = obj.opts
+
+  expect(opts).toStrictEqual(exp)
+})
+
+test('cast does not change variadic in defaultValues', () => {
   const obj = {
     opts: [
       {key: 'help', types: null, defaultValues: ['foo --bar']}
@@ -148,9 +160,21 @@ test('cast does not change commands in defaultValues', () => {
 
   const {opts} = cast(obj)
 
-  const exp = [
-    {key: 'help', types: null, defaultValues: ['foo --bar']}
-  ]
+  const exp = obj.opts
+
+  expect(opts).toStrictEqual(exp)
+})
+
+test('cast does not change commands in defaultValues', () => {
+  const obj = {
+    opts: [
+      {key: 'help', types: null, defaultValues: ['foo --bar'], opts: []}
+    ]
+  }
+
+  const {opts} = cast(obj)
+
+  const exp = obj.opts
 
   expect(opts).toStrictEqual(exp)
 })
