@@ -35,13 +35,13 @@ test('splitShortOptions works if argv is undefined', () => {
 
   const {argv} = splitShortOptions(obj)
 
-  expect(argv._).toStrictEqual(undefined)
+  expect(argv).toStrictEqual([])
 })
 
 test('splitShortOptions works if input is undefined', () => {
   const {argv} = splitShortOptions()
 
-  expect(argv._).toStrictEqual(undefined)
+  expect(argv).toStrictEqual([])
 })
 
 test('splitShortOptions passes on errors', () => {
