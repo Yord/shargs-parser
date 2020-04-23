@@ -126,3 +126,11 @@ test('flagAsBool works if input is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('flagAsBool passes on errors', () => {
+  const ERRS = ['foo']
+
+  const {errs} = flagAsBool('bar')({errs: ERRS})
+
+  expect(errs).toStrictEqual(ERRS)
+})
