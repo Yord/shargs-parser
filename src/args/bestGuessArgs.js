@@ -1,43 +1,41 @@
 const traverseArgs = require('./traverseArgs')
 
-module.exports = ({errs = [], args = {_: []}} = {}) => (
-  traverseArgs({
-    array: ({key, val: argv, errs, args}) => {
-      const errs2 = []
-      const args2 = {}
+module.exports = traverseArgs({
+  array: ({key, val: argv, errs, args}) => {
+    const errs2 = []
+    const args2 = {}
 
-      if (key === '_') {
-        const _ = []
+    if (key === '_') {
+      const _ = []
 
-        let at  = 0
-        let arg = argv[at]
+      let at  = 0
+      let arg = argv[at]
 
-        while (arg) {
-          if (isOption(arg)) {
-            const key = arg.slice(isShortOption(arg) ? 1 : 2)
+      while (arg) {
+        if (isOption(arg)) {
+          const key = arg.slice(isShortOption(arg) ? 1 : 2)
 
-            if (typeof args[key] === 'undefined') {
-              if (isString(argv[at + 1])) {
-                args2[key] = argv[at + 1]
-                at += 1
-              } else {
-                args2[key] = {type: 'flag', count: isFlag(args2[key]) ? args2[key].count + 1 : 1}
-              }
-            } else _.push(arg)
+          if (typeof args[key] === 'undefined') {
+            if (isString(argv[at + 1])) {
+              args2[key] = argv[at + 1]
+              at += 1
+            } else {
+              args2[key] = {type: 'flag', count: isFlag(args2[key]) ? args2[key].count + 1 : 1}
+            }
           } else _.push(arg)
+        } else _.push(arg)
 
-          at += 1
+        at += 1
 
-          arg = argv[at]
-        }
-
-        args2['_'] = _
+        arg = argv[at]
       }
 
-      return {errs: errs.concat(errs2), args: {...args, ...args2}}
+      args2['_'] = _
     }
-  })({errs, args})
-)
+
+    return {errs: errs.concat(errs2), args: {...args, ...args2}}
+  }
+})
 
 function isOption (arg) {
   return isLongOption(arg) || isShortOption(arg)
