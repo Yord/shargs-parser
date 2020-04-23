@@ -120,3 +120,9 @@ test('flagAsBool works if opts is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('flagAsBool works if input is undefined', () => {
+  const {args} = flagAsBool()()
+
+  expect(args).toStrictEqual({_: []})
+})
