@@ -25,13 +25,13 @@ test('shortOptsNoSpace works if argv is undefined', () => {
 
   const {argv} = shortOptsNoSpace(obj)
 
-  expect(argv._).toStrictEqual(undefined)
+  expect(argv).toStrictEqual([])
 })
 
 test('shortOptsNoSpace works if input is undefined', () => {
   const {argv} = shortOptsNoSpace()
 
-  expect(argv._).toStrictEqual(undefined)
+  expect(argv).toStrictEqual([])
 })
 
 test('shortOptsNoSpace passes on errors', () => {

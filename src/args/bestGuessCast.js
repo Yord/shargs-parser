@@ -1,17 +1,15 @@
 const traverseArgs = require('./traverseArgs')
 
-module.exports = ({errs = [], args = {_: []}} = {}) => {
-  return traverseArgs({
-    array: ({key, val, errs, args}) => ({
-      errs,
-      args: {...args, [key]: val.map(cast)}
-    }),
-    string: ({key, val, errs, args}) => ({
-      errs,
-      args: {...args, [key]: cast(val)}
-    })
-  })({errs, args})
-}
+module.exports = traverseArgs({
+  array: ({key, val, errs, args}) => ({
+    errs,
+    args: {...args, [key]: val.map(cast)}
+  }),
+  string: ({key, val, errs, args}) => ({
+    errs,
+    args: {...args, [key]: cast(val)}
+  })
+})
 
 function cast (val) {
   let val2 = val

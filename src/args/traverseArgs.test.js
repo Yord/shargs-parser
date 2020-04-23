@@ -165,39 +165,19 @@ test('traverseArgs allows custom recursion with a custom object function', () =>
 test('traverseArgs works if args are undefined', () => {
   const obj = {}
 
-  const fs = {
-    undefined: constant('undefined'),
-    null:      constant('null'),
-    boolean:   constant('boolean'),
-    number:    constant('number'),
-    string:    constant('string'),
-    array:     constant('array'),
-    flag:      constant('flag'),
-    function:  constant('function'),
-    otherwise: constant('otherwise')
-  }
+  const fs = {}
 
   const {args} = traverseArgs(fs)(obj)
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('traverseArgs works if input is undefined', () => {
-  const fs = {
-    undefined: constant('undefined'),
-    null:      constant('null'),
-    boolean:   constant('boolean'),
-    number:    constant('number'),
-    string:    constant('string'),
-    array:     constant('array'),
-    flag:      constant('flag'),
-    function:  constant('function'),
-    otherwise: constant('otherwise')
-  }
+  const fs = {}
 
   const {args} = traverseArgs(fs)()
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('traverseArgs passes on errors', () => {

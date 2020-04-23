@@ -102,7 +102,11 @@ const invalidVariadicPositionalArgument = ({positionalArguments}) => ({
 
 const requiredOptionFormat = ({key, values, defaultValues, option}) => ({
   code: 'Wrong format for required option',
-  msg:  'A required option has values or defaultValues in the wrong format. It should be an array of values.',
+  msg:  (
+    'A required option has values or defaultValues in the wrong format. ' +
+    'Default values are different depending on the command-line option type: ' +
+    'Commands take objects, flags take counts, and other options take arrays of the correct length.'
+  ),
   info: {key, values, defaultValues, option}
 })
 

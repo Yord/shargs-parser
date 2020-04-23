@@ -81,13 +81,13 @@ test('flagsAsNumbers works if opts is undefined', () => {
 
   const {args} = flagsAsNumbers(obj)
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('flagsAsNumbers works if input is undefined', () => {
   const {args} = flagsAsNumbers()
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('flagsAsNumbers passes on errors', () => {

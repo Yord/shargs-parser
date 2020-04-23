@@ -7,8 +7,8 @@ const rm = ({key, errs, args}) => {
 
 const isFlag = ({type, count}) => type === 'flag' && typeof count === 'number'
 
-module.exports = function transformArgs (fs = {}) {
-  return ({errs = [], args = {}} = {}) => {
+module.exports = function traverseArgs (fs = {}) {
+  return ({errs = [], args = {_: []}} = {}) => {
     const {
       array:     arrayF     = id,
       boolean:   booleanF   = id,
@@ -34,7 +34,7 @@ module.exports = function transformArgs (fs = {}) {
         else if (typeof val === 'object' && isFlag(val)) return flagF({key: arg, val, errs: errs2, args: args2})
         else if (typeof val === 'object') {
           if (objectF === null) {
-            const {errs: errs3, args: args3} = transformArgs(fs)({args: val})
+            const {errs: errs3, args: args3} = traverseArgs(fs)({args: val})
             return {
               errs: errs2.concat(errs3),
               args: {...args2, [arg]: args3}
