@@ -122,3 +122,11 @@ test('flagAsNumber works if input is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('flagAsNumber passes on errors', () => {
+  const ERRS = ['foo']
+
+  const {errs} = flagAsNumber('bar')({errs: ERRS})
+
+  expect(errs).toStrictEqual(ERRS)
+})
