@@ -10,6 +10,7 @@ const demandACommand    = require('./opts/demandACommand')
 const equalsSignAsSpace = require('./argv/equalsSignAsSpace')
 const failRest          = require('./args/failRest')
 const flagAsBool        = require('./args/flagAsBool')
+const flagAsNumber      = require('./args/flagAsNumber')
 const flagsAsBools      = require('./args/flagsAsBools')
 const flagsAsNumbers    = require('./args/flagsAsNumbers')
 const implyOpts         = require('./opts/implyOpts')
@@ -44,6 +45,7 @@ module.exports = {
   equalsSignAsSpace,
   failRest,
   flagAsBool,
+  flagAsNumber,
   flagsAsBools,
   flagsAsNumbers,
   implyOpts,
