@@ -30,13 +30,13 @@ test('failRest even empties rest if args is undefined', () => {
 
   const {args} = failRest(obj)
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('failRest even empties rest if input is undefined', () => {
   const {args} = failRest()
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('failRest passes on errors', () => {

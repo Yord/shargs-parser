@@ -85,13 +85,13 @@ test('flagsAsBools works if opts is undefined', () => {
 
   const {args} = flagsAsBools(obj)
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('flagsAsBools works if input is undefined', () => {
   const {args} = flagsAsBools()
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('flagsAsBools passes on errors', () => {

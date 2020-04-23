@@ -117,13 +117,13 @@ test('mergeArgs works if opts is undefined', () => {
 
   const {args} = mergeArgs()(obj)
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('mergeArgs works if input is undefined', () => {
   const {args} = mergeArgs()()
 
-  expect(args).toStrictEqual({})
+  expect(args).toStrictEqual({_: []})
 })
 
 test('mergeArgs passes on errors', () => {
