@@ -9,6 +9,7 @@ const contradictOpts    = require('./opts/contradictOpts')
 const demandACommand    = require('./opts/demandACommand')
 const equalsSignAsSpace = require('./argv/equalsSignAsSpace')
 const failRest          = require('./args/failRest')
+const flagAsBool        = require('./args/flagAsBool')
 const flagsAsBools      = require('./args/flagsAsBools')
 const flagsAsNumbers    = require('./args/flagsAsNumbers')
 const implyOpts         = require('./opts/implyOpts')
@@ -42,6 +43,7 @@ module.exports = {
   demandACommand,
   equalsSignAsSpace,
   failRest,
+  flagAsBool,
   flagsAsBools,
   flagsAsNumbers,
   implyOpts,
