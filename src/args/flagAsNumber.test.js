@@ -108,3 +108,11 @@ test('flagAsNumber is recursive', () => {
 
   expect(args).toStrictEqual(exp)
 })
+
+test('flagAsNumber works if opts is undefined', () => {
+  const obj = {}
+
+  const {args} = flagAsNumber('foo')(obj)
+
+  expect(args).toStrictEqual({_: []})
+})
