@@ -112,3 +112,11 @@ test('flagAsBool is recursive', () => {
 
   expect(args).toStrictEqual(exp)
 })
+
+test('flagAsBool works if opts is undefined', () => {
+  const obj = {}
+
+  const {args} = flagAsBool('foo')(obj)
+
+  expect(args).toStrictEqual({_: []})
+})
