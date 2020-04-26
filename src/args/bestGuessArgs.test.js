@@ -60,6 +60,7 @@ test('bestGuessArgs does not interpret short options that are too long', () => {
 test('bestGuessArgs does not touch other arrays than _', () => {
   const obj = {
     args: {
+      _: [],
       names: ['--name', 'Logan']
     }
   }
@@ -105,7 +106,7 @@ test('bestGuessArgs even empties rest if input is undefined', () => {
 })
 
 test('bestGuessArgs passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = bestGuessArgs({errs: ERRS})
 

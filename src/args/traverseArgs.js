@@ -1,13 +1,4 @@
-const id = ({errs, args}) => ({errs, args})
-
-const rm = ({key, errs, args}) => {
-  const {[key]: f, ...rest} = args
-  return {errs, args: rest}
-}
-
-const isFlag = ({type, count}) => type === 'flag' && typeof count === 'number'
-
-module.exports = function traverseArgs (fs = {}) {
+function traverseArgs (fs = {}) {
   return ({errs = [], args = {_: []}} = {}) => {
     const {
       array:     arrayF     = id,
@@ -49,4 +40,21 @@ module.exports = function traverseArgs (fs = {}) {
       {errs, args}
     )
   }
+}
+
+module.exports = {
+  traverseArgs
+}
+
+function id ({errs, args}) {
+  return {errs, args}
+}
+
+function rm ({key, errs, args}) {
+  const {[key]: f, ...rest} = args
+  return {errs, args: rest}
+}
+
+function isFlag ({type, count}) {
+  return type === 'flag' && typeof count === 'number'
 }

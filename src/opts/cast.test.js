@@ -476,7 +476,7 @@ test('cast works if input is undefined', () => {
 })
 
 test('cast passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = cast({errs: ERRS})
 

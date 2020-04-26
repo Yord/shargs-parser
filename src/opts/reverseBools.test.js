@@ -179,7 +179,7 @@ test('reverseBools works if input is undefined', () => {
 })
 
 test('reverseBools passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = reverseBools({errs: ERRS})
 

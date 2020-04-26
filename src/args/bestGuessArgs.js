@@ -1,6 +1,6 @@
-const traverseArgs = require('./traverseArgs')
+const {traverseArgs} = require('./traverseArgs')
 
-module.exports = traverseArgs({
+const bestGuessArgs = traverseArgs({
   array: ({key, val: argv, errs, args}) => {
     const errs2 = []
     const args2 = {}
@@ -37,6 +37,10 @@ module.exports = traverseArgs({
   }
 })
 
+module.exports = {
+  bestGuessArgs
+}
+
 function isOption (arg) {
   return isLongOption(arg) || isShortOption(arg)
 }
@@ -53,6 +57,7 @@ function isString (arg) {
   return typeof arg === 'string' && arg.length > 0 && arg[0] !== '-'
 }
 
-function isFlag ({type, count} = {}) {
+function isFlag (arg = {}) {
+  const {type, count} = arg
   return type === 'flag' && typeof count === 'number'
 }

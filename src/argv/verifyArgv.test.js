@@ -23,6 +23,7 @@ test('verifyArgv README example works', () => {
 
   const argv = ['-f', 'Logan']
 
+  // @ts-ignore
   const {errs} = verifyArgv(rules)({argv})
 
   const exp = [
@@ -47,7 +48,7 @@ test('verifyArgv works if input is undefined', () => {
 })
 
 test('verifyArgv passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = verifyArgv()({errs: ERRS})
 

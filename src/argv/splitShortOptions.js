@@ -1,6 +1,6 @@
-const traverseArgv = require('./traverseArgv')
+const {traverseArgv} = require('./traverseArgv')
 
-module.exports = traverseArgv(isArgvGroup)(arg => {
+const splitShortOptions = traverseArgv(isArgvGroup)(arg => {
   const argv = []
 
   for (let at = 1; at < arg.length; at++) {
@@ -10,6 +10,10 @@ module.exports = traverseArgv(isArgvGroup)(arg => {
 
   return {argv}
 })
+
+module.exports = {
+  splitShortOptions
+}
 
 function isArgvGroup (arg) {
   return arg.length > 2 && arg[0] === '-' && arg[1] !== '-'

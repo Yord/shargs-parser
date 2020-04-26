@@ -1,4 +1,4 @@
-module.exports = (p = opt => false) => (f = (opt, index, opts) => ({})) => ({errs = [], opts = []} = {}) => {
+const traverseOpts = (p = opt => false) => (f = (opt, index, opts) => ({})) => ({errs = [], opts = []} = {}) => {
   let errs2 = []
   let opts2 = []
 
@@ -11,4 +11,8 @@ module.exports = (p = opt => false) => (f = (opt, index, opts) => ({})) => ({err
   }
 
   return {errs: errs.concat(errs2), opts: opts2}
+}
+
+module.exports = {
+  traverseOpts
 }

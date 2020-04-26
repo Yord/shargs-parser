@@ -49,7 +49,7 @@ test('clearRest even empties rest if input is undefined', () => {
 })
 
 test('clearRest passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = clearRest({errs: ERRS})
 

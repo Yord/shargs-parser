@@ -3,6 +3,7 @@ const {flagsAsNumbers} = require('..')
 test('flagsAsNumbers README example works', () => {
   const obj = {
     args: {
+      _: [],
       version: {type: 'flag', count: 2}
     }
   }
@@ -10,6 +11,7 @@ test('flagsAsNumbers README example works', () => {
   const {args} = flagsAsNumbers(obj)
 
   const exp = {
+    _: [],
     version: 2
   }
 
@@ -19,6 +21,7 @@ test('flagsAsNumbers README example works', () => {
 test('flagsAsNumbers works as expected on all types', () => {
   const obj = {
     args: {
+      _: [],
       title: "The Hitchhiker's Guide to the Galaxy",
       numBool: [23, true],
       answer: 42,
@@ -33,6 +36,7 @@ test('flagsAsNumbers works as expected on all types', () => {
   const {args} = flagsAsNumbers(obj)
 
   const exp = {
+    _: [],
     title: "The Hitchhiker's Guide to the Galaxy",
     numBool: [23, true],
     answer: 42,
@@ -49,9 +53,11 @@ test('flagsAsNumbers works as expected on all types', () => {
 test('flagsAsNumbers is recursive', () => {
   const obj = {
     args: {
+      _: [],
       title: "The Hitchhiker's Guide to the Galaxy",
       numBool: [23, true],
       command: {
+        _: [],
         answer: 42,
         help: 'foo --bar',
         verbose: false,
@@ -63,9 +69,11 @@ test('flagsAsNumbers is recursive', () => {
   const {args} = flagsAsNumbers(obj)
 
   const exp = {
+    _: [],
     title: "The Hitchhiker's Guide to the Galaxy",
     numBool: [23, true],
     command: {
+      _: [],
       answer: 42,
       help: 'foo --bar',
       verbose: false,
@@ -91,7 +99,7 @@ test('flagsAsNumbers works if input is undefined', () => {
 })
 
 test('flagsAsNumbers passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = flagsAsNumbers({errs: ERRS})
 

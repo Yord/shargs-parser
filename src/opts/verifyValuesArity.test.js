@@ -280,7 +280,7 @@ test('verifyValuesArity works if input is undefined', () => {
 })
 
 test('verifyValuesArity passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = verifyValuesArity({errs: ERRS})
 

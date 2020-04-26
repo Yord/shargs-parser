@@ -1,9 +1,10 @@
 const {flagAsBool} = require('..')
-const pipe = require('../combinators/pipe')
+const {pipe}       = require('../combinators/pipe')
 
 test('flagAsBool README example works', () => {
   const obj = {
     args: {
+      _: [],
       version: {type: 'flag', count: 1}
     }
   }
@@ -11,6 +12,7 @@ test('flagAsBool README example works', () => {
   const {args} = flagAsBool('version')(obj)
 
   const exp = {
+    _: [],
     version: true
   }
 
@@ -20,6 +22,7 @@ test('flagAsBool README example works', () => {
 test('flagAsBool works as expected on all types', () => {
   const obj = {
     args: {
+      _: [],
       title: "The Hitchhiker's Guide to the Galaxy",
       numBool: [23, true],
       answer: 42,
@@ -35,6 +38,7 @@ test('flagAsBool works as expected on all types', () => {
   const {args} = flagAsBool('version1')(obj)
 
   const exp = {
+    _: [],
     title: "The Hitchhiker's Guide to the Galaxy",
     numBool: [23, true],
     answer: 42,
@@ -84,9 +88,11 @@ test('flagAsBool does not transform non-flags', () => {
 test('flagAsBool is recursive', () => {
   const obj = {
     args: {
+      _: [],
       title: "The Hitchhiker's Guide to the Galaxy",
       numBool: [23, true],
       command: {
+        _: [],
         answer: 42,
         help: 'foo --bar',
         verbose: false,
@@ -99,9 +105,11 @@ test('flagAsBool is recursive', () => {
   const {args} = flagAsBool('version1')(obj)
 
   const exp = {
+    _: [],
     title: "The Hitchhiker's Guide to the Galaxy",
     numBool: [23, true],
     command: {
+      _: [],
       answer: 42,
       help: 'foo --bar',
       verbose: false,
@@ -128,7 +136,7 @@ test('flagAsBool works if input is undefined', () => {
 })
 
 test('flagAsBool passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = flagAsBool('bar')({errs: ERRS})
 

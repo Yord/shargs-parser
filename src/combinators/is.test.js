@@ -1,4 +1,4 @@
-const is = require('./is')
+const {is} = require('./is')
 
 test('is checks for interfaces', () => {
   const a = {a: a => a === 42}

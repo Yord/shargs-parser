@@ -104,7 +104,7 @@ test('bestGuessOpts works if input is undefined', () => {
 })
 
 test('bestGuessOpts passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = bestGuessOpts({errs: ERRS})
 

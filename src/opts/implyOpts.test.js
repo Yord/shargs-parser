@@ -85,7 +85,7 @@ test('implyOpts works if input is undefined', () => {
 })
 
 test('implyOpts passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = implyOpts({errs: ERRS})
 

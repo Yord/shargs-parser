@@ -55,7 +55,7 @@ test('equalsSignAsSpace works if input is undefined', () => {
 })
 
 test('equalsSignAsSpace passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = equalsSignAsSpace({errs: ERRS})
 

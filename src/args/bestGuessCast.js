@@ -1,6 +1,6 @@
-const traverseArgs = require('./traverseArgs')
+const {traverseArgs} = require('./traverseArgs')
 
-module.exports = traverseArgs({
+const bestGuessCast = traverseArgs({
   array: ({key, val, errs, args}) => ({
     errs,
     args: {...args, [key]: val.map(cast)}
@@ -10,6 +10,10 @@ module.exports = traverseArgs({
     args: {...args, [key]: cast(val)}
   })
 })
+
+module.exports = {
+  bestGuessCast
+}
 
 function cast (val) {
   let val2 = val

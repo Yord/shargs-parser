@@ -1,5 +1,5 @@
 const {anything, assert, func, property} = require('fast-check')
-const compose = require('./compose')
+const {compose} = require('./compose')
 
 test('compose composes functions', () => {
   const f = func(anything())

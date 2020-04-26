@@ -1,5 +1,6 @@
-const and = require('./combinators/and')
-const is  = require('./combinators/is')
+const {and} = require('./combinators/and')
+const {is}  = require('./combinators/is')
+
 const has = field => obj => typeof obj[field] !== 'undefined'
 const contains = e => a => a.indexOf(e) > -1
 const equals = a => b => a === b

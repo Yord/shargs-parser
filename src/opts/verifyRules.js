@@ -1,9 +1,9 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {falseRules, wrongRulesType} = require('../errors')
 const {Rules, Variable} = require('../ducktypes')
-const is = require('../combinators/is')
+const {is} = require('../combinators/is')
 
-module.exports = traverseOpts(is(Variable, Rules))((opt, _, opts) => {
+const verifyRules = traverseOpts(is(Variable, Rules))((opt, _, opts) => {
   const errs = []
 
   const {key, rules} = opt
@@ -18,6 +18,10 @@ module.exports = traverseOpts(is(Variable, Rules))((opt, _, opts) => {
 
   return {errs}
 })
+
+module.exports = {
+  verifyRules
+}
 
 function validRules ({rules}) {
   return typeof rules === 'function'

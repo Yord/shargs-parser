@@ -192,7 +192,7 @@ test('restrictToOnly works if input is undefined', () => {
 })
 
 test('restrictToOnly passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = restrictToOnly({errs: ERRS})
 

@@ -158,6 +158,7 @@ test('broadenBools reports error on broken alt object', () => {
     false: ['no', 'f']
   }
 
+  // @ts-ignore
   const {errs, opts} = broadenBools(alt)(obj)
 
   const expOpts = [
@@ -201,7 +202,7 @@ test('broadenBools works if input is undefined', () => {
 })
 
 test('broadenBools passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const alt = {}
 

@@ -1,5 +1,5 @@
 const {anything, assert, boolean, func, property} = require('fast-check')
-const and = require('./and')
+const {and} = require('./and')
 
 const pred = () => func(boolean())
 
