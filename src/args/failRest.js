@@ -1,7 +1,7 @@
-const traverseArgs = require('./traverseArgs')
+const {traverseArgs} = require('./traverseArgs')
 const {unexpectedArgument} = require('../errors')
 
-module.exports = traverseArgs({
+const failRest = traverseArgs({
   array: ({key, val: array, errs, args}) => {
     const errs2 = []
 
@@ -15,3 +15,7 @@ module.exports = traverseArgs({
     return {errs: errs.concat(errs2), args}
   }
 })
+
+module.exports = {
+  failRest
+}

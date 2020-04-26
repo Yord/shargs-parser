@@ -1,14 +1,18 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {TypedVariable, Bool, ValidValuesTypes, ValidDefaultValuesTypes, Reverse} = require('../ducktypes')
-const is   = require('../combinators/is')
-const pipe = require('../combinators/pipe')
+const {is}   = require('../combinators/is')
+const {pipe} = require('../combinators/pipe')
 
-module.exports = pipe(
-  reverseBools('values', ValidValuesTypes),
-  reverseBools('defaultValues', ValidDefaultValuesTypes)
+const reverseBools = pipe(
+  reverseBoolsDomain('values', ValidValuesTypes),
+  reverseBoolsDomain('defaultValues', ValidDefaultValuesTypes)
 )
 
-function reverseBools (kind, Domain) {
+module.exports = {
+  reverseBools
+}
+
+function reverseBoolsDomain (kind, Domain) {
   return traverseOpts(is(TypedVariable, Bool, Domain, Reverse))(opt => {
     const values = []
     

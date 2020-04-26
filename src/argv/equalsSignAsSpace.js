@@ -1,12 +1,16 @@
-const traverseArgv = require('./traverseArgv')
-const and          = require('../combinators/and')
+const {traverseArgv} = require('./traverseArgv')
+const {and}          = require('../combinators/and')
 
-module.exports = traverseArgv(and(isLongOption, hasEqualsSign))(arg => ({
+const equalsSignAsSpace = traverseArgv(and(isLongOption, hasEqualsSign))(arg => ({
   argv: [
     arg.slice(0, arg.indexOf('=')),
     arg.slice(arg.indexOf('=') + 1)
   ]
 }))
+
+module.exports = {
+  equalsSignAsSpace
+}
 
 function hasEqualsSign (arg) {
   return arg.indexOf('=') > -1

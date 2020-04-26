@@ -1,14 +1,18 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {didYouMean} = require('../errors')
 const {Rest} = require('../ducktypes')
-const is = require('../combinators/is')
+const {is} = require('../combinators/is')
 
-module.exports = traverseOpts(is(Rest))((opt, _, opts) => {
+const suggestOptions = traverseOpts(is(Rest))((opt, _, opts) => {
   const argv    = opt.values[0]
   const options = distanceList(argv, opts)
 
   return {errs: [didYouMean({argv, options})]}
 })
+
+module.exports = {
+  suggestOptions
+}
 
 function distanceList (str, opts) {
   const distances = []

@@ -1,8 +1,12 @@
-const traverseArgs = require('./traverseArgs')
+const {traverseArgs} = require('./traverseArgs')
 
-module.exports = traverseArgs({
+const flagsAsNumbers = traverseArgs({
   flag: ({key, val, errs, args}) => ({
     errs,
     args: {...args, [key]: val.count}
   })
 })
+
+module.exports = {
+  flagsAsNumbers
+}

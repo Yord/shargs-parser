@@ -1,6 +1,6 @@
 const {falseArgvRules, wrongArgvRulesType} = require('../errors')
 
-module.exports = (rules = () => true) => ({errs = [], argv = []} = {}) => {
+const verifyArgv = (rules = () => true) => ({errs = [], argv = []} = {}) => {
   const errs2 = []
 
   if (typeof rules === 'function') {
@@ -12,4 +12,8 @@ module.exports = (rules = () => true) => ({errs = [], argv = []} = {}) => {
   }
 
   return {errs: errs.concat(errs2), argv}
+}
+
+module.exports = {
+  verifyArgv
 }

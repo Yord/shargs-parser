@@ -1,13 +1,17 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {invalidArity, invalidTypes, invalidValues} = require('../errors')
-const pipe = require('../combinators/pipe')
-const is = require('../combinators/is')
+const {is}   = require('../combinators/is')
+const {pipe} = require('../combinators/pipe')
 const {ArrayVariable, FlagOption, PrimitiveVariable, Unnamed, VariadicVariable} = require('../ducktypes')
 
-module.exports = pipe(
+const verifyValuesArity = pipe(
   checkArity('values'),
   checkArity('defaultValues')
 )
+
+module.exports = {
+  verifyValuesArity
+}
 
 function checkArity (key) {
   return traverseOpts(hasValues(key))(opt => {

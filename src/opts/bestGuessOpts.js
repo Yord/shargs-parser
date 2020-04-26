@@ -1,7 +1,7 @@
 const {Rest} = require('../ducktypes')
-const is = require('../combinators/is')
+const {is} = require('../combinators/is')
 
-module.exports = ({errs = [], opts = []} = {}) => {
+const bestGuessOpts = ({errs = [], opts = []} = {}) => {
   const errs2 = []
   const opts2 = []
 
@@ -39,6 +39,10 @@ module.exports = ({errs = [], opts = []} = {}) => {
   }
 
   return {errs: errs.concat(errs2), opts: opts2}
+}
+
+module.exports = {
+  bestGuessOpts
 }
 
 function keyIsNotDefined (key2, opts) {

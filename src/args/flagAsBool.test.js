@@ -1,5 +1,5 @@
 const {flagAsBool} = require('..')
-const pipe = require('../combinators/pipe')
+const {pipe}       = require('../combinators/pipe')
 
 test('flagAsBool README example works', () => {
   const obj = {

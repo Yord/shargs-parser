@@ -1,9 +1,9 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {contradictionDetected, wrongContradictsType} = require('../errors')
 const {Contradicts, ValuesOrDefaultValues, Variable} = require('../ducktypes')
-const is = require('../combinators/is')
+const {is} = require('../combinators/is')
 
-module.exports = traverseOpts(is(Variable, Contradicts, ValuesOrDefaultValues))((opt, _, opts) => {
+const contradictOpts = traverseOpts(is(Variable, Contradicts, ValuesOrDefaultValues))((opt, _, opts) => {
   const errs = []
 
   const {key, contradicts: keys} = opt
@@ -18,3 +18,7 @@ module.exports = traverseOpts(is(Variable, Contradicts, ValuesOrDefaultValues))(
 
   return {errs}
 })
+
+module.exports = {
+  contradictOpts
+}

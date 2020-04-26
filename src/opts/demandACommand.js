@@ -1,8 +1,8 @@
 const {commandRequired} = require('../errors')
 const {CommandOption, ValuesOrDefaultValues} = require('../ducktypes')
-const is = require('../combinators/is')
+const {is} = require('../combinators/is')
 
-module.exports = ({errs = [], opts = []} = {}) => {
+const demandACommand = ({errs = [], opts = []} = {}) => {
   const errs2 = []
 
   if (noCommandIn(opts)) {
@@ -10,6 +10,10 @@ module.exports = ({errs = [], opts = []} = {}) => {
   }
 
   return {errs: errs.concat(errs2), opts}
+}
+
+module.exports = {
+  demandACommand
 }
 
 function noCommandIn (opts) {

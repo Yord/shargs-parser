@@ -1,9 +1,9 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {implicationViolated, wrongImpliesType} = require('../errors')
 const {Implies, ValuesOrDefaultValues, Variable} = require('../ducktypes')
-const is = require('../combinators/is')
+const {is} = require('../combinators/is')
 
-module.exports = traverseOpts(is(Variable, Implies, ValuesOrDefaultValues))((opt, _, opts) => {
+const implyOpts = traverseOpts(is(Variable, Implies, ValuesOrDefaultValues))((opt, _, opts) => {
   const errs = []
 
   const {key, implies: keys} = opt
@@ -18,3 +18,7 @@ module.exports = traverseOpts(is(Variable, Implies, ValuesOrDefaultValues))((opt
 
   return {errs}
 })
+
+module.exports = {
+  implyOpts
+}

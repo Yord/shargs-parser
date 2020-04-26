@@ -1,4 +1,4 @@
-module.exports = (p = arg => false) => (f = (arg, index, argv) => ({})) => ({errs = [], argv = []} = {}) => {
+const traverseArgv = (p = arg => false) => (f = (arg, index, argv) => ({})) => ({errs = [], argv = []} = {}) => {
   let errs2 = []
   let argv2 = []
 
@@ -12,4 +12,8 @@ module.exports = (p = arg => false) => (f = (arg, index, argv) => ({})) => ({err
   }
 
   return {errs: errs.concat(errs2), argv: argv2}
+}
+
+module.exports = {
+  traverseArgv
 }

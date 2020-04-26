@@ -1,16 +1,20 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {invalidBoolMapping} = require('../errors')
 const {Bool, TypedVariable, ValidValuesTypes, ValidDefaultValuesTypes} = require('../ducktypes')
-const is   = require('../combinators/is')
-const pipe = require('../combinators/pipe')
+const {is}   = require('../combinators/is')
+const {pipe} = require('../combinators/pipe')
 
-module.exports = (alt = {}) => {
+const broadenBools = (alt = {}) => {
   const altToBool = reverse(alt)
 
   return pipe(
     broadenValues('values', ValidValuesTypes, altToBool, alt),
     broadenValues('defaultValues', ValidDefaultValuesTypes, altToBool, alt)
   )
+}
+
+module.exports = {
+  broadenBools
 }
 
 function broadenValues (val, Domain, altToBool, alt) {

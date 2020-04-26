@@ -1,5 +1,5 @@
 const {flagAsNumber} = require('..')
-const pipe = require('../combinators/pipe')
+const {pipe}         = require('../combinators/pipe')
 
 test('flagAsNumber README example works', () => {
   const obj = {

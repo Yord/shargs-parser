@@ -1,6 +1,6 @@
 const {falseArgsRules, wrongArgsRulesType} = require('../errors')
 
-module.exports = (rules = () => true) => ({errs = [], args = []} = {}) => {
+const verifyArgs = (rules = () => true) => ({errs = [], args = []} = {}) => {
   const errs2 = []
 
   if (typeof rules === 'function') {
@@ -12,4 +12,8 @@ module.exports = (rules = () => true) => ({errs = [], args = []} = {}) => {
   }
 
   return {errs: errs.concat(errs2), args}
+}
+
+module.exports = {
+  verifyArgs
 }

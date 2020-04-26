@@ -1,6 +1,6 @@
 const {falseOptsRules, wrongOptsRulesType} = require('../errors')
 
-module.exports = (rules = () => true) => ({errs = [], opts = []} = {}) => {
+const verifyOpts = (rules = () => true) => ({errs = [], opts = []} = {}) => {
   const errs2 = []
 
   if (validRules(rules)) {
@@ -12,6 +12,10 @@ module.exports = (rules = () => true) => ({errs = [], opts = []} = {}) => {
   }
 
   return {errs: errs.concat(errs2), opts}
+}
+
+module.exports = {
+  verifyOpts
 }
 
 function validRules (rules) {

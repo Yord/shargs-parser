@@ -1,6 +1,6 @@
-const traverseArgs = require('./traverseArgs')
+const {traverseArgs} = require('./traverseArgs')
 
-module.exports = traverseArgs({
+const bestGuessArgs = traverseArgs({
   array: ({key, val: argv, errs, args}) => {
     const errs2 = []
     const args2 = {}
@@ -36,6 +36,10 @@ module.exports = traverseArgs({
     return {errs: errs.concat(errs2), args: {...args, ...args2}}
   }
 })
+
+module.exports = {
+  bestGuessArgs
+}
 
 function isOption (arg) {
   return isLongOption(arg) || isShortOption(arg)

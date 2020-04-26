@@ -1,16 +1,20 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {argumentIsNotABool, argumentIsNotANumber} = require('../errors')
 const {TypedVariable, ValidDefaultValuesTypes, ValidValuesTypes} = require('../ducktypes')
-const compose = require('../combinators/compose')
-const is      = require('../combinators/is')
-const pipe    = require('../combinators/pipe')
+const {compose} = require('../combinators/compose')
+const {is}      = require('../combinators/is')
+const {pipe}    = require('../combinators/pipe')
 
-module.exports = pipe(
-  cast(ValidValuesTypes)('values'),
-  cast(ValidDefaultValuesTypes)('defaultValues')
+const cast = pipe(
+  castDomain(ValidValuesTypes)('values'),
+  castDomain(ValidDefaultValuesTypes)('defaultValues')
 )
 
-function cast (Domain) {
+module.exports = {
+  cast
+}
+
+function castDomain (Domain) {
   return compose(traverseOpts(is(TypedVariable, Domain)), castKey)
 }
 

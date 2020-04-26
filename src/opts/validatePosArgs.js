@@ -1,15 +1,19 @@
 const {invalidRequiredPositionalArgument, invalidVariadicPositionalArgument} = require('../errors')
 const {PosArg, VariadicPosArg} = require('../ducktypes')
-const is   = require('../combinators/is')
-const pipe = require('../combinators/pipe')
+const {is}   = require('../combinators/is')
+const {pipe} = require('../combinators/pipe')
 
-module.exports = ({errs = [], opts = []} = {}) => {
+const validatePosArgs = ({errs = [], opts = []} = {}) => {
   const posArgs = opts.filter(is(PosArg))
 
   return pipe(
     validateRequired(posArgs),
     validateVariadic(posArgs)
   )({errs, opts})
+}
+
+module.exports = {
+  validatePosArgs
 }
 
 function validateRequired (posArgs) {

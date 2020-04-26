@@ -1,10 +1,10 @@
 const {incompatibleTypes} = require('../errors')
 const {CommandOption, FlagOption, Variable, Variadic} = require('../ducktypes')
-const and = require('../combinators/and')
-const is = require('../combinators/is')
-const not = require('../combinators/not')
+const {and} = require('../combinators/and')
+const {is}  = require('../combinators/is')
+const {not} = require('../combinators/not')
 
-module.exports = ({errs = [], opts = []} = {}) => {
+const arrayOnRepeat = ({errs = [], opts = []} = {}) => {
   const errs2 = []
   const opts2 = []
 
@@ -51,4 +51,8 @@ module.exports = ({errs = [], opts = []} = {}) => {
   }
 
   return {errs: errs.concat(errs2), opts: opts2}
+}
+
+module.exports = {
+  arrayOnRepeat
 }

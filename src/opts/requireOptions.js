@@ -1,10 +1,10 @@
-const traverseOpts = require('./traverseOpts')
+const {traverseOpts} = require('./traverseOpts')
 const {requiredOptionFormat, requiredOptionMissing} = require('../errors')
 const {Required, Variable} = require('../ducktypes')
-const is  = require('../combinators/is')
-const not = require('../combinators/not')
+const {is}  = require('../combinators/is')
+const {not} = require('../combinators/not')
 
-module.exports = traverseOpts(is(Variable, Required))(opt => {
+const requireOptions = traverseOpts(is(Variable, Required))(opt => {
   const errs = []
 
   const {key, defaultValues, values} = opt
@@ -19,6 +19,10 @@ module.exports = traverseOpts(is(Variable, Required))(opt => {
 
   return {errs}
 })
+
+module.exports = {
+  requireOptions
+}
 
 const isDefined = val => typeof val !== 'undefined' && val !== null
 
