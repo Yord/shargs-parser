@@ -87,7 +87,7 @@ test('contradictOpts works if input is undefined', () => {
 })
 
 test('contradictOpts passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = contradictOpts({errs: ERRS})
 

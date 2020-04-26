@@ -43,6 +43,7 @@ test('mergeArgs works if rest fields are missing', () => {
     }
   }
 
+   // @ts-ignore
   const {args} = mergeArgs()(obj)
 
   const exp = {
@@ -59,9 +60,11 @@ test('mergeArgs works if rest fields are missing', () => {
 test('mergeArgs takes custom merge functions 1/2', () => {
   const obj = {
     args: {
+      _: [],
       version: {type: 'flag', count: 2},
       name: 'Logan',
       command: {
+        _: [],
         version: {type: 'flag', count: 1},
         name: 'Charles',
         help: true
@@ -75,6 +78,7 @@ test('mergeArgs takes custom merge functions 1/2', () => {
   const {args} = mergeArgs(mergeLeft)(obj)
 
   const exp = {
+    _: [],
     version: {type: 'flag', count: 2},
     name: 'Logan',
     help: true,
@@ -87,9 +91,11 @@ test('mergeArgs takes custom merge functions 1/2', () => {
 test('mergeArgs takes custom merge functions 2/2', () => {
   const obj = {
     args: {
+      _: [],
       version: {type: 'flag', count: 2},
       name: 'Logan',
       command: {
+        _: [],
         version: {type: 'flag', count: 1},
         name: 'Charles',
         help: true
@@ -103,6 +109,7 @@ test('mergeArgs takes custom merge functions 2/2', () => {
   const {args} = mergeArgs(mergeRight)(obj)
 
   const exp = {
+    _: [],
     version: {type: 'flag', count: 1},
     name: 'Charles',
     help: true,
@@ -127,7 +134,7 @@ test('mergeArgs works if input is undefined', () => {
 })
 
 test('mergeArgs passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = mergeArgs()({errs: ERRS})
 

@@ -1,6 +1,6 @@
 const {falseOptsRules, wrongOptsRulesType} = require('../errors')
 
-const verifyOpts = (rules = () => true) => ({errs = [], opts = []} = {}) => {
+const verifyOpts = (rules = opts => true) => ({errs = [], opts = []} = {}) => {
   const errs2 = []
 
   if (validRules(rules)) {

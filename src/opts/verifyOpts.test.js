@@ -31,6 +31,7 @@ test('verifyOpts fails on wrong type', () => {
     {key: 'lastName', types: ['string']}
   ]
 
+  // @ts-ignore
   const {errs} = verifyOpts(rules)({opts})
 
   const exp = [
@@ -55,7 +56,7 @@ test('verifyOpts works if input is undefined', () => {
 })
 
 test('verifyOpts passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = verifyOpts()({errs: ERRS})
 

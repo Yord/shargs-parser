@@ -108,7 +108,7 @@ test('demandACommand trows if input is undefined', () => {
 })
 
 test('demandACommand passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = demandACommand({errs: ERRS})
 

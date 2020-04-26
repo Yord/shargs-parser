@@ -61,7 +61,7 @@ test('bestGuessCast even empties rest if input is undefined', () => {
 })
 
 test('bestGuessCast passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = bestGuessCast({errs: ERRS})
 

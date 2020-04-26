@@ -43,7 +43,8 @@ test('traverseOpts does not apply function if predicate is undefined', () => {
   }
 
   const recordError = _ => ({
-    errs: ['Error']
+    errs: [{code: 'foo', msg: 'bar', info: {}}],
+    opts: []
   })
 
   const {errs, opts} = traverseOpts()(recordError)(obj)
@@ -90,7 +91,7 @@ test('traverseOpts works if input is undefined', () => {
 })
 
 test('traverseOpts passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = traverseOpts(tautology)()({errs: ERRS})
 

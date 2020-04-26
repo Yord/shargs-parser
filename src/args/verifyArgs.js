@@ -1,6 +1,6 @@
 const {falseArgsRules, wrongArgsRulesType} = require('../errors')
 
-const verifyArgs = (rules = () => true) => ({errs = [], args = []} = {}) => {
+const verifyArgs = (rules = args => true) => ({errs = [], args = []} = {}) => {
   const errs2 = []
 
   if (typeof rules === 'function') {

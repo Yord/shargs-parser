@@ -52,5 +52,8 @@ function checkArity (key) {
 }
 
 function hasValues (key) {
-  return ({[key]: values}) => typeof values !== 'undefined' && values !== null
+  return (opt = {}) => {
+    const {[key]: values} = opt
+    return typeof values !== 'undefined' && values !== null
+  }
 }

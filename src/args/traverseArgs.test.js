@@ -5,6 +5,7 @@ const constant = c => ({key, errs, args}) => ({errs, args: {...args, [key]: c}})
 test('traverseArgs README example works', () => {
   const obj = {
     args: {
+      _: [],
       version: {type: 'flag', count: 2},
       answer: 23
     }
@@ -24,6 +25,7 @@ test('traverseArgs README example works', () => {
   const {args} = traverseArgs(fs)(obj)
 
   const exp = {
+    _: [],
     version: 2,
     answer: 42
   }
@@ -34,10 +36,12 @@ test('traverseArgs README example works', () => {
 test('traverseArgs works as expected', () => {
   const obj = {
     args: {
+      _: [],
       title: "The Hitchhiker's Guide to the Galaxy",
       numBool: [23, true],
       answer: 42,
       command: {
+        _: [],
         help: 'foo --bar',
         verbose: false,
         version: {type: 'flag', count: 1},
@@ -64,10 +68,12 @@ test('traverseArgs works as expected', () => {
   const {args} = traverseArgs(fs)(obj)
 
   const exp = {
+    _: 'array',
     title: 'string',
     numBool: 'array',
     answer: 'number',
     command: {
+      _: 'array',
       help: 'string',
       verbose: 'boolean',
       version: 'flag',
@@ -84,10 +90,12 @@ test('traverseArgs works as expected', () => {
 test('traverseArgs README example works even if fs is undefined', () => {
   const obj = {
     args: {
+      _: [],
       title: "The Hitchhiker's Guide to the Galaxy",
       numBool: [23, true],
       answer: 42,
       command: {
+        _: [],
         help: 'foo --bar',
         verbose: false,
         version: {type: 'flag', count: 1},
@@ -102,10 +110,12 @@ test('traverseArgs README example works even if fs is undefined', () => {
   const {args} = traverseArgs()(obj)
 
   const exp = {
+    _: [],
     title: "The Hitchhiker's Guide to the Galaxy",
     numBool: [23, true],
     answer: 42,
     command: {
+      _: [],
       help: 'foo --bar',
       verbose: false,
       version: {type: 'flag', count: 1},
@@ -120,10 +130,12 @@ test('traverseArgs README example works even if fs is undefined', () => {
 test('traverseArgs allows custom recursion with a custom object function', () => {
   const obj = {
     args: {
+      _: [],
       title: "The Hitchhiker's Guide to the Galaxy",
       numBool: [23, true],
       answer: 42,
       command: {
+        _: [],
         help: 'foo --bar',
         verbose: false,
         version: {type: 'flag', count: 1},
@@ -147,6 +159,7 @@ test('traverseArgs allows custom recursion with a custom object function', () =>
   }
 
   const exp = {
+    _: [],
     title: "The Hitchhiker's Guide to the Galaxy",
     numBool: [23, true],
     answer: 42,
@@ -181,7 +194,7 @@ test('traverseArgs works if input is undefined', () => {
 })
 
 test('traverseArgs passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'foo', info: {}}]
 
   const fs = {
     undefined: constant('undefined'),

@@ -95,7 +95,7 @@ test('validatePosArgs works if input is undefined', () => {
 })
 
 test('validatePosArgs passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = validatePosArgs({errs: ERRS})
 

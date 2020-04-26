@@ -45,7 +45,7 @@ test('splitShortOptions works if input is undefined', () => {
 })
 
 test('splitShortOptions passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = splitShortOptions({errs: ERRS})
 

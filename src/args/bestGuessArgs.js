@@ -57,6 +57,7 @@ function isString (arg) {
   return typeof arg === 'string' && arg.length > 0 && arg[0] !== '-'
 }
 
-function isFlag ({type, count} = {}) {
+function isFlag (arg = {}) {
+  const {type, count} = arg
   return type === 'flag' && typeof count === 'number'
 }

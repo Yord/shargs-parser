@@ -9,7 +9,7 @@ module.exports = {
 function fs (merge) {
   return {
     object: ({key, val, errs, args}) => {
-      const {errs: errs2, args: args2} = traverseArgs(fs)({args: val})
+      const {errs: errs2, args: args2} = traverseArgs(fs(merge))({args: val})
       const {[key]: _, ...rest} = args
   
       return {

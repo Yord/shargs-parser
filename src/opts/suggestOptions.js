@@ -37,6 +37,7 @@ function distanceList (str, opts) {
   for (let i = 0; i < distances.length; i++) {
     const [dist, argOpt] = distances[i]
 
+    // @ts-ignore
     orderedDistances[dist].push(argOpt)
   }
 

@@ -1,14 +1,22 @@
-const argumentIsNotABool = ({values, defaultValues, index, option}) => ({
-  code: 'Argument is not a boolean',
-  msg:  "The passed command line argument must either be 'true' or 'false'",
-  info: {values, defaultValues, index, option}
-})
+const argumentIsNotABool = (info = {}) => {
+  const {values, defaultValues, index, option} = info
+  
+  return {
+    code: 'Argument is not a boolean',
+    msg:  "The passed command line argument must either be 'true' or 'false'",
+    info: {values, defaultValues, index, option}
+  }
+}
 
-const argumentIsNotANumber = ({values, defaultValues, index, option}) => ({
-  code: 'Argument is not a number',
-  msg:  'The passed command line argument must be a number',
-  info: {values, defaultValues, index, option}
-})
+const argumentIsNotANumber = (info = {}) => {
+  const {values, defaultValues, index, option} = info
+  
+  return {
+    code: 'Argument is not a number',
+    msg:  'The passed command line argument must be a number',
+    info: {values, defaultValues, index, option}
+  }
+}
 
 const commandRequired = ({options}) => ({
   code: 'Command required',
@@ -64,11 +72,15 @@ const incompatibleTypes = ({opts}) => ({
   info: {opts}
 })
 
-const invalidArity = ({option}) => ({
-  code: 'Invalid arity',
-  msg:  "An option's types arity does not match its values arity.",
-  info: {option}
-})
+const invalidArity = (info = {}) => {
+  const {option} = info
+  
+  return {
+    code: 'Invalid arity',
+    msg:  "An option's types arity does not match its values arity.",
+    info: {option}
+  }
+}
 
 const invalidBoolMapping = ({key, alt}) => ({
   code: 'Invalid bool mapping',
@@ -88,11 +100,15 @@ const invalidTypes = ({types, option}) => ({
   info: {types, option}
 })
 
-const invalidValues = ({values, defaultValues, option}) => ({
-  code: 'Invalid values',
-  msg:  "An option's values field has an invalid type.",
-  info: {values, defaultValues, option}
-})
+const invalidValues = (info = {}) => {
+  const {values, defaultValues, option} = info
+  
+  return {
+    code: 'Invalid values',
+    msg:  "An option's values field has an invalid type.",
+    info: {values, defaultValues, option}
+  }
+}
 
 const invalidVariadicPositionalArgument = ({positionalArguments}) => ({
   code: 'Invalid variadic positional argument',
@@ -100,15 +116,19 @@ const invalidVariadicPositionalArgument = ({positionalArguments}) => ({
   info: {positionalArguments}
 })
 
-const requiredOptionFormat = ({key, values, defaultValues, option}) => ({
-  code: 'Wrong format for required option',
-  msg:  (
-    'A required option has values or defaultValues in the wrong format. ' +
-    'Default values are different depending on the command-line option type: ' +
-    'Commands take objects, flags take counts, and other options take arrays of the correct length.'
-  ),
-  info: {key, values, defaultValues, option}
-})
+const requiredOptionFormat = (info = {}) => {
+  const {key, values, defaultValues, option} = info
+  
+  return {
+    code: 'Wrong format for required option',
+    msg:  (
+      'A required option has values or defaultValues in the wrong format. ' +
+      'Default values are different depending on the command-line option type: ' +
+      'Commands take objects, flags take counts, and other options take arrays of the correct length.'
+    ),
+    info: {key, values, defaultValues, option}
+  }
+}
 
 const requiredOptionMissing = ({key, option}) => ({
   code: 'Required option is missing',
@@ -140,16 +160,16 @@ const wrongArgvRulesType = ({type, argv}) => ({
   info: {type, argv}
 })
 
-const wrongContradictsType = ({key, type, options}) => ({
+const wrongContradictsType = ({key, type, option}) => ({
   code: 'Wrong contradicts type',
   msg:  'The contradicts field has the wrong type, please provide an array of command-line option keys.',
-  info: {key, type, options}
+  info: {key, type, option}
 })
 
-const wrongImpliesType = ({key, type, options}) => ({
+const wrongImpliesType = ({key, type, option}) => ({
   code: 'Wrong implies type',
   msg:  'The implies field has the wrong type, please provide an array of command-line option keys.',
-  info: {key, type, options}
+  info: {key, type, option}
 })
 
 const wrongOptsRulesType = ({type, options}) => ({
@@ -158,10 +178,10 @@ const wrongOptsRulesType = ({type, options}) => ({
   info: {type, options}
 })
 
-const wrongRulesType = ({key, type, options}) => ({
+const wrongRulesType = ({key, type, option}) => ({
   code: 'Wrong rules type',
   msg:  'The rules have a wrong type, please provide a predicate with the following signature: (option) => (options) => boolean',
-  info: {key, type, options}
+  info: {key, type, option}
 })
 
 module.exports = {

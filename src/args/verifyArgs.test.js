@@ -8,6 +8,7 @@ test('verifyArgs README example works', () => {
   )
 
   const args = {
+    _: [],
     firstName: 'Logan'
   }
 
@@ -24,9 +25,11 @@ test('verifyArgs README example works', () => {
   const rules = 42
 
   const args = {
+    _: [],
     firstName: 'Logan'
   }
 
+  // @ts-ignore
   const {errs} = verifyArgs(rules)({args})
 
   const exp = [
@@ -51,7 +54,7 @@ test('verifyArgs works if input is undefined', () => {
 })
 
 test('verifyArgs passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = verifyArgs()({errs: ERRS})
 

@@ -40,8 +40,9 @@ test('traverseArgv does not apply function if predicate is undefined', () => {
     ]
   }
 
-  const recordError = _ => ({
-    errs: ['Error']
+  const recordError = () => ({
+    errs: [{code: 'foo', msg: 'bar', info: {}}],
+    argv: []
   })
 
   const {errs, argv} = traverseArgv()(recordError)(obj)
@@ -87,7 +88,7 @@ test('traverseArgv works if input is undefined', () => {
 })
 
 test('traverseArgv passes on errors', () => {
-  const ERRS = ['foo']
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
   const {errs} = traverseArgv(tautology)()({errs: ERRS})
 
