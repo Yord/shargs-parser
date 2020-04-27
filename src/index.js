@@ -29,7 +29,6 @@ const {validatePosArgs}   = require('./opts/validatePosArgs')
 const {verifyArgs}        = require('./args/verifyArgs')
 const {verifyArgv}        = require('./argv/verifyArgv')
 const {verifyOpts}        = require('./opts/verifyOpts')
-const {verifyRules}       = require('./opts/verifyRules')
 const {verifyValuesArity} = require('./opts/verifyValuesArity')
 
 module.exports = {
@@ -64,6 +63,5 @@ module.exports = {
   verifyArgs,
   verifyArgv,
   verifyOpts,
-  verifyRules,
   verifyValuesArity
 }

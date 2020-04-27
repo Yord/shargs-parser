@@ -29,7 +29,6 @@ export {validatePosArgs}   from './opts/validatePosArgs'
 export {verifyArgs}        from './args/verifyArgs'
 export {verifyArgv}        from './argv/verifyArgv'
 export {verifyOpts}        from './opts/verifyOpts'
-export {verifyRules}       from './opts/verifyRules'
 export {verifyValuesArity} from './opts/verifyValuesArity'
 
 export interface Err {
@@ -39,7 +38,7 @@ export interface Err {
 }
 
 export interface Args {
-  _: any[]
+  _: string[]
   [key: string]: any
 }
 
