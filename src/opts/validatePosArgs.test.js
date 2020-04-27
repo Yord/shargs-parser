@@ -28,6 +28,7 @@ test('validatePosArgs reports invalid required if required is not undefined, tru
     {key: 'pos5', types: ['string'], required: 'foo', values: ['Xavier']}
   ]
 
+  // @ts-ignore
   const {errs} = validatePosArgs({opts})
 
   const exp = [

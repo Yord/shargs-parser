@@ -8,7 +8,7 @@ const verifyRules = traverseOpts(is(Variable, Rules))((opt, _, opts) => {
 
   const {key, rules} = opt
 
-  if (validRules(opt)) {
+  if (validRules({rules})) {
     if (rules(opt)(opts) === false) {
       errs.push(falseRules({key, rules, option: opt}))
     }
