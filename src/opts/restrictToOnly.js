@@ -22,6 +22,9 @@ const restrictToOnly = traverseOpts(is(Variable, Values, Only))(opt => {
 
   if (values.length === correct) {
     opts.push(opt)
+  } else {
+    const {values, ...noValues} = opt
+    opts.push(noValues)
   }
 
   return {errs, opts}
