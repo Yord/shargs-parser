@@ -116,15 +116,15 @@ test('restrictToOnly fails if a value is not allowed', () => {
   const obj = {
     opts: [
       {key: 'title', types: ['string'], only: ["Dirk Gently"], values: ["The Hitchhiker's Guide to the Galaxy"]},
-      {key: 'answer', types: ['number'], only: [23], values: [42]},
+      {key: 'answer', types: ['number'], only: [23], defaultValues: [42], values: [42]},
       {key: 'help', types: null, only: ['--foo bar'], values: ['foo --bar']},
       {key: 'verbose', types: ['bool'], only: [true], values: [false]}
     ]
   }
 
-  const {errs} = restrictToOnly(obj)
+  const {errs, opts} = restrictToOnly(obj)
 
-  const exp = obj.opts.map(option => valueRestrictionsViolated({
+  const expErrs = obj.opts.map(option => valueRestrictionsViolated({
     key: option.key,
     values: option.values,
     index: 0,
@@ -132,7 +132,15 @@ test('restrictToOnly fails if a value is not allowed', () => {
     option
   }))
 
-  expect(errs).toStrictEqual(exp)
+  const expOpts = [
+    {key: 'title', types: ['string'], only: ["Dirk Gently"]},
+    {key: 'answer', types: ['number'], only: [23], defaultValues: [42]},
+    {key: 'help', types: null, only: ['--foo bar']},
+    {key: 'verbose', types: ['bool'], only: [true]}
+  ]
+
+  expect(errs).toStrictEqual(expErrs)
+  expect(opts).toStrictEqual(expOpts)
 })
 
 test('restrictToOnly fails on the first value of an array', () => {
