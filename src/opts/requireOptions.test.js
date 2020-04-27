@@ -100,6 +100,7 @@ test('requireOptions works only with valid values', () => {
     opts: [answer, question]
   }
 
+  // @ts-ignore
   const {errs} = requireOptions(obj)
 
   const exp = [

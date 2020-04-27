@@ -202,6 +202,7 @@ test('verifyValuesArity throws invalidValues error for incorrect values in value
 
   const opts = [rest1, rest2, rest3, string1, string2, number1, number2, bool1, bool2, flag1, flag2]
 
+  // @ts-ignore
   const {errs} = verifyValuesArity({opts})
 
   const exp = opts.map(option => invalidValues({values: option.values, option}))
@@ -243,6 +244,7 @@ test('verifyValuesArity throws invalidTypes error for incorrect values in values
 
   const opts = [string0, number0, bool0, flag0]
 
+  // @ts-ignore
   const {errs} = verifyValuesArity({opts})
 
   const exp = opts.map(option => invalidTypes({types: option.types, option}))
@@ -258,6 +260,7 @@ test('verifyValuesArity throws invalidTypes error for incorrect values in defaul
 
   const opts = [string0, number0, bool0, flag0]
 
+  // @ts-ignore
   const {errs} = verifyValuesArity({opts})
 
   const exp = opts.map(option => invalidTypes({types: option.types, option}))

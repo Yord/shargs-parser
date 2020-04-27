@@ -63,6 +63,7 @@ test('contradictOpts fails on wrong type', () => {
     opts: [age, birthday]
   }
 
+  // @ts-ignore
   const {errs} = contradictOpts(obj)
 
   const exp = [

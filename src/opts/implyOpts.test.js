@@ -61,6 +61,7 @@ test('implyOpts fails on wrong type', () => {
     opts: [age, birthday]
   }
 
+  // @ts-ignore
   const {errs} = implyOpts(obj)
 
   const exp = [
