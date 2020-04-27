@@ -39,7 +39,7 @@ export interface Err {
 }
 
 export interface Args {
-  _: any[]
+  _: string[]
   [key: string]: any
 }
 

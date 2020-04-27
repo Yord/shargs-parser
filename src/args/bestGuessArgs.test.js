@@ -79,6 +79,7 @@ test('bestGuessArgs does work despite getting nonsensical input', () => {
     }
   }
 
+  // @ts-ignore
   const {args} = bestGuessArgs(obj)
 
   const exp = {
