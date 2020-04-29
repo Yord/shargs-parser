@@ -21,7 +21,7 @@ const {reverseBools}      = require('./opts/reverseBools')
 const {reverseFlags}      = require('./opts/reverseFlags')
 const {shortOptsNoSpace}  = require('./argv/shortOptsNoSpace')
 const {splitShortOptions} = require('./argv/splitShortOptions')
-const {suggestOptions}    = require('./opts/suggestOptions')
+const {suggestOpts}       = require('./opts/suggestOpts')
 const {traverseArgs}      = require('./args/traverseArgs')
 const {traverseArgv}      = require('./argv/traverseArgv')
 const {traverseOpts}      = require('./opts/traverseOpts')
@@ -55,7 +55,7 @@ module.exports = {
   reverseFlags,
   shortOptsNoSpace,
   splitShortOptions,
-  suggestOptions,
+  suggestOpts,
   traverseArgs,
   traverseArgv,
   traverseOpts,

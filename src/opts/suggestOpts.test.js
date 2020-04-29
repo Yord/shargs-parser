@@ -1,7 +1,7 @@
-const {suggestOptions} = require('..')
+const {suggestOpts} = require('..')
 const {didYouMean} = require('../errors')
 
-test('suggestOptions README example works', () => {
+test('suggestOpts README example works', () => {
   const age = {key: 'age', types: ['number'], args: ['-a', '--age']}
 
   const opts = [
@@ -9,7 +9,7 @@ test('suggestOptions README example works', () => {
     {values: ['--aeg']}
   ]
 
-  const {errs} = suggestOptions({opts})
+  const {errs} = suggestOpts({opts})
 
   const exp = [
     didYouMean({
@@ -26,7 +26,7 @@ test('suggestOptions README example works', () => {
   expect(errs).toStrictEqual(exp)
 })
 
-test('suggestOptions works as expected', () => {
+test('suggestOpts works as expected', () => {
   const argv1 = '--titel'
   const argv2 = '--titl'
   const argv3 = '--beer'
@@ -45,7 +45,7 @@ test('suggestOptions works as expected', () => {
     pos
   ]
 
-  const {errs} = suggestOptions({opts})
+  const {errs} = suggestOpts({opts})
 
   const exp = [
     didYouMean({
@@ -87,24 +87,24 @@ test('suggestOptions works as expected', () => {
   expect(errs).toStrictEqual(exp)
 })
 
-test('suggestOptions works if opts is undefined', () => {
+test('suggestOpts works if opts is undefined', () => {
   const obj = {}
 
-  const {opts} = suggestOptions(obj)
+  const {opts} = suggestOpts(obj)
 
   expect(opts).toStrictEqual([])
 })
 
-test('suggestOptions works if input is undefined', () => {
-  const {opts} = suggestOptions()
+test('suggestOpts works if input is undefined', () => {
+  const {opts} = suggestOpts()
 
   expect(opts).toStrictEqual([])
 })
 
-test('suggestOptions passes on errors', () => {
+test('suggestOpts passes on errors', () => {
   const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
-  const {errs} = suggestOptions({errs: ERRS})
+  const {errs} = suggestOpts({errs: ERRS})
 
   expect(errs).toStrictEqual(ERRS)
 })

@@ -3,7 +3,7 @@ const {didYouMean} = require('../errors')
 const {Rest} = require('../ducktypes')
 const {is} = require('../combinators/is')
 
-const suggestOptions = traverseOpts(is(Rest))((opt, _, opts) => {
+const suggestOpts = traverseOpts(is(Rest))((opt, _, opts) => {
   const argv    = opt.values[0]
   const options = distanceList(argv, opts)
 
@@ -11,7 +11,7 @@ const suggestOptions = traverseOpts(is(Rest))((opt, _, opts) => {
 })
 
 module.exports = {
-  suggestOptions
+  suggestOpts
 }
 
 function distanceList (str, opts) {
