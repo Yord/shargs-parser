@@ -1,14 +1,14 @@
-const {requireOptions} = require('..')
+const {requireOpts} = require('..')
 const {requiredOptionFormat, requiredOptionMissing} = require('../errors')
 
-test('requireOptions README example works', () => {
+test('requireOpts README example works', () => {
   const answer = {key: 'answer', types: ['number'], required: true}
 
   const obj = {
     opts: [answer]
   }
 
-  const {errs} = requireOptions(obj)
+  const {errs} = requireOpts(obj)
 
   const expErrs = [
     requiredOptionMissing({key: answer.key, option: answer})
@@ -17,7 +17,7 @@ test('requireOptions README example works', () => {
   expect(errs).toStrictEqual(expErrs)
 })
 
-test('requireOptions keeps all options in opts', () => {
+test('requireOpts keeps all options in opts', () => {
   const answer = {key: 'answer', types: ['number'], required: true}
   const question = {key: 'question', types: ['number'], required: true, values: ['Are values fine?']}
 
@@ -25,7 +25,7 @@ test('requireOptions keeps all options in opts', () => {
     opts: [answer, question]
   }
 
-  const {errs, opts} = requireOptions(obj)
+  const {errs, opts} = requireOpts(obj)
 
   const expErrs = [
     requiredOptionMissing({key: answer.key, option: answer})
@@ -37,7 +37,7 @@ test('requireOptions keeps all options in opts', () => {
   expect(opts).toStrictEqual(expOpts)
 })
 
-test('requireOptions works as expected on all types', () => {
+test('requireOpts works as expected on all types', () => {
   const obj = {
     opts: [
       {key: 'title', types: ['string'], required: true},
@@ -49,7 +49,7 @@ test('requireOptions works as expected on all types', () => {
     ]
   }
 
-  const {errs} = requireOptions(obj)
+  const {errs} = requireOpts(obj)
 
   const exp = obj.opts.map(option =>
     requiredOptionMissing({key: option.key, option})
@@ -58,14 +58,14 @@ test('requireOptions works as expected on all types', () => {
   expect(errs).toStrictEqual(exp)
 })
 
-test('requireOptions works if required is false', () => {
+test('requireOpts works if required is false', () => {
   const answer = {key: 'answer', types: ['number'], required: false}
 
   const obj = {
     opts: [answer]
   }
 
-  const {errs, opts} = requireOptions(obj)
+  const {errs, opts} = requireOpts(obj)
 
   const expErrs = []
 
@@ -75,14 +75,14 @@ test('requireOptions works if required is false', () => {
   expect(opts).toStrictEqual(expOpts)
 })
 
-test('requireOptions works if required is undefined', () => {
+test('requireOpts works if required is undefined', () => {
   const answer = {key: 'answer', types: ['number']}
 
   const obj = {
     opts: [answer]
   }
 
-  const {errs, opts} = requireOptions(obj)
+  const {errs, opts} = requireOpts(obj)
 
   const expErrs = []
 
@@ -92,7 +92,7 @@ test('requireOptions works if required is undefined', () => {
   expect(opts).toStrictEqual(expOpts)
 })
 
-test('requireOptions works only with valid values', () => {
+test('requireOpts works only with valid values', () => {
   const answer = {key: 'answer', types: ['number'], required: true, values: 42}
   const question = {key: 'question', types: ['number'], required: true, defaultValues: 'Are values fine?'}
 
@@ -101,7 +101,7 @@ test('requireOptions works only with valid values', () => {
   }
 
   // @ts-ignore
-  const {errs} = requireOptions(obj)
+  const {errs} = requireOpts(obj)
 
   const exp = [
     requiredOptionFormat({key: answer.key, values: answer.values, option: answer}),
@@ -111,7 +111,7 @@ test('requireOptions works only with valid values', () => {
   expect(errs).toStrictEqual(exp)
 })
 
-test('requireOptions works if values are present', () => {
+test('requireOpts works if values are present', () => {
   const obj = {
     opts: [
       {key: 'title', types: ['string'], required: true, values: ['foo']},
@@ -123,14 +123,14 @@ test('requireOptions works if values are present', () => {
     ]
   }
 
-  const {errs} = requireOptions(obj)
+  const {errs} = requireOpts(obj)
 
   const exp = []
 
   expect(errs).toStrictEqual(exp)
 })
 
-test('requireOptions works if defaultValues are present', () => {
+test('requireOpts works if defaultValues are present', () => {
   const obj = {
     opts: [
       {key: 'title', types: ['string'], required: true, defaultValues: ['foo']},
@@ -142,14 +142,14 @@ test('requireOptions works if defaultValues are present', () => {
     ]
   }
 
-  const {errs} = requireOptions(obj)
+  const {errs} = requireOpts(obj)
 
   const exp = []
 
   expect(errs).toStrictEqual(exp)
 })
 
-test('requireOptions works if a mix of values and defaultValues is present', () => {
+test('requireOpts works if a mix of values and defaultValues is present', () => {
   const obj = {
     opts: [
       {key: 'title', types: ['string'], required: true, values: ['foo']},
@@ -161,31 +161,31 @@ test('requireOptions works if a mix of values and defaultValues is present', () 
     ]
   }
 
-  const {errs} = requireOptions(obj)
+  const {errs} = requireOpts(obj)
 
   const exp = []
 
   expect(errs).toStrictEqual(exp)
 })
 
-test('requireOptions works if opts is undefined', () => {
+test('requireOpts works if opts is undefined', () => {
   const obj = {}
 
-  const {errs} = requireOptions(obj)
+  const {errs} = requireOpts(obj)
 
   expect(errs).toStrictEqual([])
 })
 
-test('requireOptions works if input is undefined', () => {
-  const {errs} = requireOptions()
+test('requireOpts works if input is undefined', () => {
+  const {errs} = requireOpts()
 
   expect(errs).toStrictEqual([])
 })
 
-test('requireOptions passes on errors', () => {
+test('requireOpts passes on errors', () => {
   const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
-  const {errs} = requireOptions({errs: ERRS})
+  const {errs} = requireOpts({errs: ERRS})
 
   expect(errs).toStrictEqual(ERRS)
 })

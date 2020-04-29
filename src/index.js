@@ -15,7 +15,7 @@ const {flagsAsBools}      = require('./args/flagsAsBools')
 const {flagsAsNumbers}    = require('./args/flagsAsNumbers')
 const {implyOpts}         = require('./opts/implyOpts')
 const {mergeArgs}         = require('./args/mergeArgs')
-const {requireOptions}    = require('./opts/requireOptions')
+const {requireOpts}       = require('./opts/requireOpts')
 const {restrictToOnly}    = require('./opts/restrictToOnly')
 const {reverseBools}      = require('./opts/reverseBools')
 const {reverseFlags}      = require('./opts/reverseFlags')
@@ -49,7 +49,7 @@ module.exports = {
   flagsAsNumbers,
   implyOpts,
   mergeArgs,
-  requireOptions,
+  requireOpts,
   restrictToOnly,
   reverseBools,
   reverseFlags,
