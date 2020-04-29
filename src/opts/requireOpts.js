@@ -4,7 +4,7 @@ const {Required, Variable} = require('../ducktypes')
 const {is}  = require('../combinators/is')
 const {not} = require('../combinators/not')
 
-const requireOptions = traverseOpts(is(Variable, Required))(opt => {
+const requireOpts = traverseOpts(is(Variable, Required))(opt => {
   const errs = []
 
   const {key, defaultValues, values} = opt
@@ -21,7 +21,7 @@ const requireOptions = traverseOpts(is(Variable, Required))(opt => {
 })
 
 module.exports = {
-  requireOptions
+  requireOpts
 }
 
 const isDefined = val => typeof val !== 'undefined' && val !== null

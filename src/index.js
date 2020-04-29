@@ -15,13 +15,13 @@ const {flagsAsBools}      = require('./args/flagsAsBools')
 const {flagsAsNumbers}    = require('./args/flagsAsNumbers')
 const {implyOpts}         = require('./opts/implyOpts')
 const {mergeArgs}         = require('./args/mergeArgs')
-const {requireOptions}    = require('./opts/requireOptions')
+const {requireOpts}       = require('./opts/requireOpts')
 const {restrictToOnly}    = require('./opts/restrictToOnly')
 const {reverseBools}      = require('./opts/reverseBools')
 const {reverseFlags}      = require('./opts/reverseFlags')
 const {shortOptsNoSpace}  = require('./argv/shortOptsNoSpace')
-const {splitShortOptions} = require('./argv/splitShortOptions')
-const {suggestOptions}    = require('./opts/suggestOptions')
+const {splitShortOpts}    = require('./argv/splitShortOpts')
+const {suggestOpts}       = require('./opts/suggestOpts')
 const {traverseArgs}      = require('./args/traverseArgs')
 const {traverseArgv}      = require('./argv/traverseArgv')
 const {traverseOpts}      = require('./opts/traverseOpts')
@@ -49,13 +49,13 @@ module.exports = {
   flagsAsNumbers,
   implyOpts,
   mergeArgs,
-  requireOptions,
+  requireOpts,
   restrictToOnly,
   reverseBools,
   reverseFlags,
   shortOptsNoSpace,
-  splitShortOptions,
-  suggestOptions,
+  splitShortOpts,
+  suggestOpts,
   traverseArgs,
   traverseArgv,
   traverseOpts,
