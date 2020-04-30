@@ -132,3 +132,11 @@ test('boolAsFlag works if input is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('boolAsFlag passes on errors', () => {
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
+
+  const {errs} = boolAsFlag('bar')({errs: ERRS})
+
+  expect(errs).toStrictEqual(ERRS)
+})
