@@ -126,3 +126,9 @@ test('boolAsFlag works if opts is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('boolAsFlag works if input is undefined', () => {
+  const {args} = boolAsFlag()()
+
+  expect(args).toStrictEqual({_: []})
+})
