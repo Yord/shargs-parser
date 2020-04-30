@@ -18,6 +18,7 @@ const {flagsAsNumbers}    = require('./args/flagsAsNumbers')
 const {implyOpts}         = require('./opts/implyOpts')
 const {mergeArgs}         = require('./args/mergeArgs')
 const {numberAsFlag}      = require('./args/numberAsFlag')
+const {numbersAsFlags}    = require('./args/numbersAsFlags')
 const {requireOpts}       = require('./opts/requireOpts')
 const {restrictToOnly}    = require('./opts/restrictToOnly')
 const {reverseBools}      = require('./opts/reverseBools')
@@ -55,6 +56,7 @@ module.exports = {
   implyOpts,
   mergeArgs,
   numberAsFlag,
+  numbersAsFlags,
   requireOpts,
   restrictToOnly,
   reverseBools,
