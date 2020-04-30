@@ -17,6 +17,7 @@ const {flagsAsBools}      = require('./args/flagsAsBools')
 const {flagsAsNumbers}    = require('./args/flagsAsNumbers')
 const {implyOpts}         = require('./opts/implyOpts')
 const {mergeArgs}         = require('./args/mergeArgs')
+const {numberAsFlag}      = require('./args/numberAsFlag')
 const {requireOpts}       = require('./opts/requireOpts')
 const {restrictToOnly}    = require('./opts/restrictToOnly')
 const {reverseBools}      = require('./opts/reverseBools')
@@ -38,6 +39,8 @@ module.exports = {
   bestGuessArgs,
   bestGuessCast,
   bestGuessOpts,
+  boolAsFlag,
+  boolsAsFlags,
   broadenBools,
   cast,
   clearRest,
@@ -51,6 +54,7 @@ module.exports = {
   flagsAsNumbers,
   implyOpts,
   mergeArgs,
+  numberAsFlag,
   requireOpts,
   restrictToOnly,
   reverseBools,
