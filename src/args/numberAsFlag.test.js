@@ -128,3 +128,9 @@ test('numberAsFlag works if opts is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('numberAsFlag works if input is undefined', () => {
+  const {args} = numberAsFlag()()
+
+  expect(args).toStrictEqual({_: []})
+})
