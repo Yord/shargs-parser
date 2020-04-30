@@ -1,4 +1,5 @@
 const {numberAsFlag} = require('..')
+const {pipe}       = require('../combinators/pipe')
 
 test('numberAsFlag README example works', () => {
   const obj = {
@@ -48,6 +49,38 @@ test('numberAsFlag works as expected on all types', () => {
     no: undefined,
     nono: null
   }
+
+  expect(args).toStrictEqual(exp)
+})
+
+test('numberAsFlag does not transform non-numbers', () => {
+  const obj = {
+    args: {
+      title: "The Hitchhiker's Guide to the Galaxy",
+      numBool: [23, true],
+      answer: 42,
+      help: 'foo --bar',
+      verbose: false,
+      version1: {type: 'flag', count: 1},
+      version2: true,
+      no: undefined,
+      nono: null
+    }
+  }
+
+  const {args} = pipe(
+    numberAsFlag('title'),
+    numberAsFlag('numBool'),
+    numberAsFlag('help'),
+    numberAsFlag('verbose'),
+    numberAsFlag('version1'),
+    numberAsFlag('version2'),
+    numberAsFlag('no'),
+    numberAsFlag('nono'),
+    numberAsFlag('foo')
+  )(obj)
+
+  const exp = obj.args
 
   expect(args).toStrictEqual(exp)
 })
