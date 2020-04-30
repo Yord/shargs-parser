@@ -134,3 +134,11 @@ test('numberAsFlag works if input is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('numberAsFlag passes on errors', () => {
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
+
+  const {errs} = numberAsFlag('bar')({errs: ERRS})
+
+  expect(errs).toStrictEqual(ERRS)
+})
