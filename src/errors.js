@@ -2,8 +2,8 @@ const argumentIsNotABool = (info = {}) => {
   const {values, defaultValues, index, option} = info
   
   return {
-    code: 'ArgumentIsNotABoolean',
-    msg:  "The passed command line argument must either be 'true' or 'false'",
+    code: 'ArgumentIsNotABool',
+    msg:  "The passed command line argument must either be 'true' or 'false'.",
     info: {values, defaultValues, index, option}
   }
 }
@@ -13,7 +13,7 @@ const argumentIsNotANumber = (info = {}) => {
   
   return {
     code: 'ArgumentIsNotANumber',
-    msg:  'The passed command line argument must be a number',
+    msg:  'The passed command line argument must be a number.',
     info: {values, defaultValues, index, option}
   }
 }
@@ -52,12 +52,6 @@ const falseOptsRules = ({rules, options}) => ({
   code: 'FalseOptsRules',
   msg:  'Your opts rules returned false. Please abide to the rules defined in verifyOpts.',
   info: {rules, options}
-})
-
-const falseRules = ({key, rules, option}) => ({
-  code: 'FalseRules',
-  msg:  "An option's rules returned false. Please check your arguments.",
-  info: {key, rules, option}
 })
 
 const implicationViolated = ({key, implies, option}) => ({
@@ -131,7 +125,7 @@ const requiredOptionFormat = (info = {}) => {
 }
 
 const requiredOptionMissing = ({key, option}) => ({
-  code: 'RequiredOptionIsMissing',
+  code: 'RequiredOptionMissing',
   msg:  'An option that is marked as required has not been provided.',
   info: {key, option}
 })
@@ -143,20 +137,20 @@ const unexpectedArgument = ({argument}) => ({
 })
 
 const valueRestrictionsViolated = ({key, values, index, only, option}) => ({
-  code: 'ValueRestrictionViolated',
+  code: 'ValueRestrictionsViolated',
   msg:  'A value lies outside the allowed values of an option.',
   info: {key, values, index, only, option}
 })
 
 const wrongArgsRulesType = ({type, args}) => ({
   code: 'WrongArgsRulesType',
-  msg:  'The args rules are of a wrong type, please provide a predicate with the following signature: (args) => boolean',
+  msg:  'The args rules are of a wrong type, please provide a predicate with the following signature: (args) => boolean.',
   info: {type, args}
 })
 
 const wrongArgvRulesType = ({type, argv}) => ({
   code: 'WrongArgvRulesType',
-  msg:  'The argv rules are of a wrong type, please provide a predicate with the following signature: (argv) => boolean',
+  msg:  'The argv rules are of a wrong type, please provide a predicate with the following signature: (argv) => boolean.',
   info: {type, argv}
 })
 
@@ -174,14 +168,8 @@ const wrongImpliesType = ({key, type, option}) => ({
 
 const wrongOptsRulesType = ({type, options}) => ({
   code: 'WrongOptsRulesType',
-  msg:  'The opts rules are of a wrong type, please provide a predicate with the following signature: (options) => boolean',
+  msg:  'The opts rules are of a wrong type, please provide a predicate with the following signature: (options) => boolean.',
   info: {type, options}
-})
-
-const wrongRulesType = ({key, type, option}) => ({
-  code: 'WrongRulesType',
-  msg:  'The rules have a wrong type, please provide a predicate with the following signature: (option) => (options) => boolean',
-  info: {key, type, option}
 })
 
 module.exports = {
@@ -193,7 +181,6 @@ module.exports = {
   falseArgsRules,
   falseArgvRules,
   falseOptsRules,
-  falseRules,
   implicationViolated,
   incompatibleTypes,
   invalidArity,
@@ -210,6 +197,5 @@ module.exports = {
   wrongArgvRulesType,
   wrongContradictsType,
   wrongImpliesType,
-  wrongOptsRulesType,
-  wrongRulesType
+  wrongOptsRulesType
 }
