@@ -97,3 +97,9 @@ test('boolsAsFlags works if opts is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('boolsAsFlags works if input is undefined', () => {
+  const {args} = boolsAsFlags()
+
+  expect(args).toStrictEqual({_: []})
+})
