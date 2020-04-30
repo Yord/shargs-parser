@@ -2,6 +2,8 @@ const {arrayOnRepeat}     = require('./opts/arrayOnRepeat')
 const {bestGuessArgs}     = require('./args/bestGuessArgs')
 const {bestGuessCast}     = require('./args/bestGuessCast')
 const {bestGuessOpts}     = require('./opts/bestGuessOpts')
+const {boolAsFlag}        = require('./args/boolAsFlag')
+const {boolsAsFlags}      = require('./args/boolsAsFlags')
 const {broadenBools}      = require('./opts/broadenBools')
 const {cast}              = require('./opts/cast')
 const {clearRest}         = require('./args/clearRest')
@@ -15,6 +17,8 @@ const {flagsAsBools}      = require('./args/flagsAsBools')
 const {flagsAsNumbers}    = require('./args/flagsAsNumbers')
 const {implyOpts}         = require('./opts/implyOpts')
 const {mergeArgs}         = require('./args/mergeArgs')
+const {numberAsFlag}      = require('./args/numberAsFlag')
+const {numbersAsFlags}    = require('./args/numbersAsFlags')
 const {requireOpts}       = require('./opts/requireOpts')
 const {restrictToOnly}    = require('./opts/restrictToOnly')
 const {reverseBools}      = require('./opts/reverseBools')
@@ -36,6 +40,8 @@ module.exports = {
   bestGuessArgs,
   bestGuessCast,
   bestGuessOpts,
+  boolAsFlag,
+  boolsAsFlags,
   broadenBools,
   cast,
   clearRest,
@@ -49,6 +55,8 @@ module.exports = {
   flagsAsNumbers,
   implyOpts,
   mergeArgs,
+  numberAsFlag,
+  numbersAsFlags,
   requireOpts,
   restrictToOnly,
   reverseBools,
