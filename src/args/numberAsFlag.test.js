@@ -84,3 +84,39 @@ test('numberAsFlag does not transform non-numbers', () => {
 
   expect(args).toStrictEqual(exp)
 })
+
+test('numberAsFlag is recursive', () => {
+  const obj = {
+    args: {
+      _: [],
+      title: "The Hitchhiker's Guide to the Galaxy",
+      numBool: [23, true],
+      command: {
+        _: [],
+        answer: 42,
+        help: 'foo --bar',
+        verbose: false,
+        version1: {type: 'flag', count: 1},
+        version2: true
+      }
+    }
+  }
+
+  const {args} = numberAsFlag('answer')(obj)
+
+  const exp = {
+    _: [],
+    title: "The Hitchhiker's Guide to the Galaxy",
+    numBool: [23, true],
+    command: {
+      _: [],
+      answer: {type: 'flag', count: 42},
+      help: 'foo --bar',
+      verbose: false,
+      version1: {type: 'flag', count: 1},
+      version2: true
+    }
+  }
+
+  expect(args).toStrictEqual(exp)
+})
