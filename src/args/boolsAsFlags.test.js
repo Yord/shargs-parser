@@ -53,3 +53,39 @@ test('boolsAsFlags works as expected on all types', () => {
 
   expect(args).toStrictEqual(exp)
 })
+
+test('boolsAsFlags is recursive', () => {
+  const obj = {
+    args: {
+      _: [],
+      title: "The Hitchhiker's Guide to the Galaxy",
+      numBool: [23, true],
+      command: {
+        _: [],
+        answer: 42,
+        help: 'foo --bar',
+        verbose: false,
+        version1: {type: 'flag', count: 1},
+        version2: true
+      }
+    }
+  }
+
+  const {args} = boolsAsFlags(obj)
+
+  const exp = {
+    _: [],
+    title: "The Hitchhiker's Guide to the Galaxy",
+    numBool: [23, true],
+    command: {
+      _: [],
+      answer: 42,
+      help: 'foo --bar',
+      verbose: {type: 'flag', count: -1},
+      version1: {type: 'flag', count: 1},
+      version2: {type: 'flag', count: 1}
+    }
+  }
+
+  expect(args).toStrictEqual(exp)
+})
