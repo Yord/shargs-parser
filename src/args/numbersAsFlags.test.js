@@ -101,3 +101,11 @@ test('numbersAsFlags works if input is undefined', () => {
 
   expect(args).toStrictEqual({_: []})
 })
+
+test('numbersAsFlags passes on errors', () => {
+  const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
+
+  const {errs} = numbersAsFlags({errs: ERRS})
+
+  expect(errs).toStrictEqual(ERRS)
+})
