@@ -200,12 +200,12 @@ test('verifyValuesArity throws invalidValues error for incorrect values in value
   const flag1 = {key: 'flag1', types: [], values: 42}
   const flag2 = {key: 'flag2', types: [], values: {foo: 42}}
 
-  const opts = [rest1, rest2, rest3, string1, string2, number1, number2, bool1, bool2, flag1, flag2]
+  const opts = [undefined, rest1, rest2, rest3, string1, string2, number1, number2, bool1, bool2, flag1, flag2]
 
   // @ts-ignore
   const {errs} = verifyValuesArity({opts})
 
-  const exp = opts.map(option => invalidValues({values: option.values, option}))
+  const exp = opts.slice(1).map(option => invalidValues({values: option.values, option}))
 
   expect(errs).toStrictEqual(exp)
 })
