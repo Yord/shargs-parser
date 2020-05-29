@@ -39,3 +39,11 @@ test('setDefaultValues works for all types', () => {
 
   expect(opts).toStrictEqual(exp)
 })
+
+test('setDefaultValues works if opts is undefined', () => {
+  const obj = {}
+
+  const {errs} = setDefaultValues(obj)
+
+  expect(errs).toStrictEqual([])
+})
