@@ -17,3 +17,25 @@ test('setDefaultValues README example works', () => {
 
   expect(opts).toStrictEqual(exp)
 })
+
+test('setDefaultValues works for all types', () => {
+  const obj = {
+    opts: [
+      {key: 'flag',       args: ['-f'], types: [],                             defaultValues: [1]},
+      {key: 'primitive',  args: ['-p'], types: ['string'],                     defaultValues: ['s']},
+      {key: 'array',      args: ['-a'], types: ['string', 'number'],           defaultValues: ['s', '1']},
+      {key: 'subcommand', args: ['sc'],                              opts: [], defaultValues: [{values: ['A']}]}
+    ]
+  }
+
+  const {opts} = setDefaultValues(obj)
+
+  const exp = [
+    {key: 'flag',       args: ['-f'], types: [],                             defaultValues: [1],               values: [1]},
+    {key: 'primitive',  args: ['-p'], types: ['string'],                     defaultValues: ['s'],             values: ['s']},
+    {key: 'array',      args: ['-a'], types: ['string', 'number'],           defaultValues: ['s', '1'],        values: ['s', '1']},
+    {key: 'subcommand', args: ['sc'],                              opts: [], defaultValues: [{values: ['A']}], values: [{values: ['A']}]}
+  ]
+
+  expect(opts).toStrictEqual(exp)
+})
