@@ -36,23 +36,6 @@ test('demandACommand records no error if a command has values', () => {
   expect(errs).toStrictEqual(exp)
 })
 
-test('demandACommand records no error if a command has defaultValues', () => {
-  const opts = [
-    {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
-    {key: 'numBool', types: ['number', 'bool'], values: ['23', 'true']},
-    {key: 'answer', types: ['number'], values: ['42']},
-    {key: 'help', args: ['help'], opts: [], defaultValues: ['foo', '--bar']},
-    {key: 'verbose', types: ['bool'], values: ['false']},
-    {key: 'version', types: [], values: [1]}
-  ]
-
-  const {errs} = demandACommand({opts})
-
-  const exp = []
-
-  expect(errs).toStrictEqual(exp)
-})
-
 test('demandACommand records no error if two commands are defined', () => {
   const opts = [
     {key: 'help', args: ['help'], opts: [], values: ['foo', '--bar']},
@@ -62,25 +45,6 @@ test('demandACommand records no error if two commands are defined', () => {
   const {errs} = demandACommand({opts})
 
   const exp = []
-
-  expect(errs).toStrictEqual(exp)
-})
-
-test('demandACommand records an error if a command has no values or defaultValues', () => {
-  const opts = [
-    {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
-    {key: 'numBool', types: ['number', 'bool'], values: ['23', 'true']},
-    {key: 'answer', types: ['number'], values: ['42']},
-    {key: 'help', args: ['help'], opts: []},
-    {key: 'verbose', types: ['bool'], values: ['false']},
-    {key: 'version', types: [], values: [1]}
-  ]
-
-  const {errs} = demandACommand({opts})
-
-  const exp = [
-    commandRequired({options: opts})
-  ]
 
   expect(errs).toStrictEqual(exp)
 })
