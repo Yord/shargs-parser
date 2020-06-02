@@ -94,18 +94,16 @@ test('requireOpts works if required is undefined', () => {
 
 test('requireOpts works only with valid values', () => {
   const answer = {key: 'answer', types: ['number'], required: true, values: 42}
-  const question = {key: 'question', types: ['number'], required: true, defaultValues: 'Are values fine?'}
 
   const obj = {
-    opts: [answer, question]
+    opts: [answer]
   }
 
   // @ts-ignore
   const {errs} = requireOpts(obj)
 
   const exp = [
-    requiredOptionFormat({key: answer.key, values: answer.values, option: answer}),
-    requiredOptionFormat({key: question.key, defaultValues: question.defaultValues, option: question})
+    requiredOptionFormat({key: answer.key, values: answer.values, option: answer})
   ]
 
   expect(errs).toStrictEqual(exp)
@@ -120,44 +118,6 @@ test('requireOpts works if values are present', () => {
       {key: 'help', args: ['help'], required: true, values: ['foo', 'bar']},
       {key: 'verbose', types: ['bool'], required: true, values: ['false']},
       {key: 'version', types: [], required: true, values: [1]}
-    ]
-  }
-
-  const {errs} = requireOpts(obj)
-
-  const exp = []
-
-  expect(errs).toStrictEqual(exp)
-})
-
-test('requireOpts works if defaultValues are present', () => {
-  const obj = {
-    opts: [
-      {key: 'title', types: ['string'], required: true, defaultValues: ['foo']},
-      {key: 'numBool', types: ['number', 'bool'], required: true, defaultValues: ['23', 'true']},
-      {key: 'answer', types: ['number'], required: true, defaultValues: ['42']},
-      {key: 'help', args: ['help'], required: true, defaultValues: ['foo', 'bar']},
-      {key: 'verbose', types: ['bool'], required: true, defaultValues: ['false']},
-      {key: 'version', types: [], required: true, defaultValues: [1]}
-    ]
-  }
-
-  const {errs} = requireOpts(obj)
-
-  const exp = []
-
-  expect(errs).toStrictEqual(exp)
-})
-
-test('requireOpts works if a mix of values and defaultValues is present', () => {
-  const obj = {
-    opts: [
-      {key: 'title', types: ['string'], required: true, values: ['foo']},
-      {key: 'numBool', types: ['number', 'bool'], required: true, defaultValues: ['23', 'true']},
-      {key: 'answer', types: ['number'], required: true, values: ['42']},
-      {key: 'help', args: ['help'], required: true, defaultValues: ['foo', 'bar']},
-      {key: 'verbose', types: ['bool'], required: true, values: ['false']},
-      {key: 'version', types: [], required: true, defaultValues: [1]}
     ]
   }
 

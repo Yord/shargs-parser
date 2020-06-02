@@ -7,14 +7,12 @@ const {not} = require('../combinators/not')
 const requireOpts = traverseOpts(is(Variable, Required))(opt => {
   const errs = []
 
-  const {key, defaultValues, values} = opt
+  const {key, values} = opt
 
-  if (isNotDefined(values) && isNotDefined(defaultValues)) {
+  if (isNotDefined(values)) {
     errs.push(requiredOptionMissing({key, option: opt}))
   } else if (isDefined(values) && isNotArray(values)) {
     errs.push(requiredOptionFormat({key, values, option: opt}))
-  } else if (isDefined(defaultValues) && isNotArray(defaultValues)) {
-    errs.push(requiredOptionFormat({key, defaultValues, option: opt}))
   }
 
   return {errs}
