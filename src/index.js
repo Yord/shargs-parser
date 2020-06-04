@@ -8,7 +8,7 @@ const {broadenBools}      = require('./opts/broadenBools')
 const {cast}              = require('./opts/cast')
 const {clearRest}         = require('./args/clearRest')
 const {contradictOpts}    = require('./opts/contradictOpts')
-const {demandACommand}    = require('./opts/demandACommand')
+const {demandASubcommand} = require('./opts/demandASubcommand')
 const {equalsSignAsSpace} = require('./argv/equalsSignAsSpace')
 const {failRest}          = require('./args/failRest')
 const {flagAsBool}        = require('./args/flagAsBool')
@@ -23,6 +23,7 @@ const {requireOpts}       = require('./opts/requireOpts')
 const {restrictToOnly}    = require('./opts/restrictToOnly')
 const {reverseBools}      = require('./opts/reverseBools')
 const {reverseFlags}      = require('./opts/reverseFlags')
+const {setDefaultValues}  = require('./opts/setDefaultValues')
 const {shortOptsNoSpace}  = require('./argv/shortOptsNoSpace')
 const {splitShortOpts}    = require('./argv/splitShortOpts')
 const {suggestOpts}       = require('./opts/suggestOpts')
@@ -46,7 +47,7 @@ module.exports = {
   cast,
   clearRest,
   contradictOpts,
-  demandACommand,
+  demandASubcommand,
   equalsSignAsSpace,
   failRest,
   flagAsBool,
@@ -61,6 +62,7 @@ module.exports = {
   restrictToOnly,
   reverseBools,
   reverseFlags,
+  setDefaultValues,
   shortOptsNoSpace,
   splitShortOpts,
   suggestOpts,

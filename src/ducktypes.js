@@ -128,24 +128,11 @@ const Values        = {values: isArray}
 const DefaultValues = {defaultValues: isArray}
 const Bool          = {types: contains('bool')}
 
-const ValuesOrDefaultValues = {
-  values: (_, obj) => is(Values)(obj) || is(DefaultValues)(obj)
-}
-
 const ValidValuesTypes = {
   values: (values, obj) => (
     is(Values)(obj) && (
       values.length === obj.types.length ||
       (obj.types.length === 0 && values.length === 1)
-    )
-  )
-}
-
-const ValidDefaultValuesTypes = {
-  defaultValues: (defaultValues, obj) => (
-    is(DefaultValues)(obj) && (
-      defaultValues.length === obj.types.length ||
-      (obj.types.length === 0 && defaultValues.length === 1)
     )
   )
 }
@@ -175,9 +162,7 @@ module.exports = {
   TypedVariable,
   Unnamed,
   ValidValuesTypes,
-  ValidDefaultValuesTypes,
   Values,
-  ValuesOrDefaultValues,
   Variable,
   Variadic,
   VariadicOption,

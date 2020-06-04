@@ -18,12 +18,6 @@ const argumentIsNotANumber = (info = {}) => {
   }
 }
 
-const commandRequired = ({options}) => ({
-  code: 'CommandRequired',
-  msg:  'No command found. Please use at least one command!',
-  info: {options}
-})
-
 const contradictionDetected = ({key, contradicts, option}) => ({
   code: 'ContradictionDetected',
   msg:  'Some given keys contradict each other.',
@@ -130,6 +124,12 @@ const requiredOptionMissing = ({key, option}) => ({
   info: {key, option}
 })
 
+const subcommandRequired = ({options}) => ({
+  code: 'SubcommandRequired',
+  msg:  'No subcommand found. Please use at least one subcommand!',
+  info: {options}
+})
+
 const unexpectedArgument = ({argument}) => ({
   code: 'UnexpectedArgument',
   msg:  'An unexpected argument was used that has no option defined.',
@@ -175,7 +175,6 @@ const wrongOptsRulesType = ({type, options}) => ({
 module.exports = {
   argumentIsNotABool,
   argumentIsNotANumber,
-  commandRequired,
   contradictionDetected,
   didYouMean,
   falseArgsRules,
@@ -191,6 +190,7 @@ module.exports = {
   invalidVariadicPositionalArgument,
   requiredOptionFormat,
   requiredOptionMissing,
+  subcommandRequired,
   unexpectedArgument,
   valueRestrictionsViolated,
   wrongArgsRulesType,

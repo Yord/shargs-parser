@@ -28,62 +28,6 @@ test('broadenBools README example works', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('broadenBools works for defaultValues', () => {
-  const obj = {
-    opts: [
-      {key: 'answer', types: ['number'], defaultValues: ['42']},
-      {key: 'numBool', types: ['number', 'bool'], defaultValues: ['23', 'yes']},
-      {key: 'verbose', types: ['bool'], defaultValues: ['no']},
-      {key: 'verbose', types: ['bool'], defaultValues: ['f']},
-      {values: ['foo']}
-    ]
-  }
-
-  const alt = {
-    true: ['yes'],
-    false: ['no', 'f']
-  }
-
-  const {opts} = broadenBools(alt)(obj)
-
-  const exp = [
-    {key: 'answer', types: ['number'], defaultValues: ['42']},
-    {key: 'numBool', types: ['number', 'bool'], defaultValues: ['23', 'true']},
-    {key: 'verbose', types: ['bool'], defaultValues: ['false']},
-    {key: 'verbose', types: ['bool'], defaultValues: ['false']},
-    {values: ['foo']}
-  ]
-
-  expect(opts).toStrictEqual(exp)
-})
-
-test('broadenBools works for both, values and defaultValues together', () => {
-  const obj = {
-    opts: [
-      {key: 'answer', types: ['number'], defaultValues: ['42']},
-      {key: 'numBool', types: ['number', 'bool'], defaultValues: ['23', 'yes'], values: ['42', 'no']},
-      {key: 'verbose', types: ['bool'], defaultValues: ['no'], values: ['yes']},
-      {key: 'verbose', types: ['bool'], defaultValues: ['f'], values: ['t']}
-    ]
-  }
-
-  const alt = {
-    true: ['yes', 't'],
-    false: ['no', 'f']
-  }
-
-  const {opts} = broadenBools(alt)(obj)
-
-  const exp = [
-    {key: 'answer', types: ['number'], defaultValues: ['42']},
-    {key: 'numBool', types: ['number', 'bool'], defaultValues: ['23', 'true'], values: ['42', 'false']},
-    {key: 'verbose', types: ['bool'], defaultValues: ['false'], values: ['true']},
-    {key: 'verbose', types: ['bool'], defaultValues: ['false'], values: ['true']}
-  ]
-
-  expect(opts).toStrictEqual(exp)
-})
-
 test('broadenBools reports error on unknown bool value', () => {
   const obj = {
     opts: [
@@ -104,36 +48,6 @@ test('broadenBools reports error on unknown bool value', () => {
     {key: 'numBool', types: ['number', 'bool'], values: ['23', 't']},
     {key: 'verbose', types: ['bool'], values: ['false']},
     {key: 'verbose', types: ['bool'], values: ['false']}
-  ]
-
-  const expErrs = [
-    invalidBoolMapping({key: 't', alt})
-  ]
-
-  expect(opts).toStrictEqual(expOpts)
-  expect(errs).toStrictEqual(expErrs)
-})
-
-test('broadenBools reports error on unknown bool defaultValue', () => {
-  const obj = {
-    opts: [
-      {key: 'numBool', types: ['number', 'bool'], defaultValues: ['23', 't']},
-      {key: 'verbose', types: ['bool'], defaultValues: ['no']},
-      {key: 'verbose', types: ['bool'], defaultValues: ['f']}
-    ]
-  }
-
-  const alt = {
-    true: ['yes'],
-    false: ['no', 'f']
-  }
-
-  const {errs, opts} = broadenBools(alt)(obj)
-
-  const expOpts = [
-    {key: 'numBool', types: ['number', 'bool'], defaultValues: ['23', 't']},
-    {key: 'verbose', types: ['bool'], defaultValues: ['false']},
-    {key: 'verbose', types: ['bool'], defaultValues: ['false']}
   ]
 
   const expErrs = [

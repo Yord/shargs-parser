@@ -95,28 +95,11 @@ test('restrictToOnly works if values are not an array', () => {
   expect(opts).toStrictEqual(exp)
 })
 
-test('restrictToOnly ignores defaultValues', () => {
-  const answer = {key: 'answer', only: [42], defaultValues: [23]}
-  
-  const obj = {
-    opts: [answer]
-  }
-
-  const {errs, opts} = restrictToOnly(obj)
-
-  const expOpts = [answer]
-
-  const expErrs = []
-
-  expect(opts).toStrictEqual(expOpts)
-  expect(errs).toStrictEqual(expErrs)
-})
-
 test('restrictToOnly fails if a value is not allowed', () => {
   const obj = {
     opts: [
       {key: 'title', types: ['string'], only: ["Dirk Gently"], values: ["The Hitchhiker's Guide to the Galaxy"]},
-      {key: 'answer', types: ['number'], only: [23], defaultValues: [42], values: [42]},
+      {key: 'answer', types: ['number'], only: [23], values: [42]},
       {key: 'help', types: null, only: ['--foo bar'], values: ['foo --bar']},
       {key: 'verbose', types: ['bool'], only: [true], values: [false]}
     ]
@@ -134,7 +117,7 @@ test('restrictToOnly fails if a value is not allowed', () => {
 
   const expOpts = [
     {key: 'title', types: ['string'], only: ["Dirk Gently"]},
-    {key: 'answer', types: ['number'], only: [23], defaultValues: [42]},
+    {key: 'answer', types: ['number'], only: [23]},
     {key: 'help', types: null, only: ['--foo bar']},
     {key: 'verbose', types: ['bool'], only: [true]}
   ]

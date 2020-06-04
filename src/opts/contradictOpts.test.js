@@ -19,24 +19,6 @@ test('contradictOpts README example works', () => {
   expect(errs).toStrictEqual(exp)
 })
 
-test('contradictOpts works on default values', () => {
-  const age      = {key: 'age', types: ['number'], contradicts: ['birthday'], values: ['27']}
-  const birthday = {key: 'birthday', types: ['string'], contradicts: ['age'], values: ['27.7.1927']}
-
-  const obj = {
-    opts: [age, birthday]
-  }
-
-  const {errs} = contradictOpts(obj)
-
-  const exp = [
-    contradictionDetected({key: 'age', contradicts: ['birthday'], option: age}),
-    contradictionDetected({key: 'birthday', contradicts: ['age'], option: birthday})
-  ]
-
-  expect(errs).toStrictEqual(exp)
-})
-
 test('contradictOpts does not change anything if it passes', () => {
   const obj = {
     opts: [
