@@ -8,7 +8,7 @@ const {broadenBools}      = require('./opts/broadenBools')
 const {cast}              = require('./opts/cast')
 const {clearRest}         = require('./args/clearRest')
 const {contradictOpts}    = require('./opts/contradictOpts')
-const {demandACommand}    = require('./opts/demandACommand')
+const {demandASubcommand} = require('./opts/demandASubcommand')
 const {equalsSignAsSpace} = require('./argv/equalsSignAsSpace')
 const {failRest}          = require('./args/failRest')
 const {flagAsBool}        = require('./args/flagAsBool')
@@ -47,7 +47,7 @@ module.exports = {
   cast,
   clearRest,
   contradictOpts,
-  demandACommand,
+  demandASubcommand,
   equalsSignAsSpace,
   failRest,
   flagAsBool,

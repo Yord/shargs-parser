@@ -1,7 +1,7 @@
-const {demandACommand} = require('..')
-const {commandRequired} = require('../errors')
+const {demandASubcommand} = require('..')
+const {subcommandRequired} = require('../errors')
 
-test('demandACommand README example works', () => {
+test('demandASubcommand README example works', () => {
   const opts = [
     {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
     {key: 'numBool', types: ['number', 'bool'], values: ['23', 'true']},
@@ -10,16 +10,16 @@ test('demandACommand README example works', () => {
     {key: 'version', types: [], values: [1]}
   ]
 
-  const {errs} = demandACommand({opts})
+  const {errs} = demandASubcommand({opts})
 
   const exp = [
-    commandRequired({options: opts})
+    subcommandRequired({options: opts})
   ]
 
   expect(errs).toStrictEqual(exp)
 })
 
-test('demandACommand records no error if a command has values', () => {
+test('demandASubcommand records no error if a command has values', () => {
   const opts = [
     {key: 'title', types: ['string'], values: ["The Hitchhiker's Guide to the Galaxy"]},
     {key: 'numBool', types: ['number', 'bool'], values: ['23', 'true']},
@@ -29,56 +29,56 @@ test('demandACommand records no error if a command has values', () => {
     {key: 'version', types: [], values: [1]}
   ]
 
-  const {errs} = demandACommand({opts})
+  const {errs} = demandASubcommand({opts})
 
   const exp = []
 
   expect(errs).toStrictEqual(exp)
 })
 
-test('demandACommand records no error if two commands are defined', () => {
+test('demandASubcommand records no error if two commands are defined', () => {
   const opts = [
     {key: 'help', args: ['help'], opts: [], values: ['foo', '--bar']},
     {key: 'verbose', args: ['verbose'], opts: [], values: ['false']}
   ]
 
-  const {errs} = demandACommand({opts})
+  const {errs} = demandASubcommand({opts})
 
   const exp = []
 
   expect(errs).toStrictEqual(exp)
 })
 
-test('demandACommand trows if opts is undefined', () => {
+test('demandASubcommand trows if opts is undefined', () => {
   const obj = {}
 
-  const {errs} = demandACommand(obj)
+  const {errs} = demandASubcommand(obj)
 
   const exp = [
-    commandRequired({options: []})
+    subcommandRequired({options: []})
   ]
 
   expect(errs).toStrictEqual(exp)
 })
 
-test('demandACommand trows if input is undefined', () => {
-  const {errs} = demandACommand()
+test('demandASubcommand trows if input is undefined', () => {
+  const {errs} = demandASubcommand()
 
   const exp = [
-    commandRequired({options: []})
+    subcommandRequired({options: []})
   ]
 
   expect(errs).toStrictEqual(exp)
 })
 
-test('demandACommand passes on errors', () => {
+test('demandASubcommand passes on errors', () => {
   const ERRS = [{code: 'foo', msg: 'bar', info: {}}]
 
-  const {errs} = demandACommand({errs: ERRS})
+  const {errs} = demandASubcommand({errs: ERRS})
 
   const exp = [
     ...ERRS,
-    commandRequired({options: []})
+    subcommandRequired({options: []})
   ]
 
   expect(errs).toStrictEqual(exp)
