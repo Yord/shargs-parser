@@ -115,12 +115,7 @@ test('restrictToOnly fails if a value is not allowed', () => {
     option
   }))
 
-  const expOpts = [
-    {key: 'title', types: ['string'], only: ["Dirk Gently"]},
-    {key: 'answer', types: ['number'], only: [23]},
-    {key: 'help', types: null, only: ['--foo bar']},
-    {key: 'verbose', types: ['bool'], only: [true]}
-  ]
+  const expOpts = obj.opts
 
   expect(errs).toStrictEqual(expErrs)
   expect(opts).toStrictEqual(expOpts)
