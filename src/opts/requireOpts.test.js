@@ -1,5 +1,5 @@
 const {requireOpts} = require('..')
-const {requiredOptionFormat, requiredOptionMissing} = require('../errors')
+const {requiredOptionMissing, wrongFormatForRequiredOption} = require('../errors')
 
 test('requireOpts README example works', () => {
   const answer = {key: 'answer', types: ['number'], required: true}
@@ -103,7 +103,7 @@ test('requireOpts works only with valid values', () => {
   const {errs} = requireOpts(obj)
 
   const exp = [
-    requiredOptionFormat({key: answer.key, values: answer.values, option: answer})
+    wrongFormatForRequiredOption({key: answer.key, values: answer.values, option: answer})
   ]
 
   expect(errs).toStrictEqual(exp)

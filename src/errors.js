@@ -104,7 +104,7 @@ const invalidVariadicPositionalArgument = ({positionalArguments}) => ({
   info: {positionalArguments}
 })
 
-const requiredOptionFormat = (info = {}) => {
+const wrongFormatForRequiredOption = (info = {}) => {
   const {key, values, defaultValues, option} = info
   
   return {
@@ -188,7 +188,6 @@ module.exports = {
   invalidTypes,
   invalidValues,
   invalidVariadicPositionalArgument,
-  requiredOptionFormat,
   requiredOptionMissing,
   subcommandRequired,
   unexpectedArgument,
@@ -197,5 +196,6 @@ module.exports = {
   wrongArgvRulesType,
   wrongContradictsType,
   wrongImpliesType,
+  wrongFormatForRequiredOption,
   wrongOptsRulesType
 }

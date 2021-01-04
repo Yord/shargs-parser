@@ -1,5 +1,5 @@
 const {traverseOpts} = require('./traverseOpts')
-const {requiredOptionFormat, requiredOptionMissing} = require('../errors')
+const {requiredOptionMissing, wrongFormatForRequiredOption} = require('../errors')
 const {Required, Variable} = require('../ducktypes')
 const {is}  = require('../combinators/is')
 const {not} = require('../combinators/not')
@@ -12,7 +12,7 @@ const requireOpts = traverseOpts(is(Variable, Required))(opt => {
   if (isNotDefined(values)) {
     errs.push(requiredOptionMissing({key, option: opt}))
   } else if (isDefined(values) && isNotArray(values)) {
-    errs.push(requiredOptionFormat({key, values, option: opt}))
+    errs.push(wrongFormatForRequiredOption({key, values, option: opt}))
   }
 
   return {errs}
