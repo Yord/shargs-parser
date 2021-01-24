@@ -88,6 +88,8 @@ test('traverseArgs works as expected', () => {
 })
 
 test('traverseArgs README example works even if fs is undefined', () => {
+  const f = () => {}
+
   const obj = {
     args: {
       _: [],
@@ -101,7 +103,7 @@ test('traverseArgs README example works even if fs is undefined', () => {
         version: {type: 'flag', count: 1},
         no: undefined,
         nono: null,
-        f: () => {},
+        f,
         sym: Symbol('foo')
       }
     }
@@ -120,7 +122,8 @@ test('traverseArgs README example works even if fs is undefined', () => {
       verbose: false,
       version: {type: 'flag', count: 1},
       no: undefined,
-      nono: null
+      nono: null,
+      f
     }
   }
 
